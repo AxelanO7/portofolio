@@ -53,7 +53,7 @@ export default function ProjectSection() {
       description: "Mobile application for the introduction of various colors.",
       image: imgColorLearning,
       techStack: ["Java"],
-      github: "https://github.com",
+      github: "https://github.com/AxelanO7/color-learning-mobile-java",
       demo: "",
     },
     {
