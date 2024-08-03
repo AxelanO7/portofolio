@@ -4,7 +4,7 @@ export default function ContactSection() {
       <h1 className="text-4xl font-bold text-teal-500">Contact</h1>
       <hr className="w-48 border-2 border-teal-500 rounded-full mb-8 mt-2" />
       <form
-        action="https://formspree.io/f/xvovzqwk"
+        action="https://formspree.io/f/mqazqwak"
         method="POST"
         className="flex flex-col gap-4 bg-teal-900 bg-opacity-50 p-4 rounded-md w-96"
       >
