@@ -84,9 +84,6 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              {/* <Link color={"foreground"} href="#" size="lg">
-                {item.label}
-              </Link> */}
               <p
                 className="cursor-pointer hover:text-teal-500"
                 onClick={() => {
