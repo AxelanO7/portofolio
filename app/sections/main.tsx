@@ -12,7 +12,7 @@ export default function MainSection() {
 
   return (
     <section className="flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center space-y-8">
-      <h1 className="text-6xl font-bold flex justify-center sm:justify-start text-teal-50">
+      <h1 className="text-4xl font-bold flex justify-center sm:justify-start text-teal-50 sm:text-6xl sm:leading-relaxed sm:ml-4 sm:mt-4">
         Hi, I'm <span className="text-teal-500 animate-pulse mx-4"> Axel </span>
         👋
       </h1>
@@ -41,7 +41,7 @@ export default function MainSection() {
           |
         </p>
       </div>
-      <p className="max-w-lg mx-auto sm:mx-0 w-96 sm:w-full text-teal-50 sm:text-lg text-center">
+      <p className="max-w-lg mx-auto sm:mx-0 sm:w-full text-teal-50 sm:text-lg text-center">
         Software Engineer based in the Indonesia. Passionate about building
         beautiful and functional websites and mobile applications.
       </p>
