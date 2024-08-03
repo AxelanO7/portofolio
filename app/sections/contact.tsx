@@ -6,7 +6,7 @@ export default function ContactSection() {
       <form
         action="https://formspree.io/f/mqazqwak"
         method="POST"
-        className="flex flex-col gap-4 bg-teal-900 bg-opacity-50 p-4 rounded-md w-96"
+        className="flex flex-col gap-4 bg-teal-900 bg-opacity-50 p-4 rounded-md max-w-96 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%]"
       >
         <label htmlFor="name" className="text-teal-50">
           Name
