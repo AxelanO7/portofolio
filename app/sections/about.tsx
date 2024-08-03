@@ -5,19 +5,19 @@ export default function AboutSection() {
     <section className="flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center about">
       <h1 className="text-4xl font-bold text-teal-500">About Me</h1>
       <hr className="w-48 border-2 border-teal-500 rounded-full mb-8 mt-2" />
-      <div className="max-w-3xl mx-auto sm:mx-0 w-96 sm:w-full text-teal-50 sm:text-lg text-center space-y-4">
+      <div className="max-w-3xl mx-auto sm:mx-0 sm:w-full text-teal-50 sm:text-lg text-center space-y-4">
         <p>
           I have a strong foundation in full-stack web development, with
           experience in both front-end and back-end technologies. I'm proficient
-          in modern frameworks like React and Angular, and I'm comfortable
-          working with both SQL and NoSQL databases.
+          in modern frameworks like React and Vue, and I'm comfortable working
+          with both SQL and NoSQL databases.
         </p>
         <p>
           My experience in mobile development has given me a deep understanding
           of iOS and Android platforms, as well as cross-platform development
-          tools like React Native. I'm also well-versed in UI/UX design
-          principles, ensuring that the applications I build are not only
-          functional but also visually appealing.
+          tools like Flutter. I'm also well-versed in UI/UX design principles,
+          ensuring that the applications I build are not only functional but
+          also visually appealing.
         </p>
         <p>
           I'm passionate about learning new technologies and staying up-to-date
