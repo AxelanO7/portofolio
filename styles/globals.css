@@ -19,7 +19,7 @@
 }
 
 .sd_btn:hover {
-  box-shadow: 8px 8px 0px white, -8px -8px 0px white;
+  box-shadow: 8px 8px 0px white, -8px -8px 0px teal;
 }
 
 .sd_btn:hover .one {
