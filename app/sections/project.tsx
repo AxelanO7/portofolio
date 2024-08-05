@@ -76,8 +76,15 @@ export default function ProjectSection() {
               <CardFooter className="bg-gradient-to-br from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 hover:text-black flex justify-between items-center p-4">
                 <div className="flex justify-between w-full">
                   <h2 className="text-xl font-semibold">{project.name}</h2>
-                  <div className="text-xs font-semibold items-center flex bg-white text-teal-500 px-2 py-1 rounded-md">
-                    {project.techStack.join(", ")}
+                  <div className="flex gap-2">
+                    {project.techStack.map((tech, index) => (
+                      <div
+                        key={index}
+                        className="text-xs font-semibold items-center flex bg-white text-teal-500 px-2 py-1 rounded-md"
+                      >
+                        {tech}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </CardFooter>
