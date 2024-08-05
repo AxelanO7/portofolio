@@ -3,11 +3,12 @@ import Typewriter from "typewriter-effect";
 
 export default function MainSection() {
   const roles = ["Full Stack Web Developer", "Mobile Developer"];
-  const handleScroll = () => {
-    const element = document.getElementsByClassName("contact");
-    if (element.length > 0) {
-      element[0].scrollIntoView({ behavior: "smooth" });
-    }
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "resume.pdf";
+    link.download = "Axel's Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
   };
 
   return (
@@ -45,8 +46,8 @@ export default function MainSection() {
         Software Engineer based in the Indonesia. Passionate about building
         beautiful and functional websites and mobile applications.
       </p>
-      <button className="sd_btn" onClick={handleScroll}>
-        Get in touch
+      <button className="sd_btn" onClick={handleDownload}>
+        Download CV
       </button>
     </section>
   );
