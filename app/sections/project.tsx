@@ -15,7 +15,7 @@ export default function ProjectSection() {
         "Website for managing administrative data such as population data and submitting administrative letters.",
       image: imgSiapenku,
       techStack: ["Laravel", "Vue"],
-      github: "https://github.com/AxelanO7/siapenku-web-php",
+      github: "http://siapenku.stion.site",
       demo: "",
     },
     {
