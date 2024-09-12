@@ -81,6 +81,17 @@ export default function ProjectSection() {
       demo: "",
     },
     {
+      name: "Calculator",
+      shortDescription:
+        "Versatile calculator application capable of adapting to various screen sizes while incorporating user authentication and external data retrieval functionalities.",
+      description:
+        "This project aims to develop a highly adaptable calculator application capable of seamlessly adjusting its interface to accommodate diverse screen sizes, from compact smartphones to expansive tablets. To ensure data privacy and security, the app will incorporate robust user authentication mechanisms. Furthermore, it will be designed to dynamically fetch external data, such as real-time financial information or scientific constants, enhancing its utility and providing users with access to up-to-date calculations and computations.",
+      image: imgCalculator,
+      techStack: ["Flutter"],
+      github: "https://github.com/AxelanO7/live-code-hybrid-flutter",
+      demo: "",
+    },
+    {
       name: "Smart BTW",
       shortDescription:
         "This mobile application aims to provide a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises and assessments.",
@@ -100,17 +111,6 @@ export default function ProjectSection() {
       image: imgBtwEdutech,
       techStack: ["Flutter"],
       github: "",
-      demo: "",
-    },
-    {
-      name: "Versatile Calculator",
-      shortDescription:
-        "Versatile calculator application capable of adapting to various screen sizes while incorporating user authentication and external data retrieval functionalities.",
-      description:
-        "This project aims to develop a highly adaptable calculator application capable of seamlessly adjusting its interface to accommodate diverse screen sizes, from compact smartphones to expansive tablets. To ensure data privacy and security, the app will incorporate robust user authentication mechanisms. Furthermore, it will be designed to dynamically fetch external data, such as real-time financial information or scientific constants, enhancing its utility and providing users with access to up-to-date calculations and computations.",
-      image: imgCalculator,
-      techStack: ["Flutter"],
-      github: "https://github.com/AxelanO7/live-code-hybrid-flutter",
       demo: "",
     },
     {
@@ -141,16 +141,18 @@ export default function ProjectSection() {
     <section className="flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center projects py-16">
       <h1 className="text-4xl font-bold text-teal-500">Projects</h1>
       <hr className="w-48 border-2 border-teal-500 rounded-full mb-8 mt-2" />
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto transition-all duration-300 border-2 border-teal-500 rounded-lg p-4"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mx-auto transition-all duration-300 border-2 border-teal-500 rounded-lg p-4">
         {projects.map((project, index) => (
           <Card key={index} className="hover:scale-105 transform">
             <a href={project.github} target="_blank" rel="noreferrer noopener">
-              <Image src={project.image || ""} alt={project.name} />
+              <Image
+                src={project.image || ""}
+                alt={project.name}
+                className="object-cover h-64 w-full"
+              />
               <CardFooter className="bg-gradient-to-br from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 hover:text-black flex justify-between items-center p-4">
                 <div className="flex justify-between w-full">
-                  <h2 className="text-xl font-semibold">{project.name}</h2>
+                  <h2 className="text-md font-semibold">{project.name}</h2>
                   <div className="flex gap-2">
                     {project.techStack.map((tech, index) => (
                       <div
