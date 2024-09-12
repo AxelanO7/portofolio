@@ -8,8 +8,8 @@ import imgCalculator from "@/public/calculator.png";
 import imgAssyarif from "@/public/assyarif.png";
 import imgBnShop from "@/public/bn_shop.png";
 import imgVillaManis from "@/public/villa_manis.png";
-import imgSmartBtw from "@/public/smart_btw.png";
-import imgBtwEdutech from "@/public/btw_edutech.png";
+import imgSmartBtw from "@/public/smartbtw.png";
+import imgBtwEdutech from "@/public/btwedutech.png";
 import Image from "next/image";
 
 export default function ProjectSection() {
