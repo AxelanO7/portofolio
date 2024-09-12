@@ -5,6 +5,11 @@ import imgKoi from "@/public/koi.png";
 import imgTeacherPayroll from "@/public/teacher_payroll.png";
 import imgColorLearning from "@/public/color_learning.png";
 import imgCalculator from "@/public/calculator.png";
+import imgAssyarif from "@/public/assyarif.png";
+import imgBnShop from "@/public/bn_shop.png";
+import imgVillaManis from "@/public/villa_manis.png";
+import imgSmartBtw from "@/public/smart_btw.png";
+import imgBtwEdutech from "@/public/btw_edutech.png";
 import Image from "next/image";
 
 export default function ProjectSection() {
@@ -48,7 +53,7 @@ export default function ProjectSection() {
         "This web-based application is designed to streamline the management of inventory, providing a centralized platform for tracking incoming and outgoing goods",
       description:
         "This web-based application streamlines inventory management by providing real-time tracking of incoming and outgoing goods, automating processes like reorder points and inventory adjustments, generating accurate reports, and improving inventory accuracy and visibility. By optimizing these aspects, businesses can enhance efficiency, reduce costs, and make informed decisions.",
-      image: imgTeacherPayroll,
+      image: imgBnShop,
       techStack: ["React", "Go"],
       github: "https://github.com/AxelanO7/bn-shop-frontend-web-js",
       demo: "",
@@ -59,7 +64,7 @@ export default function ProjectSection() {
         "This web-based application is designed to streamline financial and accounting processes, providing a centralized platform for managing and analyzing financial data",
       description:
         "This web-based application streamlines financial and accounting processes by providing comprehensive reporting, efficient data management, real-time analytics, compliance management, and integration capabilities. By automating and optimizing these aspects, businesses can improve efficiency, enhance decision-making, and ensure financial accuracy and compliance.",
-      image: imgTeacherPayroll,
+      image: imgVillaManis,
       techStack: ["React", "Go"],
       github: "https://github.com/AxelanO7/villa-manis-frontend-web-js",
       demo: "",
@@ -70,7 +75,7 @@ export default function ProjectSection() {
         "This web-based application streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility.",
       description:
         "This web-based application streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility. By automating and optimizing these aspects, businesses can enhance efficiency, reduce costs, and make informed decisions.",
-      image: imgTeacherPayroll,
+      image: imgAssyarif,
       techStack: ["React", "Go"],
       github: "https://github.com/AxelanO7/assyarif-frontend-web-js",
       demo: "",
@@ -81,7 +86,7 @@ export default function ProjectSection() {
         "This mobile application aims to provide a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises and assessments.",
       description:
         "This mobile application provides a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises, assessments, and personalized feedback, the app helps users develop essential skills, familiarize themselves with the job environment, build confidence, and increase their chances of success in job interviews and tryouts.",
-      image: imgCalculator,
+      image: imgSmartBtw,
       techStack: ["Flutter"],
       github: "",
       demo: "",
@@ -92,7 +97,7 @@ export default function ProjectSection() {
         "This mobile application aims to provide a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises and assessments.",
       description:
         "This mobile application provides a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises, assessments, and personalized feedback, the app helps users develop essential skills, familiarize themselves with the job environment, build confidence, and increase their chances of success in job interviews and tryouts.",
-      image: imgCalculator,
+      image: imgBtwEdutech,
       techStack: ["Flutter"],
       github: "",
       demo: "",
