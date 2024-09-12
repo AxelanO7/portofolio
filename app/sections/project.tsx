@@ -141,7 +141,9 @@ export default function ProjectSection() {
     <section className="flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center projects py-16">
       <h1 className="text-4xl font-bold text-teal-500">Projects</h1>
       <hr className="w-48 border-2 border-teal-500 rounded-full mb-8 mt-2" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-auto transition-all duration-300 border-2 border-teal-500 rounded-lg p-4">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto transition-all duration-300 border-2 border-teal-500 rounded-lg p-4"
+      >
         {projects.map((project, index) => (
           <Card key={index} className="hover:scale-105 transform">
             <a href={project.github} target="_blank" rel="noreferrer noopener">
