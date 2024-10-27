@@ -2,7 +2,7 @@
 import Typewriter from "typewriter-effect";
 
 export default function MainSection() {
-  const roles = ["Full Stack Web Developer", "Mobile Developer"];
+  const roles = ["Full Stack Web Engineer", "Mobile Engineer"];
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "resume.pdf";
