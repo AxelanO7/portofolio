@@ -1,6 +1,7 @@
 import {
   CodeIgniterIcon,
   ExpressJsIcon,
+  FlaskIcon,
   FlutterIcon,
   LaravelIcon,
   NextJsIcon,
@@ -15,6 +16,7 @@ import {
   JavaScriptIcon,
   KotlinIcon,
   PhpIcon,
+  PythonIcon,
   SwiftIcon,
   TypeScriptIcon,
 } from "@/components/icons/programming/languages";
@@ -29,6 +31,7 @@ export default function SkillSection() {
     <SwiftIcon />,
     <TypeScriptIcon />,
     <JavaIcon />,
+    <PythonIcon />,
     <PhpIcon />,
     <CPlusPlusIcon />,
   ];
@@ -39,6 +42,7 @@ export default function SkillSection() {
     <ExpressJsIcon />,
     <NextJsIcon />,
     <VueJsIcon />,
+    <FlaskIcon />,
     <LaravelIcon />,
     <CodeIgniterIcon />,
   ];
