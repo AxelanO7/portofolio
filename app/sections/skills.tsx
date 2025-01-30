@@ -1,4 +1,5 @@
 import {
+  AngularIcon,
   CodeIgniterIcon,
   ExpressJsIcon,
   FlaskIcon,
@@ -42,6 +43,7 @@ export default function SkillSection() {
     <ExpressJsIcon />,
     <NextJsIcon />,
     <VueJsIcon />,
+    <AngularIcon />,
     <FlaskIcon />,
     <LaravelIcon />,
     <CodeIgniterIcon />,
