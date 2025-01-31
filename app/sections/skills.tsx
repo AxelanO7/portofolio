@@ -1,16 +1,18 @@
 import {
   AngularIcon,
   CodeIgniterIcon,
-  ExpressJsIcon,
+  NodeJsIcon,
   FlaskIcon,
   FlutterIcon,
   LaravelIcon,
+  NetIcon,
   NextJsIcon,
   ReactJsIcon,
   VueJsIcon,
 } from "@/components/icons/programming/frameworks";
 import {
   CPlusPlusIcon,
+  CSharpIcon,
   DartIcon,
   GoIcon,
   JavaIcon,
@@ -35,15 +37,17 @@ export default function SkillSection() {
     <PythonIcon />,
     <PhpIcon />,
     <CPlusPlusIcon />,
+    <CSharpIcon />,
   ];
 
   const frameworks = [
     <FlutterIcon />,
     <ReactJsIcon />,
-    <ExpressJsIcon />,
-    <NextJsIcon />,
     <VueJsIcon />,
     <AngularIcon />,
+    <NodeJsIcon />,
+    <NetIcon />,
+    <NextJsIcon />,
     <FlaskIcon />,
     <LaravelIcon />,
     <CodeIgniterIcon />,
