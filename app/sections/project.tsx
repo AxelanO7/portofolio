@@ -12,6 +12,8 @@ import imgSmartBtw from "@/public/smartbtw.png";
 import imgBtwEdutech from "@/public/btwedutech.png";
 import imgJobseerApp from "@/public/jobseeker_app.png";
 import imgJobseerPartners from "@/public/jobseeker_partners.png";
+import imgSujana from "@/public/sujana.png";
+import imgVMUC from "@/public/vmuc.png";
 import Image from "next/image";
 
 export default function ProjectSection() {
@@ -80,6 +82,28 @@ export default function ProjectSection() {
       image: imgAssyarif,
       techStack: ["React", "Go"],
       link: "https://github.com/AxelanO7/assyarif-frontend-web-js",
+      demo: "",
+    },
+    {
+      name: "Sujana",
+      shortDescription:
+        "A marketing and booking information system designed to streamline tour package management, improve operational efficiency, and enhance customer experience for Sujana Tour and Travel in Bali.",
+      description:
+        "This project focuses on developing a comprehensive 'Marketing and Booking Information System' for Sujana Tour and Travel, located in Denpasar, Bali. The system aims to address the challenges of manual booking processes, such as missed orders and lack of clear revenue data, by providing an integrated solution for managing bookings, scheduling, payments, and order tracking. By leveraging technology, the system will improve operational efficiency, reduce errors, and enhance the overall customer experience. The implementation of this system is expected to positively impact the growth of the tourism industry in Bali by offering a more reliable and efficient service to travelers.",
+      image: imgSujana,
+      techStack: ["React", "Go"],
+      link: "https://github.com/AxelanO7/sujana-frontend-web-js",
+      demo: "",
+    },
+    {
+      name: "VMUC",
+      shortDescription:
+        "A web-based financial reporting system designed to streamline and automate financial management for Villa Munduk Umah Cabbin, ensuring accurate and efficient data processing.",
+      description:
+        "This project focuses on designing and developing a web-based financial reporting system for Villa Munduk Umah Cabbin to address challenges in manual financial management. The system aims to automate the recording of financial transactions, including guest reservations, employee payroll, and monthly financial reports. By integrating subsystems for data processing and financial intelligence, the system will enhance data accuracy, reduce errors, and save time in generating financial reports. Additionally, it will minimize paper usage and provide real-time insights into the villa's financial performance, helping the management make informed decisions.",
+      image: imgVMUC,
+      techStack: ["React", "Go"],
+      link: "https://github.com/AxelanO7/vmuc-fintech-frontend-web-js",
       demo: "",
     },
     {
