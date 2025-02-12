@@ -24,7 +24,7 @@ export default function AboutSection() {
           Vue.js, Angular, Node.js, .NET, Next.js, Flask, Laravel, and
           CodeIgniter, to create seamless, high-performance applications.
           Passionate about solving complex problems and delivering solutions
-          that enhance user experiences and operational effectiveness.
+          that enhance user operational effectiveness.
         </p>
         <p>
           Committed to staying at the forefront of technological advancements,
@@ -32,8 +32,7 @@ export default function AboutSection() {
           competitive edge. A collaborative leader who fosters a culture of
           innovation, knowledge sharing, and continuous improvement within
           development teams. Dedicated to delivering high-quality, scalable, and
-          future-proof solutions that meet the evolving needs of businesses and
-          end-users.
+          future-proof solutions that meet the evolving needs of businesses.
         </p>
       </div>
     </section>
