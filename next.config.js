@@ -1,35 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    // Remove turbo for now to avoid conflicts
+    // Memberi tahu Next.js untuk tidak membundel framer-motion di server
+    serverComponentsExternalPackages: ["framer-motion"],
   },
   images: {
     domains: [],
     unoptimized: false,
     formats: ['image/webp', 'image/avif'],
   },
-  webpack(config, { isServer }) {
-    // Handle SVG files
+  webpack(config) {
+    // Menangani file SVG
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
 
-    // Fix for framer-motion in client components
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-      };
-    }
-    
     return config;
   },
-  // Remove styledComponents compiler
   swcMinify: true,
   poweredByHeader: false,
   compress: true,
-  
+
   typescript: {
     ignoreBuildErrors: false,
   },

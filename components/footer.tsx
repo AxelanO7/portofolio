@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function FooterSection() {
   return (
     <footer className="w-full flex items-center justify-center py-3">
