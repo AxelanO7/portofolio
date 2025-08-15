@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    // Memberi tahu Next.js untuk tidak membundel framer-motion di server
+    // This tells Next.js not to bundle framer-motion on the server.
     serverComponentsExternalPackages: ["framer-motion"],
   },
   images: {
@@ -10,7 +10,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   webpack(config) {
-    // Menangani file SVG
+    // Handling SVG files
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
@@ -21,7 +21,6 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   compress: true,
-
   typescript: {
     ignoreBuildErrors: false,
   },
