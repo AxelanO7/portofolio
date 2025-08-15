@@ -1,4 +1,9 @@
-import { Card, CardFooter } from "@nextui-org/card";
+import React, { useState } from "react";
+import { motion, AnimatePresence, MotionValue } from "framer-motion";
+import { Card, CardBody } from "@nextui-org/card";
+import Image from "next/image";
+
+// Import all project images
 import imgSiapenku from "@/public/siapenku.png";
 import imgSigapura from "@/public/sigapura.png";
 import imgKoi from "@/public/koi.png";
@@ -14,208 +19,528 @@ import imgJobseerApp from "@/public/jobseeker_app.png";
 import imgJobseerPartners from "@/public/jobseeker_partners.png";
 import imgSujana from "@/public/sujana.png";
 import imgVMUC from "@/public/vmuc.png";
-import Image from "next/image";
 
 export default function ProjectSection() {
-  const projects = [
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [hoveredProject, setHoveredProject] = useState(null);
+
+  const categories = [
     {
-      name: "Siapenku",
-      shortDescription:
-        "Website for managing administrative data such as population data and submitting administrative letters.",
-      description:
-        "This information system is designed to effectively manage and analyze administrative data pertaining to the population of Bulian Village within Kubutambahan District. The system aims to provide a comprehensive and up-to-date database of demographic information, facilitating efficient governance, policymaking, and service delivery.",
-      image: imgSiapenku,
-      techStack: ["Laravel", "Vue"],
-      link: "http://siapenku.stion.site",
-      demo: "",
+      id: "all",
+      name: "All Projects",
+      icon: "🚀",
+      color: "from-blue-500 to-cyan-500",
     },
     {
-      name: "Sigapura",
-      shortDescription:
-        "Website to digitize shrines in a temple with 3D model features",
-      description:
-        "This project aims to develop a comprehensive online platform dedicated to the digitization and preservation of temple shrines. By leveraging advanced 3D modeling and imaging technologies, we will create an immersive virtual environment that allows users to explore and interact with these sacred spaces in unprecedented detail.",
-      image: imgSigapura,
-      techStack: ["PHP"],
-      link: "https://github.com/AxelanO7/sigapura-web-php",
-      demo: "",
+      id: "web",
+      name: "Web Apps",
+      icon: "💻",
+      color: "from-purple-500 to-pink-500",
     },
     {
-      name: "KOI",
-      shortDescription:
-        "Website designed to optimize interactions among students, organizations, and activities within a campus community, with activities categorized and organized",
-      description:
-        "This project entails the development of a comprehensive online platform designed to streamline and enhance interactions within a campus community. By categorizing and organizing campus activities, the website will serve as a centralized hub for students to discover and engage with diverse opportunities, clubs, and events. This platform aims to foster a stronger sense of community, facilitate collaboration between students and organizations, and optimize the overall campus experience.",
-      image: imgKoi,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/koi-frontend-web-js",
-      demo: "",
+      id: "mobile",
+      name: "Mobile Apps",
+      icon: "📱",
+      color: "from-emerald-500 to-teal-500",
     },
     {
-      name: "BN Shop",
-      shortDescription:
-        "This web-based application is designed to streamline the management of inventory, providing a centralized platform for tracking incoming and outgoing goods",
-      description:
-        "This web-based application streamlines inventory management by providing real-time tracking of incoming and outgoing goods, automating processes like reorder points and inventory adjustments, generating accurate reports, and improving inventory accuracy and visibility. By optimizing these aspects, businesses can enhance efficiency, reduce costs, and make informed decisions.",
-      image: imgBnShop,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/bn-shop-frontend-web-js",
-      demo: "",
-    },
-    {
-      name: "Villa Manis",
-      shortDescription:
-        "This web-based application is designed to streamline financial and accounting processes, providing a centralized platform for managing and analyzing financial data",
-      description:
-        "This web-based application streamlines financial and accounting processes by providing comprehensive reporting, efficient data management, real-time analytics, compliance management, and integration capabilities. By automating and optimizing these aspects, businesses can improve efficiency, enhance decision-making, and ensure financial accuracy and compliance.",
-      image: imgVillaManis,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/villa-manis-frontend-web-js",
-      demo: "",
-    },
-    {
-      name: "Assyarif",
-      shortDescription:
-        "This web-based application streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility.",
-      description:
-        "This web-based application streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility. By automating and optimizing these aspects, businesses can enhance efficiency, reduce costs, and make informed decisions.",
-      image: imgAssyarif,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/assyarif-frontend-web-js",
-      demo: "",
-    },
-    {
-      name: "Sujana",
-      shortDescription:
-        "A marketing and booking information system designed to streamline tour package management, improve operational efficiency, and enhance customer experience for Sujana Tour and Travel in Bali.",
-      description:
-        "This project focuses on developing a comprehensive 'Marketing and Booking Information System' for Sujana Tour and Travel, located in Denpasar, Bali. The system aims to address the challenges of manual booking processes, such as missed orders and lack of clear revenue data, by providing an integrated solution for managing bookings, scheduling, payments, and order tracking. By leveraging technology, the system will improve operational efficiency, reduce errors, and enhance the overall customer experience. The implementation of this system is expected to positively impact the growth of the tourism industry in Bali by offering a more reliable and efficient service to travelers.",
-      image: imgSujana,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/sujana-frontend-web-js",
-      demo: "",
-    },
-    {
-      name: "VMUC",
-      shortDescription:
-        "A web-based financial reporting system designed to streamline and automate financial management for Villa Munduk Umah Cabbin, ensuring accurate and efficient data processing.",
-      description:
-        "This project focuses on designing and developing a web-based financial reporting system for Villa Munduk Umah Cabbin to address challenges in manual financial management. The system aims to automate the recording of financial transactions, including guest reservations, employee payroll, and monthly financial reports. By integrating subsystems for data processing and financial intelligence, the system will enhance data accuracy, reduce errors, and save time in generating financial reports. Additionally, it will minimize paper usage and provide real-time insights into the villa's financial performance, helping the management make informed decisions.",
-      image: imgVMUC,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/vmuc-fintech-frontend-web-js",
-      demo: "",
-    },
-    {
-      name: "Calculator",
-      shortDescription:
-        "Versatile calculator application capable of adapting to various screen sizes while incorporating user authentication and external data retrieval functionalities.",
-      description:
-        "This project aims to develop a highly adaptable calculator application capable of seamlessly adjusting its interface to accommodate diverse screen sizes, from compact smartphones to expansive tablets. To ensure data privacy and security, the app will incorporate robust user authentication mechanisms. Furthermore, it will be designed to dynamically fetch external data, such as real-time financial information or scientific constants, enhancing its utility and providing users with access to up-to-date calculations and computations.",
-      image: imgCalculator,
-      techStack: ["Flutter"],
-      link: "https://github.com/AxelanO7/live-code-hybrid-flutter",
-      demo: "",
-    },
-    {
-      name: "Smart BTW",
-      shortDescription:
-        "This mobile application aims to provide a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises and assessments.",
-      description:
-        "This mobile application provides a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises, assessments, and personalized feedback, the app helps users develop essential skills, familiarize themselves with the job environment, build confidence, and increase their chances of success in job interviews and tryouts.",
-      image: imgSmartBtw,
-      techStack: ["Flutter"],
-      link: "",
-      demo: "",
-    },
-    {
-      name: "BTW Edutech",
-      shortDescription:
-        "This mobile application aims to provide a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises and assessments.",
-      description:
-        "This mobile application provides a realistic simulation experience for individuals preparing for job tryouts. By offering interactive exercises, assessments, and personalized feedback, the app helps users develop essential skills, familiarize themselves with the job environment, build confidence, and increase their chances of success in job interviews and tryouts.",
-      image: imgBtwEdutech,
-      techStack: ["Flutter"],
-      link: "",
-      demo: "",
-    },
-    {
-      name: "Jobseeker .app",
-      shortDescription:
-        "Mobile app for job seekers: Simplified job search, skill-based matching, and quick job opportunities.",
-      description:
-        "This project aims to develop a user-friendly mobile application tailored for job seekers, offering a seamless and efficient job search experience. The app will feature a social media-like interface, allowing users to browse and apply for jobs effortlessly. Key functionalities include skill-based job matching, quick access to job opportunities, and a streamlined process to connect users with potential employers. The app eliminates the need for long queues and complex processes, making job hunting as simple as scrolling through social media.",
-      image: imgJobseerApp,
-      techStack: ["Flutter"],
-      link: "https://play.google.com/store/apps/details?id=com.jobseeker.app&hl=id",
-      demo: "",
-    },
-    {
-      name: "Jobseeker .partners",
-      shortDescription:
-        "Mobile app for job seekers: Easy job search, skill matching, fast job opportunities.",
-      description:
-        "This project creates a user-friendly mobile app for job seekers, simplifying the job search.  It features a social media-like interface for easy browsing and application, skill-based matching to connect job seekers with relevant opportunities, quick access to available jobs, and a streamlined process to connect with employers.  The app makes job hunting as simple as scrolling through social media, eliminating complex processes.",
-      image: imgJobseerPartners,
-      techStack: ["Flutter"],
-      link: "https://play.google.com/store/apps/details?id=com.jobseeker.partners&hl=id",
-      demo: "",
-    },
-    {
-      name: "Color Learning",
-      shortDescription:
-        "Mobile application for the introduction of various colors.",
-      description:
-        "This project aims to develop a mobile application designed to introduce and explore the vast spectrum of colors. The app will serve as an interactive and engaging platform for users of all ages to learn about color theory, identification, and appreciation.",
-      image: imgColorLearning,
-      techStack: ["Java"],
-      link: "https://github.com/AxelanO7/color-learning-mobile-java",
-      demo: "",
-    },
-    {
-      name: "Teacher Payroll",
-      shortDescription:
-        "Mobile app for teachers: Attendance tracking (location, photo), time-off requests, pay slips.",
-      description:
-        "This project aims to develop a comprehensive mobile application designed specifically for teachers, offering features to streamline various administrative tasks. Core functionalities include robust attendance tracking capabilities utilizing location data and photo verification, a user-friendly platform for submitting time-off requests, and a secure portal for accessing and reviewing pay slips, all accessible conveniently through a mobile interface.",
-      image: imgTeacherPayroll,
-      techStack: ["Flutter"],
-      github: "https://github.com/AxelanO7/payroll-mobile-flutter",
-      demo: "",
+      id: "ai",
+      name: "AI/ML",
+      icon: "🤖",
+      color: "from-orange-500 to-red-500",
     },
   ];
 
-  return (
-    <section className="flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center projects py-16">
-      <h1 className="text-4xl font-bold text-teal-500">Projects</h1>
-      <hr className="w-48 border-2 border-teal-500 rounded-full mb-8 mt-2" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mx-auto transition-all duration-300 border-2 border-teal-500 rounded-lg p-4">
-        {projects.map((project, index) => (
-          <Card key={index} className="hover:scale-105 transform">
-            <a href={project.link} target="_blank" rel="noreferrer noopener">
-              <Image
-                src={project.image || ""}
-                alt={project.name}
-                className="object-cover h-64 w-full"
-              />
-              <CardFooter className="bg-gradient-to-br from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 hover:text-black flex justify-between items-center p-4">
-                <div className="flex justify-between w-full">
-                  <h2 className="text-md font-semibold">{project.name}</h2>
-                  <div className="flex gap-2">
-                    {project.techStack.map((tech, index) => (
-                      <div
-                        key={index}
-                        className="text-xs font-semibold items-center flex bg-white text-teal-500 px-2 py-1 rounded-md"
-                      >
-                        {tech}
-                      </div>
-                    ))}
-                  </div>
+  const projects = [
+    {
+      id: 1,
+      name: "Siapenku",
+      category: "web",
+      shortDescription: "Administrative Data Management System",
+      description:
+        "Comprehensive system for managing population data and administrative letters in Bulian Village, enhancing governance and service delivery.",
+      image: imgSiapenku,
+      techStack: ["Laravel", "Vue.js", "MySQL"],
+      link: "http://siapenku.stion.site",
+      featured: true,
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      id: 2,
+      name: "KOI Campus Platform",
+      category: "web",
+      shortDescription: "Campus Community Management",
+      description:
+        "Platform optimizing interactions among students, organizations, and activities within campus community with categorized event management.",
+      image: imgKoi,
+      techStack: ["React", "Go", "PostgreSQL"],
+      link: "https://github.com/AxelanO7/koi-frontend-web-js",
+      featured: true,
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      id: 3,
+      name: "Smart BTW",
+      category: "mobile",
+      shortDescription: "Job Preparation Simulator",
+      description:
+        "Mobile application providing realistic simulation experience for job tryouts with interactive exercises and assessments.",
+      image: imgSmartBtw,
+      techStack: ["Flutter", "Firebase"],
+      link: "",
+      featured: true,
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    {
+      id: 4,
+      name: "Jobseeker App",
+      category: "mobile",
+      shortDescription: "Social Job Search Platform",
+      description:
+        "Revolutionary job search app with social media-like interface, skill-based matching, and instant job opportunities.",
+      image: imgJobseerApp,
+      techStack: ["Flutter", "Node.js", "MongoDB"],
+      link: "https://play.google.com/store/apps/details?id=com.jobseeker.app&hl=id",
+      featured: true,
+      gradient: "from-orange-500 to-red-500",
+    },
+    {
+      id: 5,
+      name: "Sigapura 3D",
+      category: "web",
+      shortDescription: "3D Temple Digitization",
+      description:
+        "Innovative platform for digitizing temple shrines with advanced 3D modeling and immersive virtual exploration.",
+      image: imgSigapura,
+      techStack: ["PHP", "Three.js", "WebGL"],
+      link: "https://github.com/AxelanO7/sigapura-web-php",
+      gradient: "from-indigo-500 to-purple-500",
+    },
+    {
+      id: 6,
+      name: "BN Shop Inventory",
+      category: "web",
+      shortDescription: "Smart Inventory Management",
+      description:
+        "Comprehensive inventory management system with real-time tracking, automated reordering, and analytics dashboard.",
+      image: imgBnShop,
+      techStack: ["React", "Go", "Redis"],
+      link: "https://github.com/AxelanO7/bn-shop-frontend-web-js",
+      gradient: "from-cyan-500 to-blue-500",
+    },
+    {
+      id: 7,
+      name: "Villa Manis FinTech",
+      category: "web",
+      shortDescription: "Financial Management System",
+      description:
+        "Advanced financial reporting and accounting system for hospitality industry with real-time analytics.",
+      image: imgVillaManis,
+      techStack: ["React", "Go", "PostgreSQL"],
+      link: "https://github.com/AxelanO7/villa-manis-frontend-web-js",
+      gradient: "from-pink-500 to-rose-500",
+    },
+    {
+      id: 8,
+      name: "Teacher Payroll",
+      category: "mobile",
+      shortDescription: "HR Management Mobile App",
+      description:
+        "Complete HR solution for teachers with attendance tracking, leave management, and digital payroll system.",
+      image: imgTeacherPayroll,
+      techStack: ["Flutter", "Laravel", "MySQL"],
+      link: "https://github.com/AxelanO7/payroll-mobile-flutter",
+      gradient: "from-green-500 to-emerald-500",
+    },
+    {
+      id: 9,
+      name: "BTW Edutech",
+      category: "mobile",
+      shortDescription: "Educational Technology Platform",
+      description:
+        "Advanced educational platform for skill development and career preparation with AI-powered assessments.",
+      image: imgBtwEdutech,
+      techStack: ["Flutter", "AI/ML", "Firebase"],
+      link: "",
+      gradient: "from-violet-500 to-purple-500",
+    },
+    {
+      id: 10,
+      name: "VMUC FinTech",
+      category: "web",
+      shortDescription: "Villa Financial Intelligence",
+      description:
+        "Sophisticated financial reporting system for Villa Munduk with automated transaction processing and analytics.",
+      image: imgVMUC,
+      techStack: ["React", "Go", "TimescaleDB"],
+      link: "https://github.com/AxelanO7/vmuc-fintech-frontend-web-js",
+      gradient: "from-teal-500 to-cyan-500",
+    },
+    {
+      id: 11,
+      name: "Sujana Travel",
+      category: "web",
+      shortDescription: "Travel Booking System",
+      description:
+        "Comprehensive booking system for Sujana Tour & Travel with integrated payment processing and itinerary management.",
+      image: imgSujana,
+      techStack: ["React", "Go", "Stripe API"],
+      link: "https://github.com/AxelanO7/sujana-frontend-web-js",
+      gradient: "from-amber-500 to-orange-500",
+    },
+    {
+      id: 12,
+      name: "Color Learning",
+      category: "mobile",
+      shortDescription: "Interactive Color Education",
+      description:
+        "Engaging mobile application for color theory education with interactive games and visual learning tools.",
+      image: imgColorLearning,
+      techStack: ["Java", "Android SDK"],
+      link: "https://github.com/AxelanO7/color-learning-mobile-java",
+      gradient: "from-rainbow-500 to-pink-500",
+    },
+  ];
+
+  const filteredProjects =
+    activeFilter === "all"
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
+
+  const featuredProjects = projects.filter((project) => project.featured);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0, scale: 0.9 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
+  const ProjectCard = ({ project, index, isFeatured = false }) => (
+    <motion.div
+      variants={itemVariants}
+      className={`group relative ${isFeatured ? "md:col-span-2" : ""}`}
+      whileHover={{ y: -10, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onHoverStart={() => setHoveredProject(project.id)}
+      onHoverEnd={() => setHoveredProject(null)}
+    >
+      <Card className="h-full bg-white/5 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden group-hover:shadow-2xl">
+        <CardBody className="p-0">
+          {/* Image Container */}
+          <div className="relative overflow-hidden h-48 md:h-56">
+            <motion.div
+              className="absolute inset-0 bg-black/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              initial={false}
+            />
+
+            <Image
+              src={project.image}
+              alt={project.name}
+              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+              fill
+            />
+
+            {/* Overlay Content */}
+            <motion.div
+              className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              initial={false}
+            >
+              <motion.a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={(e) => !project.link && e.preventDefault()}
+              >
+                {project.link ? "View Project" : "Coming Soon"}
+              </motion.a>
+            </motion.div>
+
+            {/* Featured Badge */}
+            {project.featured && (
+              <motion.div
+                className="absolute top-4 right-4 z-30"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div
+                  className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white text-xs font-bold rounded-full shadow-lg`}
+                >
+                  ⭐ Featured
                 </div>
-              </CardFooter>
-            </a>
-          </Card>
-        ))}
+              </motion.div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="p-6 space-y-4">
+            {/* Header */}
+            <div className="space-y-2">
+              <motion.h3
+                className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
+                style={{
+                  backgroundImage:
+                    hoveredProject === project.id
+                      ? `linear-gradient(to right, var(--tw-gradient-stops))`
+                      : "none",
+                }}
+                whileHover={{
+                  backgroundImage: `linear-gradient(to right, ${
+                    project.gradient.split(" ")[1]
+                  }, ${project.gradient.split(" ")[3]})`,
+                }}
+              >
+                {project.name}
+              </motion.h3>
+
+              <p className="text-gray-400 text-sm font-medium">
+                {project.shortDescription}
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
+              {project.description}
+            </p>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map(
+                (
+                  tech:
+                    | boolean
+                    | React.ReactElement<
+                        any,
+                        string | React.JSXElementConstructor<any>
+                      >
+                    | Iterable<React.ReactNode>
+                    | Promise<React.AwaitedReactNode>
+                    | React.Key
+                    | MotionValue<number>
+                    | MotionValue<string>
+                    | null
+                    | undefined,
+                  techIndex: number
+                ) => (
+                  <motion.span
+                    key={tech}
+                    className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 + techIndex * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {tech}
+                  </motion.span>
+                )
+              )}
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    </motion.div>
+  );
+
+  return (
+    <section className="relative flex flex-col min-h-screen justify-center items-center projects py-16 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-40 right-40 w-96 h-96 bg-gradient-to-br from-purple-400/10 via-pink-400/10 to-red-400/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-40 left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/10 via-cyan-400/10 to-emerald-400/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.3, 1, 1.3],
+            rotate: [360, 180, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <motion.h1
+            className="text-4xl sm:text-5xl font-bold mb-4"
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          >
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Featured Projects
+            </span>
+          </motion.h1>
+          <motion.div
+            className="w-48 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mx-auto mb-6"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          />
+          <motion.p
+            className="text-xl text-gray-300 max-w-2xl mx-auto"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            Innovative solutions that showcase technical excellence and creative
+            problem-solving
+          </motion.p>
+        </motion.div>
+
+        {/* Category Filters */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mb-12"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          {categories.map((category) => (
+            <motion.button
+              key={category.id}
+              className={`
+                group relative px-6 py-3 rounded-2xl font-semibold transition-all duration-300
+                ${
+                  activeFilter === category.id
+                    ? `bg-gradient-to-r ${category.color} text-white shadow-lg shadow-white/20`
+                    : "bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20"
+                }
+              `}
+              onClick={() => setActiveFilter(category.id)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="flex items-center gap-2">
+                <span className="text-xl">{category.icon}</span>
+                {category.name}
+              </span>
+
+              {activeFilter === category.id && (
+                <motion.div
+                  className="absolute inset-0 bg-white/20 rounded-2xl"
+                  layoutId="activeProjectTab"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </motion.button>
+          ))}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                isFeatured={project.featured}
+              />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Stats Section */}
+        <motion.div
+          className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          {[
+            {
+              number: `${projects.length}+`,
+              label: "Projects Completed",
+              color: "from-blue-500 to-cyan-500",
+            },
+            {
+              number: "15+",
+              label: "Technologies Used",
+              color: "from-purple-500 to-pink-500",
+            },
+            {
+              number: "100%",
+              label: "Client Satisfaction",
+              color: "from-emerald-500 to-teal-500",
+            },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="space-y-2"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                delay: index * 0.1,
+              }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: index * 0.2,
+                }}
+              >
+                {stat.number}
+              </motion.div>
+              <div className="text-gray-300 font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
