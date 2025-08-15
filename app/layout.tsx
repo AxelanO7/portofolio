@@ -36,17 +36,17 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <head />
       <body
-        className={clsx("min-h-screen font-sans antialiased bg-c_dark_gray")}
+        className={clsx(
+          "min-h-screen font-sans antialiased bg-c_dark_gray overflow-x-hidden"
+        )}
         style={{
           fontFamily: fontMonserrat.variable,
         }}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col">
+          <div className="relative flex flex-col min-h-screen w-full">
             <Navbar />
-            <main className="container mx-auto max-w-7xl px-6 flex-grow">
-              {children}
-            </main>
+            <main className="flex-grow w-full">{children}</main>
             <FooterSection />
           </div>
         </Providers>

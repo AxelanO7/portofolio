@@ -1,377 +1,394 @@
-"use client";
+import React from "react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
-export default function MainSection() {
-  const [currentRole, setCurrentRole] = useState(0);
-  const roles = [
-    "CTO & Tech Leader",
-    "Full Stack Engineer",
-    "DevOps Specialist",
-    "AI Innovation Expert",
-    "System Architect",
-    "Mobile Engineer",
+export default function AboutSection() {
+  const achievements = [
+    {
+      icon: "🚀",
+      title: "Tech Leadership",
+      description:
+        "Leading cross-functional teams in building scalable solutions",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: "🎯",
+      title: "Strategic Innovation",
+      description:
+        "Driving digital transformation with AI-powered technologies",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: "⚡",
+      title: "DevOps Excellence",
+      description: "Architecting robust infrastructure and CI/CD pipelines",
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    {
+      icon: "🤖",
+      title: "AI Integration",
+      description: "Implementing cutting-edge AI solutions for business growth",
+      gradient: "from-orange-500 to-red-500",
+    },
   ];
 
-  const roleColors = [
-    "from-purple-600 via-pink-600 to-red-500",
-    "from-blue-600 via-cyan-500 to-teal-500",
-    "from-green-500 via-emerald-500 to-teal-600",
-    "from-orange-500 via-amber-500 to-yellow-500",
-    "from-indigo-600 via-purple-600 to-pink-500",
-    "from-red-500 via-rose-500 to-pink-600",
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleDownload = () => {
-    const link = document.createElement("a");
-
-    link.href = "resume.pdf";
-    link.download = "Axel's Resume.pdf";
-    link.click();
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
   };
 
-  const handleSocialMedia = (url: string) => {
-    window.open(url, "_blank");
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
   };
-
-  // Floating particles animation
-  const FloatingParticles = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, Math.random() * 40 - 20, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1, 0],
-          }}
-          className={`absolute w-2 h-2 rounded-full ${
-            i % 4 === 0
-              ? "bg-blue-400"
-              : i % 4 === 1
-                ? "bg-purple-400"
-                : i % 4 === 2
-                  ? "bg-pink-400"
-                  : "bg-cyan-400"
-          }`}
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-
-  // Gradient background orbs
-  const GradientOrbs = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-      <motion.div
-        animate={{
-          scale: [1.2, 1, 1.2],
-          rotate: [360, 180, 0],
-        }}
-        className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 via-teal-400/20 to-green-400/20 rounded-full blur-3xl"
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-    </div>
-  );
 
   return (
-    <section className="relative flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center space-y-8 overflow-hidden">
-      <FloatingParticles />
-      <GradientOrbs />
-
-      {/* Main content with enhanced animations */}
-      <div className="relative z-10 text-center space-y-8">
-        {/* Avatar with dynamic glow */}
+    <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center about py-16 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ scale: 1, rotate: 0 }}
-          className="flex justify-center mb-8"
-          initial={{ scale: 0, rotate: -180 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            duration: 1.2,
+          className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-pink-400/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
           }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-20 w-72 h-72 bg-gradient-to-tr from-cyan-400/10 via-teal-400/10 to-green-400/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [360, 180, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          <div className="relative">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 30px rgba(147, 51, 234, 0.4)",
-                  "0 0 60px rgba(59, 130, 246, 0.6)",
-                  "0 0 30px rgba(236, 72, 153, 0.4)",
-                  "0 0 60px rgba(6, 182, 212, 0.6)",
-                ],
-              }}
-              className="w-32 h-32 rounded-full border-4 border-white/30 shadow-2xl overflow-hidden"
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              <img
-                alt="Jeremia Axelano"
-                className="w-full h-full object-cover"
-                src="/a.png"
-              />
+          <motion.h1
+            className="text-4xl sm:text-5xl font-bold mb-4"
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          >
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              About Me
+            </span>
+          </motion.h1>
+          <motion.div
+            className="w-48 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mx-auto"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          />
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <motion.div
+            className="space-y-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={itemVariants} className="space-y-4">
+              <h2 className="text-2xl font-bold text-white">
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  CTO & Technology Leader
+                </span>
+              </h2>
+              <p className="text-gray-200 text-lg leading-relaxed">
+                Experienced{" "}
+                <span className="text-purple-400 font-semibold">
+                  Chief Technology Officer
+                </span>{" "}
+                with a proven track record in leading digital transformation
+                initiatives and building high-performing engineering teams.
+                Specialized in
+                <span className="text-cyan-400 font-semibold">
+                  {" "}
+                  full-stack development
+                </span>
+                ,
+                <span className="text-emerald-400 font-semibold">
+                  {" "}
+                  DevOps engineering
+                </span>
+                , and
+                <span className="text-orange-400 font-semibold">
+                  {" "}
+                  AI integration
+                </span>
+                .
+              </p>
             </motion.div>
 
-            {/* Orbiting elements */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{
-                  rotate: [0, 360],
-                  scale: [0.8, 1.2, 0.8],
-                }}
-                className={`absolute w-3 h-3 rounded-full ${
-                  i % 3 === 0
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500"
-                    : i % 3 === 1
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500"
-                      : "bg-gradient-to-r from-emerald-500 to-teal-500"
-                }`}
-                style={{
-                  top: "50%",
-                  left: "50%",
-                  transformOrigin: `${60 + i * 10}px center`,
-                  transform: "translate(-50%, -50%)",
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                  ease: "linear",
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
+            <motion.div variants={itemVariants} className="space-y-4">
+              <p className="text-gray-200 leading-relaxed">
+                My expertise spans across multiple domains including{" "}
+                <span className="text-blue-400 font-semibold">
+                  mobile and web application development
+                </span>
+                , leveraging cutting-edge technologies like{" "}
+                <span className="text-purple-400 font-semibold">
+                  React, Vue.js, Flutter, Node.js, Go, Python
+                </span>
+                , and modern{" "}
+                <span className="text-emerald-400 font-semibold">
+                  cloud infrastructure
+                </span>{" "}
+                with{" "}
+                <span className="text-cyan-400 font-semibold">
+                  Docker, AWS, and advanced CI/CD pipelines
+                </span>
+                .
+              </p>
+            </motion.div>
 
-        {/* Name with enhanced gradient animation */}
-        <motion.h1
-          animate={{ y: 0, opacity: 1 }}
-          className="text-4xl font-bold flex flex-col sm:flex-row justify-center items-center sm:justify-center text-white sm:text-6xl sm:leading-relaxed gap-4"
-          initial={{ y: 50, opacity: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <span className="text-white">Hi, I&apos;m</span>
-          <motion.span
-            animate={{
-              backgroundPosition: ["0%", "100%", "0%"],
-            }}
-            className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse"
-            style={{
-              backgroundSize: "200% auto",
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            Axel
-          </motion.span>
-          <motion.span
-            animate={{ rotate: [0, 20, -20, 0] }}
-            className="text-4xl sm:text-6xl"
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-          >
-            👋
-          </motion.span>
-        </motion.h1>
+            <motion.div variants={itemVariants} className="space-y-4">
+              <p className="text-gray-200 leading-relaxed">
+                As a strategic leader, I focus on{" "}
+                <span className="text-pink-400 font-semibold">
+                  driving innovation
+                </span>{" "}
+                through
+                <span className="text-orange-400 font-semibold">
+                  {" "}
+                  AI-powered solutions
+                </span>
+                , implementing
+                <span className="text-teal-400 font-semibold">
+                  {" "}
+                  scalable architectures
+                </span>
+                , and fostering a culture of
+                <span className="text-purple-400 font-semibold">
+                  {" "}
+                  continuous improvement
+                </span>{" "}
+                within development teams. Passionate about transforming complex
+                business challenges into elegant, efficient, and future-proof
+                technological solutions.
+              </p>
+            </motion.div>
 
-        {/* Dynamic role display */}
-        <motion.div
-          animate={{ y: 0, opacity: 1 }}
-          className="text-xl font-semibold text-white sm:text-2xl sm:leading-relaxed flex items-center justify-center space-x-2 h-16"
-          initial={{ y: 30, opacity: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-        >
-          <motion.span
-            animate={{ scale: [1, 1.1, 1] }}
-            className="text-cyan-400 animate-pulse"
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            |
-          </motion.span>
-
-          <motion.span
-            key={currentRole}
-            animate={{ y: 0, opacity: 1 }}
-            className={`bg-gradient-to-r ${roleColors[currentRole]} bg-clip-text text-transparent font-bold`}
-            exit={{ y: -20, opacity: 0 }}
-            initial={{ y: 20, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {roles[currentRole]}
-          </motion.span>
-
-          <motion.span
-            animate={{ scale: [1, 1.1, 1] }}
-            className="text-cyan-400 animate-pulse"
-            transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
-          >
-            |
-          </motion.span>
-        </motion.div>
-
-        {/* Enhanced description */}
-        <motion.p
-          animate={{ y: 0, opacity: 1 }}
-          className="max-w-2xl mx-auto text-gray-200 sm:text-lg text-center leading-relaxed"
-          initial={{ y: 30, opacity: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
-        >
-          <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-semibold">
-            CTO & Tech Leader
-          </span>{" "}
-          passionate about building{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
-            innovative solutions
-          </span>{" "}
-          with{" "}
-          <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent font-semibold">
-            AI-powered technology
-          </span>
-          . Leading teams to transform ideas into scalable digital realities.
-        </motion.p>
-
-        {/* Enhanced action buttons */}
-        <motion.div
-          animate={{ y: 0, opacity: 1 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
-          initial={{ y: 30, opacity: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          <motion.button
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleDownload}
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={false}
-            />
-            <span className="relative z-10">Download CV</span>
-            <motion.div
-              className="absolute inset-0 bg-white/20"
-              initial={{ x: "-100%" }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ x: "100%" }}
-            />
-          </motion.button>
-
-          {/* Social media icons with enhanced animations */}
-          <div className="flex gap-4">
-            {[
-              {
-                url: "https://linkedin.com/in/jeremia-axelano",
-                icon: (
-                  <svg
-                    className="w-6 h-6 fill-current"
-                    viewBox="0 0 50 50"
-                    xmlns="http://www.w3.org/2000/svg"
+            <motion.div variants={itemVariants} className="pt-4">
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "Frontend", color: "from-blue-500 to-cyan-500" },
+                  { label: "Backend", color: "from-green-500 to-emerald-500" },
+                  { label: "Fullstack", color: "from-purple-500 to-pink-500" },
+                  { label: "Leadership", color: "from-orange-500 to-red-500" },
+                  {
+                    label: "Innovation",
+                    color: "from-indigo-500 to-purple-500",
+                  },
+                  { label: "AI/ML", color: "from-cyan-500 to-teal-500" },
+                  { label: "DevOps", color: "from-emerald-500 to-blue-500" },
+                  { label: "Architecture", color: "from-pink-500 to-rose-500" },
+                  { label: "Mentoring", color: "from-amber-500 to-orange-500" },
+                ].map((skill, index) => (
+                  <motion.span
+                    key={skill.label}
+                    className={`px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r ${skill.color} text-white shadow-lg`}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
-                  </svg>
-                ),
-                gradient: "from-blue-600 to-blue-800",
-              },
-              {
-                url: "https://github.com/AxelanO7",
-                icon: (
-                  <svg
-                    className="w-6 h-6 fill-current"
-                    viewBox="0 0 50 50"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M17.791,46.836C18.502,46.53,19,45.823,19,45v-5.4c0-0.197,0.016-0.402,0.041-0.61C19.027,38.994,19.014,38.997,19,39 c0,0-3,0-3.6,0c-1.5,0-2.8-0.6-3.4-1.8c-0.7-1.3-1-3.5-2.8-4.7C8.9,32.3,9.1,32,9.7,32c0.6,0.1,1.9,0.9,2.7,2c0.9,1.1,1.8,2,3.4,2 c2.487,0,3.82-0.125,4.622-0.555C21.356,34.056,22.649,33,24,33v-0.025c-5.668-0.182-9.289-2.066-10.975-4.975 c-3.665,0.042-6.856,0.405-8.677,0.707c-0.058-0.327-0.108-0.656-0.151-0.987c1.797-0.296,4.843-0.647,8.345-0.714 c-0.112-0.276-0.209-0.559-0.291-0.849c-3.511-0.178-6.541-0.039-8.187,0.097c-0.02-0.332-0.047-0.663-0.051-0.999 c1.649-0.135,4.597-0.27,8.018-0.111c-0.079-0.5-0.13-1.011-0.13-1.543c0-1.7,0.6-3.5,1.7-5c-0.5-1.7-1.2-5.3,0.2-6.6 c2.7,0,4.6,1.3,5.5,2.1C21,13.4,22.9,13,25,13s4,0.4,5.6,1.1c0.9-0.8,2.8-2.1,5.5-2.1c1.5,1.4,0.7,5,0.2,6.6c1.1,1.5,1.7,3.2,1.6,5 c0,0.484-0.045,0.951-0.11,1.409c3.499-0.172,6.527-0.034,8.204,0.102c-0.002,0.337-0.033,0.666-0.051,0.999 c-1.671-0.138-4.775-0.28-8.359-0.089c-0.089,0.336-0.197,0.663-0.325,0.98c3.546,0.046,6.665,0.389,8.548,0.689 c-0.043,0.332-0.093,0.661-0.151,0.987c-1.912-0.306-5.171-0.664-8.879-0.682C35.112,30.873,31.557,32.75,26,32.969V33 c2.6,0,5,3.9,5,6.6V45c0,0.823,0.498,1.53,1.209,1.836C41.37,43.804,48,35.164,48,25C48,12.318,37.683,2,25,2S2,12.318,2,25 C2,35.164,8.63,43.804,17.791,46.836z" />
-                  </svg>
-                ),
-                gradient: "from-gray-700 to-gray-900",
-              },
-            ].map((social, index) => (
-              <motion.button
-                key={index}
-                animate={{ opacity: 1, y: 0 }}
-                className={`group relative p-4 bg-gradient-to-r ${social.gradient} text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden`}
-                initial={{ opacity: 0, y: 20 }}
-                transition={{ delay: 1.4 + index * 0.1 }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => handleSocialMedia(social.url)}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ scale: 0 }}
-                  style={{ borderRadius: "50%" }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1 }}
-                />
-                <div className="relative z-10">{social.icon}</div>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+                    {skill.label}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          transition={{ delay: 2, duration: 0.8 }}
-        >
+          {/* Right Column - Achievement Cards */}
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            className="text-gray-400"
-            transition={{ duration: 2, repeat: Infinity }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group relative"
+                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div
+                  className={`
+                  relative p-6 bg-gradient-to-br ${achievement.gradient} rounded-2xl 
+                  shadow-xl hover:shadow-2xl transition-all duration-300
+                  border border-white/20 backdrop-blur-sm
+                  overflow-hidden
+                `}
+                >
+                  {/* Background glow effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={false}
+                  />
+
+                  <div className="relative z-10">
+                    <motion.div
+                      className="text-4xl mb-4"
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.2,
+                      }}
+                    >
+                      {achievement.icon}
+                    </motion.div>
+
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      {achievement.title}
+                    </h3>
+
+                    <p className="text-white/90 text-sm leading-relaxed">
+                      {achievement.description}
+                    </p>
+                  </div>
+
+                  {/* Animated border */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl border-2 border-white/30"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    transition={{ duration: 2, delay: index * 0.1 }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Stats Section */}
+        <motion.div
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          {[
+            {
+              number: "5+",
+              label: "Years Experience",
+              color: "from-blue-500 to-cyan-500",
+            },
+            {
+              number: "50+",
+              label: "Projects Delivered",
+              color: "from-purple-500 to-pink-500",
+            },
+            {
+              number: "20+",
+              label: "Technologies",
+              color: "from-emerald-500 to-teal-500",
+            },
+            {
+              number: "10+",
+              label: "Team Members Led",
+              color: "from-orange-500 to-red-500",
+            },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="text-center group"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <path
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+              <motion.div
+                className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  delay: index * 0.1,
+                }}
+              >
+                {stat.number}
+              </motion.div>
+              <div className="text-gray-300 font-medium mt-2">{stat.label}</div>
+              <motion.div
+                className={`h-1 bg-gradient-to-r ${stat.color} rounded-full mx-auto mt-2 group-hover:w-full transition-all duration-300`}
+                initial={{ width: 0 }}
+                whileInView={{ width: "60%" }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
               />
-            </svg>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Quote Section */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <motion.blockquote
+            className="text-xl md:text-2xl font-medium text-gray-200 italic max-w-4xl mx-auto"
+            initial={{ y: 30 }}
+            whileInView={{ y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            "Innovation distinguishes between a leader and a follower. I believe
+            in{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">
+              transforming challenges into opportunities
+            </span>{" "}
+            through technology."
+          </motion.blockquote>
+          <motion.div
+            className="mt-6 flex justify-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full" />
           </motion.div>
         </motion.div>
       </div>

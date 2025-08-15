@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -10,7 +12,7 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
 
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -18,10 +20,7 @@ export default function ContactSection() {
     }));
   };
 
-  const handleSubmit = async (e: {
-    preventDefault: () => void;
-    target: any;
-  }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -105,7 +104,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="relative flex flex-col min-h-[calc(100vh-4rem)] justify-center items-center contact py-16 overflow-hidden">
+    <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center contact py-16 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -150,7 +149,7 @@ export default function ContactSection() {
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
           >
             <span className="bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-500 bg-clip-text text-transparent">
-              Let&apos;s Connect
+              Let's Connect
             </span>
           </motion.h1>
           <motion.div
@@ -165,8 +164,8 @@ export default function ContactSection() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            Ready to transform your ideas into reality? Let&apos;s discuss your
-            next project and explore innovative solutions together.
+            Ready to transform your ideas into reality? Let's discuss your next
+            project and explore innovative solutions together.
           </motion.p>
         </motion.div>
 
@@ -186,10 +185,10 @@ export default function ContactSection() {
                 </span>
               </h2>
               <p className="text-gray-300 leading-relaxed mb-8">
-                Whether you&apos;re looking to build a new application, optimize
-                existing systems, or need strategic technology consulting,
-                I&apos;m here to help bring your vision to life with
-                cutting-edge solutions and industry best practices.
+                Whether you're looking to build a new application, optimize
+                existing systems, or need strategic technology consulting, I'm
+                here to help bring your vision to life with cutting-edge
+                solutions and industry best practices.
               </p>
             </motion.div>
 
@@ -485,15 +484,15 @@ export default function ContactSection() {
             whileInView={{ y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            &quot;Every great project starts with a{" "}
+            "Every great project starts with a{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">
               conversation
             </span>
-            . Let&apos;s build something{" "}
+            . Let's build something{" "}
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-bold">
               extraordinary
             </span>{" "}
-            together.&quot;
+            together."
           </motion.blockquote>
 
           <motion.div

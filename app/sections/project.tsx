@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence, MotionValue } from "framer-motion";
+"use client";
+
+import React, { useState, Suspense } from "react";
+import { motion, MotionValue } from "framer-motion";
 import { Card, CardBody } from "@nextui-org/card";
 import Image from "next/image";
 
@@ -21,41 +23,12 @@ import imgSujana from "@/public/sujana.png";
 import imgVMUC from "@/public/vmuc.png";
 
 export default function ProjectSection() {
-  const [activeFilter, setActiveFilter] = useState("all");
   const [hoveredProject, setHoveredProject] = useState(null);
-
-  const categories = [
-    {
-      id: "all",
-      name: "All Projects",
-      icon: "🚀",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      id: "web",
-      name: "Web Apps",
-      icon: "💻",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      id: "mobile",
-      name: "Mobile Apps",
-      icon: "📱",
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      id: "ai",
-      name: "AI/ML",
-      icon: "🤖",
-      color: "from-orange-500 to-red-500",
-    },
-  ];
 
   const projects = [
     {
       id: 1,
       name: "Siapenku",
-      category: "web",
       shortDescription: "Administrative Data Management System",
       description:
         "Comprehensive system for managing population data and administrative letters in Bulian Village, enhancing governance and service delivery.",
@@ -68,7 +41,6 @@ export default function ProjectSection() {
     {
       id: 2,
       name: "KOI Campus Platform",
-      category: "web",
       shortDescription: "Campus Community Management",
       description:
         "Platform optimizing interactions among students, organizations, and activities within campus community with categorized event management.",
@@ -81,7 +53,6 @@ export default function ProjectSection() {
     {
       id: 3,
       name: "Smart BTW",
-      category: "mobile",
       shortDescription: "Job Preparation Simulator",
       description:
         "Mobile application providing realistic simulation experience for job tryouts with interactive exercises and assessments.",
@@ -94,7 +65,6 @@ export default function ProjectSection() {
     {
       id: 4,
       name: "Jobseeker App",
-      category: "mobile",
       shortDescription: "Social Job Search Platform",
       description:
         "Revolutionary job search app with social media-like interface, skill-based matching, and instant job opportunities.",
@@ -107,7 +77,6 @@ export default function ProjectSection() {
     {
       id: 5,
       name: "Sigapura 3D",
-      category: "web",
       shortDescription: "3D Temple Digitization",
       description:
         "Innovative platform for digitizing temple shrines with advanced 3D modeling and immersive virtual exploration.",
@@ -119,7 +88,6 @@ export default function ProjectSection() {
     {
       id: 6,
       name: "BN Shop Inventory",
-      category: "web",
       shortDescription: "Smart Inventory Management",
       description:
         "Comprehensive inventory management system with real-time tracking, automated reordering, and analytics dashboard.",
@@ -131,7 +99,6 @@ export default function ProjectSection() {
     {
       id: 7,
       name: "Villa Manis FinTech",
-      category: "web",
       shortDescription: "Financial Management System",
       description:
         "Advanced financial reporting and accounting system for hospitality industry with real-time analytics.",
@@ -143,7 +110,6 @@ export default function ProjectSection() {
     {
       id: 8,
       name: "Teacher Payroll",
-      category: "mobile",
       shortDescription: "HR Management Mobile App",
       description:
         "Complete HR solution for teachers with attendance tracking, leave management, and digital payroll system.",
@@ -155,7 +121,6 @@ export default function ProjectSection() {
     {
       id: 9,
       name: "BTW Edutech",
-      category: "mobile",
       shortDescription: "Educational Technology Platform",
       description:
         "Advanced educational platform for skill development and career preparation with AI-powered assessments.",
@@ -167,7 +132,6 @@ export default function ProjectSection() {
     {
       id: 10,
       name: "VMUC FinTech",
-      category: "web",
       shortDescription: "Villa Financial Intelligence",
       description:
         "Sophisticated financial reporting system for Villa Munduk with automated transaction processing and analytics.",
@@ -179,7 +143,6 @@ export default function ProjectSection() {
     {
       id: 11,
       name: "Sujana Travel",
-      category: "web",
       shortDescription: "Travel Booking System",
       description:
         "Comprehensive booking system for Sujana Tour & Travel with integrated payment processing and itinerary management.",
@@ -191,23 +154,48 @@ export default function ProjectSection() {
     {
       id: 12,
       name: "Color Learning",
-      category: "mobile",
       shortDescription: "Interactive Color Education",
       description:
         "Engaging mobile application for color theory education with interactive games and visual learning tools.",
       image: imgColorLearning,
       techStack: ["Java", "Android SDK"],
       link: "https://github.com/AxelanO7/color-learning-mobile-java",
-      gradient: "from-rainbow-500 to-pink-500",
+      gradient: "from-indigo-500 to-pink-500",
+    },
+    {
+      id: 13,
+      name: "Calculator Pro",
+      shortDescription: "Versatile Calculator Application",
+      description:
+        "Versatile calculator application capable of adapting to various screen sizes while incorporating user authentication and external data retrieval functionalities.",
+      image: imgCalculator,
+      techStack: ["Flutter"],
+      link: "https://github.com/AxelanO7/live-code-hybrid-flutter",
+      gradient: "from-blue-500 to-purple-500",
+    },
+    {
+      id: 14,
+      name: "Assyarif Inventory",
+      shortDescription: "Streamlined Inventory Management",
+      description:
+        "Web-based application that streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility.",
+      image: imgAssyarif,
+      techStack: ["React", "Go"],
+      link: "https://github.com/AxelanO7/assyarif-frontend-web-js",
+      gradient: "from-emerald-500 to-blue-500",
+    },
+    {
+      id: 15,
+      name: "Jobseeker Partners",
+      shortDescription: "Partner Management Platform",
+      description:
+        "Mobile app for job seekers with easy job search, skill matching, and fast job opportunities for business partners.",
+      image: imgJobseerPartners,
+      techStack: ["Flutter"],
+      link: "https://play.google.com/store/apps/details?id=com.jobseeker.partners&hl=id",
+      gradient: "from-purple-500 to-cyan-500",
     },
   ];
-
-  const filteredProjects =
-    activeFilter === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
-
-  const featuredProjects = projects.filter((project) => project.featured);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -234,137 +222,169 @@ export default function ProjectSection() {
     },
   };
 
-  const ProjectCard = ({ project, index, isFeatured = false }) => (
-    <motion.div
-      variants={itemVariants}
-      className={`group relative ${isFeatured ? "md:col-span-2" : ""}`}
-      whileHover={{ y: -10, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      onHoverStart={() => setHoveredProject(project.id)}
-      onHoverEnd={() => setHoveredProject(null)}
-    >
-      <Card className="h-full bg-white/5 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden group-hover:shadow-2xl">
-        <CardBody className="p-0">
-          {/* Image Container */}
-          <div className="relative overflow-hidden h-48 md:h-56">
-            <motion.div
-              className="absolute inset-0 bg-black/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={false}
-            />
+  const ProjectCard = ({ project, index }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
-            <Image
-              src={project.image}
-              alt={project.name}
-              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-              fill
-            />
-
-            {/* Overlay Content */}
-            <motion.div
-              className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={false}
-            >
-              <motion.a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => !project.link && e.preventDefault()}
-              >
-                {project.link ? "View Project" : "Coming Soon"}
-              </motion.a>
-            </motion.div>
-
-            {/* Featured Badge */}
-            {project.featured && (
+    return (
+      <motion.div
+        variants={itemVariants}
+        className="group relative"
+        whileHover={{ y: -10, scale: 1.02 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        onHoverStart={() => setHoveredProject(project.id)}
+        onHoverEnd={() => setHoveredProject(null)}
+      >
+        <Card className="h-full bg-white/5 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden group-hover:shadow-2xl">
+          <CardBody className="p-0">
+            {/* Image Container */}
+            <div className="relative overflow-hidden h-48 md:h-56 bg-gray-800">
               <motion.div
-                className="absolute top-4 right-4 z-30"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div
-                  className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white text-xs font-bold rounded-full shadow-lg`}
-                >
-                  ⭐ Featured
+                className="absolute inset-0 bg-black/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={false}
+              />
+
+              {!imageError ? (
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  className={`object-cover w-full h-full transition-all duration-500 group-hover:scale-110 ${
+                    imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageError(true)}
+                  priority={index < 6} // Prioritize first 6 images
+                />
+              ) : (
+                // Fallback when image fails to load
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900">
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">📱</div>
+                    <div className="text-white font-semibold">
+                      {project.name}
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            )}
-          </div>
+              )}
 
-          {/* Content */}
-          <div className="p-6 space-y-4">
-            {/* Header */}
-            <div className="space-y-2">
-              <motion.h3
-                className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
-                style={{
-                  backgroundImage:
-                    hoveredProject === project.id
-                      ? `linear-gradient(to right, var(--tw-gradient-stops))`
-                      : "none",
-                }}
-                whileHover={{
-                  backgroundImage: `linear-gradient(to right, ${
-                    project.gradient.split(" ")[1]
-                  }, ${project.gradient.split(" ")[3]})`,
-                }}
+              {/* Loading skeleton */}
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0 bg-gray-700 animate-pulse" />
+              )}
+
+              {/* Overlay Content */}
+              <motion.div
+                className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={false}
               >
-                {project.name}
-              </motion.h3>
+                <motion.a
+                  href={project.link || "#"}
+                  target={project.link ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  className={`px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
+                    !project.link ? "cursor-not-allowed opacity-75" : ""
+                  }`}
+                  whileHover={{ scale: project.link ? 1.05 : 1 }}
+                  whileTap={{ scale: project.link ? 0.95 : 1 }}
+                  onClick={(e) => {
+                    if (!project.link) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
+                  {project.link ? "View Project" : "Coming Soon"}
+                </motion.a>
+              </motion.div>
 
-              <p className="text-gray-400 text-sm font-medium">
-                {project.shortDescription}
-              </p>
-            </div>
-
-            {/* Description */}
-            <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-              {project.description}
-            </p>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.map(
-                (
-                  tech:
-                    | boolean
-                    | React.ReactElement<
-                        any,
-                        string | React.JSXElementConstructor<any>
-                      >
-                    | Iterable<React.ReactNode>
-                    | Promise<React.AwaitedReactNode>
-                    | React.Key
-                    | MotionValue<number>
-                    | MotionValue<string>
-                    | null
-                    | undefined,
-                  techIndex: number
-                ) => (
-                  <motion.span
-                    key={tech}
-                    className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + techIndex * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
+              {/* Featured Badge */}
+              {project.featured && (
+                <motion.div
+                  className="absolute top-4 right-4 z-30"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div
+                    className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white text-xs font-bold rounded-full shadow-lg`}
                   >
-                    {tech}
-                  </motion.span>
-                )
+                    ⭐ Featured
+                  </div>
+                </motion.div>
               )}
             </div>
-          </div>
-        </CardBody>
-      </Card>
-    </motion.div>
-  );
+
+            {/* Content */}
+            <div className="p-6 space-y-4">
+              {/* Header */}
+              <div className="space-y-2">
+                <motion.h3
+                  className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
+                  style={{
+                    backgroundImage:
+                      hoveredProject === project.id
+                        ? `linear-gradient(to right, var(--tw-gradient-stops))`
+                        : "none",
+                  }}
+                  whileHover={{
+                    backgroundImage: `linear-gradient(to right, ${project.gradient.split(" ")[1]}, ${project.gradient.split(" ")[3]})`,
+                  }}
+                >
+                  {project.name}
+                </motion.h3>
+
+                <p className="text-gray-400 text-sm font-medium">
+                  {project.shortDescription}
+                </p>
+              </div>
+
+              {/* Description */}
+              <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
+                {project.description}
+              </p>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map(
+                  (
+                    tech:
+                      | boolean
+                      | React.ReactElement<
+                          any,
+                          string | React.JSXElementConstructor<any>
+                        >
+                      | Iterable<React.ReactNode>
+                      | Promise<React.AwaitedReactNode>
+                      | React.Key
+                      | MotionValue<number>
+                      | MotionValue<string>
+                      | null
+                      | undefined,
+                    techIndex: number
+                  ) => (
+                    <motion.span
+                      key={tech}
+                      className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 + techIndex * 0.05 }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {tech}
+                    </motion.span>
+                  )
+                )}
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+      </motion.div>
+    );
+  };
 
   return (
-    <section className="relative flex flex-col min-h-screen justify-center items-center projects py-16 overflow-hidden">
+    <section className="relative w-full projects py-16 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -374,18 +394,6 @@ export default function ProjectSection() {
             rotate: [0, 180, 360],
           }}
           transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-40 left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/10 via-cyan-400/10 to-emerald-400/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
             duration: 25,
             repeat: Infinity,
             ease: "linear",
@@ -393,7 +401,7 @@ export default function ProjectSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -429,65 +437,31 @@ export default function ProjectSection() {
           </motion.p>
         </motion.div>
 
-        {/* Category Filters */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              className={`
-                group relative px-6 py-3 rounded-2xl font-semibold transition-all duration-300
-                ${
-                  activeFilter === category.id
-                    ? `bg-gradient-to-r ${category.color} text-white shadow-lg shadow-white/20`
-                    : "bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20"
-                }
-              `}
-              onClick={() => setActiveFilter(category.id)}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="flex items-center gap-2">
-                <span className="text-xl">{category.icon}</span>
-                {category.name}
-              </span>
-
-              {activeFilter === category.id && (
-                <motion.div
-                  className="absolute inset-0 bg-white/20 rounded-2xl"
-                  layoutId="activeProjectTab"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-            </motion.button>
-          ))}
-        </motion.div>
-
         {/* Projects Grid */}
-        <AnimatePresence mode="wait">
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="h-96 bg-gray-700 animate-pulse rounded-2xl"
+                />
+              ))}
+            </div>
+          }
+        >
           <motion.div
-            key={activeFilter}
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
           >
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                isFeatured={project.featured}
-              />
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </motion.div>
-        </AnimatePresence>
+        </Suspense>
 
         {/* Stats Section */}
         <motion.div

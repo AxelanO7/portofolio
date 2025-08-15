@@ -6,16 +6,16 @@ import SkillSection from "./sections/skills";
 
 export default function Home() {
   return (
-    <>
+    <div className="w-full">
       <MainSection />
-      <hr />
+      <hr className="border-gray-700" />
       <AboutSection />
-      <hr />
+      <hr className="border-gray-700" />
       <SkillSection />
-      <hr />
+      <hr className="border-gray-700" />
       <ProjectSection />
-      <hr />
+      <hr className="border-gray-700" />
       <ContactSection />
-    </>
+    </div>
   );
 }

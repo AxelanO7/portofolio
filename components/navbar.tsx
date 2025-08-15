@@ -11,12 +11,12 @@ import {
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
+import Image from "next/image";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { fontPacifico } from "@/config/fonts";
-import imgLogo from "@/public/a.png";
 import { useState } from "react";
 
 export const Navbar = () => {
@@ -35,7 +35,14 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <img src={imgLogo.src} alt="Logo" width="32" height="32" />
+            <Image
+              src="/a.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="rounded-full"
+              priority
+            />
           </NextLink>
         </NavbarBrand>
       </NavbarContent>

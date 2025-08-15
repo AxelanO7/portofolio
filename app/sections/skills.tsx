@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -61,67 +63,40 @@ export default function SkillSection() {
       {
         name: "JavaScript",
         icon: <JavaScriptIcon />,
-        level: 95,
         color: "from-yellow-400 to-orange-500",
       },
       {
         name: "TypeScript",
         icon: <TypeScriptIcon />,
-        level: 90,
         color: "from-blue-600 to-blue-800",
       },
-      {
-        name: "Go",
-        icon: <GoIcon />,
-        level: 85,
-        color: "from-cyan-400 to-blue-500",
-      },
+      { name: "Go", icon: <GoIcon />, color: "from-cyan-400 to-blue-500" },
       {
         name: "Python",
         icon: <PythonIcon />,
-        level: 88,
         color: "from-green-400 to-blue-500",
       },
-      {
-        name: "Dart",
-        icon: <DartIcon />,
-        level: 82,
-        color: "from-blue-400 to-cyan-600",
-      },
+      { name: "Dart", icon: <DartIcon />, color: "from-blue-400 to-cyan-600" },
       {
         name: "Kotlin",
         icon: <KotlinIcon />,
-        level: 80,
         color: "from-purple-500 to-pink-500",
       },
       {
         name: "Swift",
         icon: <SwiftIcon />,
-        level: 75,
         color: "from-orange-500 to-red-500",
       },
-      {
-        name: "Java",
-        icon: <JavaIcon />,
-        level: 85,
-        color: "from-red-600 to-orange-600",
-      },
-      {
-        name: "PHP",
-        icon: <PhpIcon />,
-        level: 88,
-        color: "from-purple-600 to-blue-600",
-      },
+      { name: "Java", icon: <JavaIcon />, color: "from-red-600 to-orange-600" },
+      { name: "PHP", icon: <PhpIcon />, color: "from-purple-600 to-blue-600" },
       {
         name: "C++",
         icon: <CPlusPlusIcon />,
-        level: 70,
         color: "from-blue-700 to-purple-700",
       },
       {
         name: "C#",
         icon: <CSharpIcon />,
-        level: 75,
         color: "from-purple-600 to-pink-600",
       },
     ],
@@ -129,156 +104,75 @@ export default function SkillSection() {
       {
         name: "React.js",
         icon: <ReactJsIcon />,
-        level: 95,
         color: "from-cyan-400 to-blue-500",
       },
       {
         name: "Next.js",
         icon: <NextJsIcon />,
-        level: 90,
         color: "from-gray-800 to-gray-600",
       },
       {
         name: "Vue.js",
         icon: <VueJsIcon />,
-        level: 85,
         color: "from-green-400 to-emerald-500",
       },
       {
         name: "Angular",
         icon: <AngularIcon />,
-        level: 75,
         color: "from-red-500 to-pink-500",
       },
       {
         name: "Flutter",
         icon: <FlutterIcon />,
-        level: 88,
         color: "from-blue-400 to-cyan-500",
       },
       {
         name: "Node.js",
         icon: <NodeJsIcon />,
-        level: 92,
         color: "from-green-500 to-emerald-600",
       },
       {
         name: "Laravel",
         icon: <LaravelIcon />,
-        level: 85,
         color: "from-red-500 to-orange-500",
       },
       {
         name: "Flask",
         icon: <FlaskIcon />,
-        level: 80,
         color: "from-gray-700 to-gray-900",
       },
-      {
-        name: ".NET",
-        icon: <NetIcon />,
-        level: 78,
-        color: "from-purple-600 to-blue-600",
-      },
+      { name: ".NET", icon: <NetIcon />, color: "from-purple-600 to-blue-600" },
       {
         name: "CodeIgniter",
         icon: <CodeIgniterIcon />,
-        level: 82,
         color: "from-orange-500 to-red-500",
       },
     ],
     cloud: [
-      {
-        name: "Docker",
-        icon: "🐳",
-        level: 90,
-        color: "from-blue-500 to-cyan-500",
-      },
-      {
-        name: "AWS",
-        icon: "☁️",
-        level: 85,
-        color: "from-orange-400 to-yellow-500",
-      },
-      {
-        name: "CI/CD",
-        icon: "🔄",
-        level: 88,
-        color: "from-green-500 to-emerald-500",
-      },
-      {
-        name: "Linux",
-        icon: "🐧",
-        level: 85,
-        color: "from-gray-700 to-gray-900",
-      },
-      {
-        name: "Kubernetes",
-        icon: "⚙️",
-        level: 75,
-        color: "from-blue-600 to-purple-600",
-      },
-      {
-        name: "MongoDB",
-        icon: "🍃",
-        level: 88,
-        color: "from-green-600 to-emerald-600",
-      },
-      {
-        name: "PostgreSQL",
-        icon: "🐘",
-        level: 85,
-        color: "from-blue-700 to-indigo-700",
-      },
-      {
-        name: "MySQL",
-        icon: "🗄️",
-        level: 90,
-        color: "from-orange-500 to-red-500",
-      },
+      { name: "Docker", icon: "🐳", color: "from-blue-500 to-cyan-500" },
+      { name: "AWS", icon: "☁️", color: "from-orange-400 to-yellow-500" },
+      { name: "CI/CD", icon: "🔄", color: "from-green-500 to-emerald-500" },
+      { name: "Linux", icon: "🐧", color: "from-gray-700 to-gray-900" },
+      { name: "Kubernetes", icon: "⚙️", color: "from-blue-600 to-purple-600" },
+      { name: "MongoDB", icon: "🍃", color: "from-green-600 to-emerald-600" },
+      { name: "PostgreSQL", icon: "🐘", color: "from-blue-700 to-indigo-700" },
+      { name: "MySQL", icon: "🗄️", color: "from-orange-500 to-red-500" },
     ],
     ai: [
-      { name: "n8n", icon: "🔗", level: 85, color: "from-pink-500 to-red-500" },
-      {
-        name: "Chatbot",
-        icon: "🤖",
-        level: 80,
-        color: "from-blue-500 to-purple-500",
-      },
+      { name: "n8n", icon: "🔗", color: "from-pink-500 to-red-500" },
+      { name: "Chatbot", icon: "🤖", color: "from-blue-500 to-purple-500" },
       {
         name: "Machine Learning",
         icon: "🧠",
-        level: 75,
         color: "from-purple-500 to-pink-500",
       },
-      {
-        name: "OpenAI API",
-        icon: "⚡",
-        level: 82,
-        color: "from-green-400 to-blue-500",
-      },
-      {
-        name: "Git",
-        icon: "📚",
-        level: 95,
-        color: "from-orange-500 to-red-500",
-      },
-      {
-        name: "ClickUp",
-        icon: "📋",
-        level: 88,
-        color: "from-purple-500 to-blue-500",
-      },
-      {
-        name: "Automation",
-        icon: "🔧",
-        level: 85,
-        color: "from-cyan-500 to-blue-500",
-      },
+      { name: "OpenAI API", icon: "⚡", color: "from-green-400 to-blue-500" },
+      { name: "Git", icon: "📚", color: "from-orange-500 to-red-500" },
+      { name: "ClickUp", icon: "📋", color: "from-purple-500 to-blue-500" },
+      { name: "Automation", icon: "🔧", color: "from-cyan-500 to-blue-500" },
       {
         name: "API Integration",
         icon: "🔌",
-        level: 90,
         color: "from-emerald-500 to-teal-500",
       },
     ],
@@ -344,25 +238,15 @@ export default function SkillSection() {
             {skill.name}
           </h3>
 
-          {/* Progress bar */}
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm text-gray-300">
-              <span>Proficiency</span>
-              <span>{skill.level}%</span>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-              <motion.div
-                className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                initial={{ width: 0 }}
-                whileInView={{ width: `${skill.level}%` }}
-                transition={{
-                  duration: 1.5,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-              />
-            </div>
+          {/* Simple indicator without percentage */}
+          <div className="flex justify-center">
+            <motion.div
+              className={`w-8 h-1 bg-gradient-to-r ${skill.color} rounded-full`}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            />
           </div>
         </div>
 
@@ -376,7 +260,7 @@ export default function SkillSection() {
   );
 
   return (
-    <section className="relative flex flex-col min-h-screen justify-center items-center skills py-16 overflow-hidden">
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center skills py-16 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

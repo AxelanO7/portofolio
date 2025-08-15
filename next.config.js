@@ -1,39 +1,40 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    // Remove turbo for now to avoid conflicts
   },
   images: {
     domains: [],
-    unoptimized: true,
+    unoptimized: false,
+    formats: ['image/webp', 'image/avif'],
   },
-  webpack(config) {
+  webpack(config, { isServer }) {
+    // Handle SVG files
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    // Fix for framer-motion in client components
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    
     return config;
   },
-  // Fix for framer-motion SSR issues
-  compiler: {
-    styledComponents: true,
-  },
-  // Optimize for better performance
+  // Remove styledComponents compiler
   swcMinify: true,
-  // Enable static exports if needed
-  // output: 'export',
-  // trailingSlash: true,
-  // Add error handling for build
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
+  poweredByHeader: false,
+  compress: true,
+  
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
   },
 };
 
