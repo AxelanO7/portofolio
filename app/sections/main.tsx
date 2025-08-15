@@ -1,10 +1,11 @@
 "use client";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function MainSection() {
   const [currentRole, setCurrentRole] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
   const roles = [
     "CTO & Tech Leader",
     "Full Stack Engineer",
@@ -24,6 +25,7 @@ export default function MainSection() {
   ];
 
   useEffect(() => {
+    setIsMounted(true);
     const interval = setInterval(() => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
@@ -41,13 +43,13 @@ export default function MainSection() {
     window.open(url, "_blank");
   };
 
-  // Floating particles animation
+  // Floating particles animation (Static version)
   const FloatingParticles = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {[...Array(20)].map((_, i) => (
-        <motion.div
+        <div
           key={i}
-          className={`absolute w-2 h-2 rounded-full ${
+          className={`absolute w-2 h-2 rounded-full animate-pulse ${
             i % 4 === 0
               ? "bg-blue-400"
               : i % 4 === 1
@@ -59,51 +61,18 @@ export default function MainSection() {
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, Math.random() * 40 - 20, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1, 0],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-            ease: "easeInOut",
+            animationDelay: `${Math.random() * 2}s`,
           }}
         />
       ))}
     </div>
   );
 
-  // Gradient background orbs
+  // Gradient background orbs (Static version)
   const GradientOrbs = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div
-        className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-      <motion.div
-        className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 via-teal-400/20 to-green-400/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          rotate: [360, 180, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-cyan-400/20 via-teal-400/20 to-green-400/20 rounded-full blur-3xl animate-pulse" />
     </div>
   );
 
@@ -112,33 +81,12 @@ export default function MainSection() {
       <FloatingParticles />
       <GradientOrbs />
 
-      {/* Main content with enhanced animations */}
+      {/* Main content */}
       <div className="relative z-10 text-center space-y-8">
-        {/* Avatar with dynamic glow */}
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            duration: 1.2,
-          }}
-          className="flex justify-center mb-8"
-        >
+        {/* Avatar */}
+        <div className="flex justify-center mb-8">
           <div className="relative">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 30px rgba(147, 51, 234, 0.4)",
-                  "0 0 60px rgba(59, 130, 246, 0.6)",
-                  "0 0 30px rgba(236, 72, 153, 0.4)",
-                  "0 0 60px rgba(6, 182, 212, 0.6)",
-                ],
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="relative w-32 h-32 rounded-full border-4 border-white/30 shadow-2xl overflow-hidden"
-            >
+            <div className="relative w-32 h-32 rounded-full border-4 border-white/30 shadow-2xl overflow-hidden hover:shadow-blue-500/30 transition-all duration-300">
               <Image
                 src="/a.png"
                 alt="Jeremia Axelano"
@@ -147,13 +95,13 @@ export default function MainSection() {
                 sizes="128px"
                 priority
               />
-            </motion.div>
+            </div>
 
-            {/* Orbiting elements - Fixed positioning */}
+            {/* Static orbiting elements */}
             {[...Array(6)].map((_, i) => (
-              <motion.div
+              <div
                 key={i}
-                className={`absolute w-3 h-3 rounded-full ${
+                className={`absolute w-3 h-3 rounded-full animate-pulse ${
                   i % 3 === 0
                     ? "bg-gradient-to-r from-blue-500 to-cyan-500"
                     : i % 3 === 1
@@ -163,107 +111,36 @@ export default function MainSection() {
                 style={{
                   top: "50%",
                   left: "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
-                animate={{
-                  x: [
-                    Math.cos((i * 60 * Math.PI) / 180) * 80,
-                    Math.cos(((i * 60 + 180) * Math.PI) / 180) * 80,
-                    Math.cos((i * 60 * Math.PI) / 180) * 80,
-                  ],
-                  y: [
-                    Math.sin((i * 60 * Math.PI) / 180) * 80,
-                    Math.sin(((i * 60 + 180) * Math.PI) / 180) * 80,
-                    Math.sin((i * 60 * Math.PI) / 180) * 80,
-                  ],
-                  scale: [0.8, 1.2, 0.8],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                  ease: "linear",
+                  transform: `translate(-50%, -50%) translate(${Math.cos((i * 60 * Math.PI) / 180) * 80}px, ${Math.sin((i * 60 * Math.PI) / 180) * 80}px)`,
+                  animationDelay: `${i * 0.5}s`,
                 }}
               />
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Name with enhanced gradient animation */}
-        <motion.h1
-          className="text-4xl font-bold flex flex-col sm:flex-row justify-center items-center sm:justify-center text-white sm:text-6xl sm:leading-relaxed gap-4"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
+        {/* Name */}
+        <h1 className="text-4xl font-bold flex flex-col sm:flex-row justify-center items-center sm:justify-center text-white sm:text-6xl sm:leading-relaxed gap-4 opacity-0 animate-[fadeInUp_1s_0.5s_ease-out_forwards]">
           <span className="text-white">Hi, I'm</span>
-          <motion.span
-            className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse"
-            animate={{
-              backgroundPosition: ["0%", "100%", "0%"],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{
-              backgroundSize: "200% auto",
-            }}
-          >
+          <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
             Axel
-          </motion.span>
-          <motion.span
-            animate={{ rotate: [0, 20, -20, 0] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            className="text-4xl sm:text-6xl"
-          >
-            👋
-          </motion.span>
-        </motion.h1>
+          </span>
+          <span className="text-4xl sm:text-6xl animate-bounce">👋</span>
+        </h1>
 
         {/* Dynamic role display */}
-        <motion.div
-          className="text-xl font-semibold text-white sm:text-2xl sm:leading-relaxed flex items-center justify-center space-x-2 h-16"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-        >
-          <motion.span
-            className="text-cyan-400 animate-pulse"
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            |
-          </motion.span>
-
-          <motion.span
-            key={currentRole}
-            className={`bg-gradient-to-r ${roleColors[currentRole]} bg-clip-text text-transparent font-bold`}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.5 }}
+        <div className="text-xl font-semibold text-white sm:text-2xl sm:leading-relaxed flex items-center justify-center space-x-2 h-16 opacity-0 animate-[fadeInUp_1s_0.8s_ease-out_forwards]">
+          <span className="text-cyan-400 animate-pulse">|</span>
+          <span
+            className={`bg-gradient-to-r ${roleColors[currentRole]} bg-clip-text text-transparent font-bold transition-all duration-500`}
           >
             {roles[currentRole]}
-          </motion.span>
+          </span>
+          <span className="text-cyan-400 animate-pulse">|</span>
+        </div>
 
-          <motion.span
-            className="text-cyan-400 animate-pulse"
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
-          >
-            |
-          </motion.span>
-        </motion.div>
-
-        {/* Enhanced description */}
-        <motion.p
-          className="max-w-2xl mx-auto text-gray-200 sm:text-lg text-center leading-relaxed"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-        >
+        {/* Description */}
+        <p className="max-w-2xl mx-auto text-gray-200 sm:text-lg text-center leading-relaxed opacity-0 animate-[fadeInUp_1s_1s_ease-out_forwards]">
           <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-semibold">
             CTO & Tech Leader
           </span>{" "}
@@ -276,35 +153,19 @@ export default function MainSection() {
             AI-powered technology
           </span>
           . Leading teams to transform ideas into scalable digital realities.
-        </motion.p>
+        </p>
 
-        {/* Enhanced action buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          <motion.button
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+        {/* Action buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4 opacity-0 animate-[fadeInUp_1s_1.2s_ease-out_forwards]">
+          <button
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1"
             onClick={handleDownload}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={false}
-            />
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative z-10">Download CV</span>
-            <motion.div
-              className="absolute inset-0 bg-white/20"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 0.6 }}
-            />
-          </motion.button>
+          </button>
 
-          {/* Social media icons with enhanced animations */}
+          {/* Social media icons */}
           <div className="flex gap-4">
             {[
               {
@@ -334,41 +195,21 @@ export default function MainSection() {
                 gradient: "from-gray-700 to-gray-900",
               },
             ].map((social, index) => (
-              <motion.button
+              <button
                 key={index}
-                className={`group relative p-4 bg-gradient-to-r ${social.gradient} text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden`}
+                className={`group relative p-4 bg-gradient-to-r ${social.gradient} text-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:scale-110 hover:rotate-3`}
                 onClick={() => handleSocialMedia(social.url)}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 + index * 0.1 }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ borderRadius: "50%" }}
-                />
+                <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full" />
                 <div className="relative z-10">{social.icon}</div>
-              </motion.button>
+              </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.8 }}
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-gray-400"
-          >
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-[fadeInUp_1s_2s_ease-out_forwards]">
+          <div className="text-gray-400 animate-bounce">
             <svg
               className="w-6 h-6"
               fill="none"
@@ -382,9 +223,22 @@ export default function MainSection() {
                 d="M19 14l-7 7m0 0l-7-7m7 7V3"
               />
             </svg>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }

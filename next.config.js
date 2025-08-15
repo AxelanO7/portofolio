@@ -1,29 +1,31 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    // This tells Next.js not to bundle framer-motion on the server.
-    serverComponentsExternalPackages: ["framer-motion"],
+  // Configure compiler options
+  compiler: {
+    // Remove console logs in production
+    removeConsole: process.env.NODE_ENV === 'production',
   },
+  
+  // Image optimization
   images: {
-    domains: [],
+    domains: ['localhost'],
     unoptimized: false,
-    formats: ['image/webp', 'image/avif'],
   },
-  webpack(config) {
-    // Handling SVG files
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
-  },
-  swcMinify: true,
+  
+  // Enable React strict mode
+  reactStrictMode: true,
+  
+  // Disable x-powered-by header
   poweredByHeader: false,
-  compress: true,
+  
+  // Enable SWC minification
+  swcMinify: true,
+  
+  // Disable static page generation errors during build
   typescript: {
     ignoreBuildErrors: false,
   },
+  
   eslint: {
     ignoreDuringBuilds: false,
   },
