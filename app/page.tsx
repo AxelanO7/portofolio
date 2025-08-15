@@ -1,3 +1,5 @@
+"use client";
+
 import AboutSection from "./sections/about";
 import ContactSection from "./sections/contact";
 import MainSection from "./sections/main";
