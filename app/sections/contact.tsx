@@ -12,7 +12,7 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -20,7 +20,10 @@ export default function ContactSection() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: {
+    preventDefault: () => void;
+    target: any;
+  }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -96,7 +99,7 @@ export default function ContactSection() {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },

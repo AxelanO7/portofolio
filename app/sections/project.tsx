@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import { motion, MotionValue } from "framer-motion";
 import { Card, CardBody } from "@nextui-org/card";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 // Import all project images
 import imgSiapenku from "@/public/siapenku.png";
@@ -22,10 +22,29 @@ import imgJobseerPartners from "@/public/jobseeker_partners.png";
 import imgSujana from "@/public/sujana.png";
 import imgVMUC from "@/public/vmuc.png";
 
-export default function ProjectSection() {
-  const [hoveredProject, setHoveredProject] = useState(null);
+// Define the type for a single project
+interface Project {
+  id: number;
+  name: string;
+  shortDescription: string;
+  description: string;
+  image: StaticImageData;
+  techStack: string[];
+  link: string;
+  featured?: boolean;
+  gradient: string;
+}
 
-  const projects = [
+// Define the type for the ProjectCard component's props
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+}
+
+export default function ProjectSection() {
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+
+  const projects: Project[] = [
     {
       id: 1,
       name: "Siapenku",
@@ -215,14 +234,14 @@ export default function ProjectSection() {
       opacity: 1,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12,
       },
     },
   };
 
-  const ProjectCard = ({ project, index }) => {
+  const ProjectCard = ({ project, index }: ProjectCardProps) => {
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
 
@@ -327,9 +346,26 @@ export default function ProjectSection() {
                         ? `linear-gradient(to right, var(--tw-gradient-stops))`
                         : "none",
                   }}
-                  whileHover={{
-                    backgroundImage: `linear-gradient(to right, ${project.gradient.split(" ")[1]}, ${project.gradient.split(" ")[3]})`,
+                  onMouseEnter={() => {
+                    const fromColor =
+                      project.gradient.match(/from-([a-z]+-[0-9]+)/)?.[0];
+                    const toColor =
+                      project.gradient.match(/to-([a-z]+-[0-9]+)/)?.[0];
+                    const element = document.getElementById(
+                      `project-title-${project.id}`
+                    );
+                    if (element && fromColor && toColor) {
+                      element.style.setProperty(
+                        "--tw-gradient-from",
+                        `var(--color-${fromColor})`
+                      );
+                      element.style.setProperty(
+                        "--tw-gradient-to",
+                        `var(--color-${toColor})`
+                      );
+                    }
                   }}
+                  id={`project-title-${project.id}`}
                 >
                   {project.name}
                 </motion.h3>
@@ -346,35 +382,18 @@ export default function ProjectSection() {
 
               {/* Tech Stack */}
               <div className="flex flex-wrap gap-2">
-                {project.techStack.map(
-                  (
-                    tech:
-                      | boolean
-                      | React.ReactElement<
-                          any,
-                          string | React.JSXElementConstructor<any>
-                        >
-                      | Iterable<React.ReactNode>
-                      | Promise<React.AwaitedReactNode>
-                      | React.Key
-                      | MotionValue<number>
-                      | MotionValue<string>
-                      | null
-                      | undefined,
-                    techIndex: number
-                  ) => (
-                    <motion.span
-                      key={tech}
-                      className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 + techIndex * 0.05 }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  )
-                )}
+                {project.techStack.map((tech: string, techIndex: number) => (
+                  <motion.span
+                    key={`${project.id}-tech-${techIndex}`}
+                    className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 + techIndex * 0.05 }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
               </div>
             </div>
           </CardBody>

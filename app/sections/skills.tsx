@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AngularIcon,
@@ -28,8 +28,33 @@ import {
   TypeScriptIcon,
 } from "@/components/icons/programming/languages";
 
+// Define the shape of a single skill object
+interface Skill {
+  name: string;
+  icon: ReactNode; // ReactNode allows for JSX elements or strings (emojis)
+  color: string;
+}
+
+// Define the specific categories to be used as keys
+type SkillCategory = "languages" | "frameworks" | "cloud" | "ai";
+
+// Define the shape of the entire skills data object
+interface SkillsData {
+  languages: Skill[];
+  frameworks: Skill[];
+  cloud: Skill[];
+  ai: Skill[];
+}
+
+// Define the props for the SkillCard component
+interface SkillCardProps {
+  skill: Skill;
+  index: number;
+}
+
 export default function SkillSection() {
-  const [activeCategory, setActiveCategory] = useState("languages");
+  const [activeCategory, setActiveCategory] =
+    useState<SkillCategory>("languages");
 
   const categories = [
     {
@@ -58,7 +83,7 @@ export default function SkillSection() {
     },
   ];
 
-  const skillsData = {
+  const skillsData: SkillsData = {
     languages: [
       {
         name: "JavaScript",
@@ -196,14 +221,14 @@ export default function SkillSection() {
       opacity: 1,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const, // Fix: Add 'as const' to specify the literal type
         stiffness: 150,
         damping: 12,
       },
     },
   };
 
-  const SkillCard = ({ skill, index }) => (
+  const SkillCard = ({ skill, index }: SkillCardProps) => (
     <motion.div
       variants={itemVariants}
       className="group relative"
@@ -343,7 +368,7 @@ export default function SkillSection() {
                     : "bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20"
                 }
               `}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => setActiveCategory(category.id as SkillCategory)}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -373,7 +398,7 @@ export default function SkillSection() {
             exit="hidden"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
-            {skillsData[activeCategory]?.map((skill, index) => (
+            {skillsData[activeCategory].map((skill, index) => (
               <SkillCard key={skill.name} skill={skill} index={index} />
             ))}
           </motion.div>
