@@ -42,6 +42,7 @@ export default function RootLayout({
         style={{
           fontFamily: fontMonserrat.variable,
         }}
+        suppressHydrationWarning
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col min-h-screen w-full">
