@@ -7,12 +7,10 @@ export default function MainSection() {
   const [isMounted, setIsMounted] = useState(false);
 
   const roles = [
-    "CTO & Tech Leader",
+    "Chief Tech Officer",
     "Full Stack Engineer",
     "DevOps Specialist",
     "AI Innovation Expert",
-    "System Architect",
-    "Mobile Engineer",
   ];
 
   const roleColors = [
@@ -77,7 +75,7 @@ export default function MainSection() {
   );
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center space-y-8 overflow-hidden">
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center space-y-8 overflow-hidden pt-16 pb-20">
       <FloatingParticles />
       <GradientOrbs />
 
@@ -142,7 +140,7 @@ export default function MainSection() {
         {/* Description */}
         <p className="max-w-2xl mx-auto text-gray-200 sm:text-lg text-center leading-relaxed opacity-0 animate-[fadeInUp_1s_1s_ease-out_forwards]">
           <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent font-semibold">
-            CTO & Tech Leader
+            Chief Technology Officer
           </span>{" "}
           passionate about building{" "}
           <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold">
@@ -208,7 +206,7 @@ export default function MainSection() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-[fadeInUp_1s_2s_ease-out_forwards]">
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 opacity-0 animate-[fadeInUp_1s_2s_ease-out_forwards]">
           <div className="text-gray-400 animate-bounce">
             <svg
               className="w-6 h-6"
