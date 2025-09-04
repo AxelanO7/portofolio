@@ -7,7 +7,7 @@ export default function MainSection() {
   const [isMounted, setIsMounted] = useState(false);
 
   const roles = [
-    "Chief Tech Officer",
+    "Chief Technology Officer",
     "Full Stack Engineer",
     "DevOps Specialist",
     "AI Innovation Expert",
@@ -121,7 +121,7 @@ export default function MainSection() {
         <h1 className="text-4xl font-bold flex flex-col sm:flex-row justify-center items-center sm:justify-center text-white sm:text-6xl sm:leading-relaxed gap-4 opacity-0 animate-[fadeInUp_1s_0.5s_ease-out_forwards]">
           <span className="text-white">Hi, I'm</span>
           <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
-            Axel
+            Jeremia Axelano
           </span>
           <span className="text-4xl sm:text-6xl animate-bounce">👋</span>
         </h1>
