@@ -38,7 +38,7 @@ export const Navbar = () => {
               alt="Logo"
               width={32}
               height={32}
-              className="rounded-full"
+              className="rounded-full w-8 h-8 object-cover"
               priority
             />
           </NextLink>
