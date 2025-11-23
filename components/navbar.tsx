@@ -7,8 +7,8 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
+  Button,
+} from "@heroui/react";
 import NextLink from "next/link";
 import Image from "next/image";
 import clsx from "clsx";

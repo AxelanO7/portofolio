@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense } from "react";
 import { m as motion, MotionValue } from "framer-motion";
-import { Card, CardBody } from "@nextui-org/card";
+import { Card, CardBody } from "@heroui/react";
 import Image, { StaticImageData } from "next/image";
 
 // Import all project images
