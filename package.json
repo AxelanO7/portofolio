@@ -11,6 +11,8 @@
     "build:analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@nextui-org/button": "^2.2.9",
+    "@nextui-org/navbar": "^2.2.8",
     "@nextui-org/react": "latest",
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
