@@ -285,7 +285,10 @@ export default function SkillSection() {
   );
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center items-center skills py-16 overflow-hidden">
+    <section
+      id="skills"
+      className="relative w-full min-h-screen flex flex-col justify-center items-center skills py-16 overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

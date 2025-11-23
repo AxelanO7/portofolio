@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
-import { m as motion, MotionValue } from "framer-motion";
+import React, { useState, Suspense, useRef } from "react";
+import { m as motion, useInView } from "framer-motion";
 import { Card, CardBody } from "@heroui/react";
 import Image, { StaticImageData } from "next/image";
 
@@ -43,6 +43,8 @@ interface ProjectCardProps {
 
 export default function ProjectSection() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const isGridInView = useInView(gridRef, { once: true, amount: 0.2 });
 
   const projects: Project[] = [
     {
@@ -405,7 +407,7 @@ export default function ProjectSection() {
   const featuredProjects = projects.filter((project) => project.featured);
 
   return (
-    <section className="relative w-full projects py-16 overflow-hidden">
+    <section id="projects" className="relative w-full projects py-16 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -473,10 +475,10 @@ export default function ProjectSection() {
         >
           {featuredProjects.length > 0 ? (
             <motion.div
+              ref={gridRef}
               variants={containerVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate={isGridInView ? "visible" : "hidden"}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
             >
               {featuredProjects.map((project, index) => (

@@ -107,7 +107,10 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center contact py-16 overflow-hidden">
+    <section
+      id="contact"
+      className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center contact py-16 overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
