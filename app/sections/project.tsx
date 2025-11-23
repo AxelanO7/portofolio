@@ -402,6 +402,8 @@ export default function ProjectSection() {
     );
   };
 
+  const featuredProjects = projects.filter((project) => project.featured);
+
   return (
     <section className="relative w-full projects py-16 overflow-hidden">
       {/* Background Elements */}
@@ -469,17 +471,23 @@ export default function ProjectSection() {
             </div>
           }
         >
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
-          >
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </motion.div>
+          {featuredProjects.length > 0 ? (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+            >
+              {featuredProjects.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} />
+              ))}
+            </motion.div>
+          ) : (
+            <div className="text-center text-gray-300 py-12 border border-white/10 rounded-2xl">
+              Projects are on the way. Stay tuned!
+            </div>
+          )}
         </Suspense>
 
         {/* Stats Section */}

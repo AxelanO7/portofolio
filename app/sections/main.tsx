@@ -13,14 +13,7 @@ export default function MainSection() {
     "AI Innovation Expert",
   ];
 
-  const roleColors = [
-    "from-purple-600 via-pink-600 to-red-500",
-    "from-blue-600 via-cyan-500 to-teal-500",
-    "from-green-500 via-emerald-500 to-teal-600",
-    "from-orange-500 via-amber-500 to-yellow-500",
-    "from-indigo-600 via-purple-600 to-pink-500",
-    "from-red-500 via-rose-500 to-pink-600",
-  ];
+  const roleGradient = "from-[#7F6BFF] to-[#4CC3FF]";
 
   useEffect(() => {
     setIsMounted(true);
@@ -120,7 +113,7 @@ export default function MainSection() {
         {/* Name */}
         <h1 className="text-4xl font-bold flex flex-col sm:flex-row justify-center items-center sm:justify-center text-white sm:text-6xl sm:leading-relaxed gap-4 opacity-0 animate-[fadeInUp_1s_0.5s_ease-out_forwards]">
           <span className="text-white">Hi, I'm</span>
-          <span className="bg-gradient-to-r from-indigo-400 to-blue-500 bg-clip-text text-transparent animate-pulse">
+          <span className="bg-gradient-to-r from-[#7F6BFF] to-[#4CC3FF] bg-clip-text text-transparent">
             Jeremia Axelano
           </span>
           <span className="text-4xl sm:text-6xl animate-bounce">👋</span>
@@ -130,7 +123,7 @@ export default function MainSection() {
         <div className="text-xl font-semibold text-white sm:text-2xl sm:leading-relaxed flex items-center justify-center space-x-2 h-16 opacity-0 animate-[fadeInUp_1s_0.8s_ease-out_forwards]">
           <span className="text-cyan-400 animate-pulse">|</span>
           <span
-            className={`bg-gradient-to-r ${roleColors[currentRole]} bg-clip-text text-transparent font-bold transition-all duration-500`}
+            className={`bg-gradient-to-r ${roleGradient} bg-clip-text text-transparent font-bold transition-all duration-500`}
           >
             {roles[currentRole]}
           </span>
