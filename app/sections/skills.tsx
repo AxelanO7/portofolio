@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import {
   AngularIcon,
   CodeIgniterIcon,

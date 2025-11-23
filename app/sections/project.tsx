@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, Suspense } from "react";
-import { motion, MotionValue } from "framer-motion";
+import { m as motion, MotionValue } from "framer-motion";
 import { Card, CardBody } from "@nextui-org/card";
 import Image, { StaticImageData } from "next/image";
 
