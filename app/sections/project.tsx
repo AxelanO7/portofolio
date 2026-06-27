@@ -425,7 +425,7 @@ export default function ProjectSection() {
                 initial={false}
               />
 
-              {!imageError ? (
+              {project.image && !imageError ? (
                 <Image
                   src={project.image}
                   alt={project.name}
@@ -439,12 +439,15 @@ export default function ProjectSection() {
                   priority={index < 6} // Prioritize first 6 images
                 />
               ) : (
-                // Fallback when image fails to load
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900">
+                // Fallback when image is missing or fails to load
+                <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br ${project.gradient} p-6`}>
                   <div className="text-center">
-                    <div className="text-4xl mb-2">📱</div>
-                    <div className="text-white font-semibold">
+                    <div className="text-4xl mb-2 filter saturate-200">💻</div>
+                    <div className="text-white font-black uppercase tracking-wider text-sm">
                       {project.name}
+                    </div>
+                    <div className="text-white/60 text-xs font-mono mt-1">
+                      {project.techStack.slice(0, 2).join(" • ")}
                     </div>
                   </div>
                 </div>
@@ -574,15 +577,14 @@ export default function ProjectSection() {
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-40 right-40 w-96 h-96 bg-gradient-to-br from-purple-400/10 via-pink-400/10 to-red-400/10 rounded-full blur-3xl"
+          className="absolute top-40 right-40 w-96 h-96 bg-emerald-500/[0.02] rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -597,17 +599,15 @@ export default function ProjectSection() {
           viewport={{ once: true }}
         >
           <motion.h1
-            className="text-4xl sm:text-5xl font-bold mb-4"
+            className="text-4xl sm:text-5xl font-black mb-4 uppercase tracking-tight text-white"
             initial={{ scale: 0.8 }}
             whileInView={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
           >
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
+            Featured <span className="text-emerald-400">Projects</span>
           </motion.h1>
           <motion.div
-            className="w-48 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mx-auto mb-6"
+            className="w-24 h-1 bg-emerald-500 rounded-full mx-auto mb-6"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
