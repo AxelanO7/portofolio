@@ -1,20 +1,12 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
-import dynamic from "next/dynamic";
 
 import { siteConfig } from "@/config/site";
 import { fontMonserrat } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import FooterSection from "../components/footer";
-
-// Dynamic import for Providers to prevent SSR issues
-const Providers = dynamic(
-  () => import("./providers").then((mod) => ({ default: mod.Providers })),
-  {
-    ssr: false,
-  }
-);
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {

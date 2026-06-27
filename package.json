@@ -2,6 +2,10 @@
   "name": "next-app-template",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +21,7 @@
     "clsx": "2.1.1",
     "framer-motion": "^11.18.2",
     "intl-messageformat": "^10.7.18",
+    "lucide-react": "^1.21.0",
     "next": "14.2.4",
     "next-themes": "^0.2.1",
     "react": "18.3.1",

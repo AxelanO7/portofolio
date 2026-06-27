@@ -22,13 +22,28 @@ import imgJobseerPartners from "@/public/jobseeker_partners.png";
 import imgSujana from "@/public/sujana.png";
 import imgVMUC from "@/public/vmuc.png";
 
+// Fallbacks for missing images
+const imgGuestlistWeb = "";
+const imgGuestlistLanding = "";
+const imgGuestlistAdmin = "";
+const imgGuestlistMobile = "";
+const imgGuestlistPartner = "";
+const imgGuestlistLink = "";
+const imgGuestlistForm = "";
+const imgLasVegasAI = "";
+const imgEternalTour = "";
+const imgPajakita = "";
+const imgSarpras = "";
+const imgJeepAdmin = "";
+const imgMontrack = "";
+
 // Define the type for a single project
 interface Project {
   id: number;
   name: string;
   shortDescription: string;
   description: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
   techStack: string[];
   link: string;
   featured?: boolean;
@@ -215,6 +230,151 @@ export default function ProjectSection() {
       techStack: ["Flutter"],
       link: "https://play.google.com/store/apps/details?id=com.jobseeker.partners&hl=id",
       gradient: "from-purple-500 to-cyan-500",
+    },
+    {
+      id: 16,
+      name: "Guestlist Website",
+      shortDescription: "Official Platform Portal",
+      description:
+        "The core web platform for the Guestlist ecosystem, facilitating comprehensive user interactions and service aggregation.",
+      image: imgGuestlistWeb,
+      techStack: ["Next.js", "Go", "PostgreSQL"],
+      link: "https://github.com/AxelanO7/guestlist-web",
+      gradient: "from-pink-500 to-purple-600",
+    },
+    {
+      id: 17,
+      name: "Guestlist Landing Page",
+      shortDescription: "Corporate & Marketing Profile",
+      description:
+        "Modern company profile and marketing landing page designed to showcase Guestlist's services with high conversion optimization.",
+      image: imgGuestlistLanding,
+      techStack: ["Next.js", "Tailwind CSS"],
+      link: "https://github.com/AxelanO7/guestlist-landing",
+      gradient: "from-purple-500 to-indigo-500",
+    },
+    {
+      id: 18,
+      name: "Guestlist Back Office",
+      shortDescription: "Centralized Admin Dashboard",
+      description:
+        "Comprehensive administrative dashboard for managing users, content moderation, and system-wide configurations.",
+      image: imgGuestlistAdmin,
+      techStack: ["React", "Go", "Redis"],
+      link: "https://github.com/AxelanO7/guestlist-backoffice",
+      gradient: "from-slate-700 to-slate-900",
+    },
+    {
+      id: 19,
+      name: "Guestlist Mobile App",
+      shortDescription: "User Experience Application",
+      description:
+        "Native mobile application delivering the full Guestlist experience, allowing users to discover events and manage bookings on the go.",
+      image: imgGuestlistMobile,
+      techStack: ["Flutter", "Go"],
+      link: "https://github.com/AxelanO7/guestlist-mobile",
+      featured: true,
+      gradient: "from-violet-600 to-fuchsia-600",
+    },
+    {
+      id: 20,
+      name: "Guestlist Partner App",
+      shortDescription: "Merchant Management System",
+      description:
+        "Dedicated mobile tool for partners to manage inventory, scan tickets, and view real-time analytics and revenue reports.",
+      image: imgGuestlistPartner,
+      techStack: ["Flutter", "Go"],
+      link: "https://github.com/AxelanO7/guestlist-partner",
+      gradient: "from-blue-600 to-cyan-600",
+    },
+    {
+      id: 21,
+      name: "Guestlist Link",
+      shortDescription: "Bio-Link Management Tool",
+      description:
+        "A customizable bio-link tool similar to Linktree, allowing users to aggregate their digital presence into a single accessible page.",
+      image: imgGuestlistLink,
+      techStack: ["React", "Go", "PostgreSQL"],
+      link: "https://github.com/AxelanO7/guestlist-link",
+      gradient: "from-gray-600 to-gray-800",
+    },
+    {
+      id: 22,
+      name: "Guestlist Form",
+      shortDescription: "Dynamic Form Builder",
+      description:
+        "Versatile form builder application allowing users to create custom surveys and data collection forms with real-time responses.",
+      image: imgGuestlistForm,
+      techStack: ["React", "Go", "MongoDB"],
+      link: "https://github.com/AxelanO7/guestlist-form",
+      gradient: "from-orange-400 to-red-400",
+    },
+    {
+      id: 23,
+      name: "Las Vegas Chatbot AI",
+      shortDescription: "Intelligent CS Agent",
+      description:
+        "Automated customer service agent powered by OpenAI and n8n workflows, integrated with Twilio for seamless user communication.",
+      image: imgLasVegasAI,
+      techStack: ["OpenAI API", "n8n", "Twilio"],
+      link: "https://github.com/AxelanO7/las-vegas-bot",
+      featured: true,
+      gradient: "from-emerald-400 to-green-600",
+    },
+    {
+      id: 24,
+      name: "Eternal Tour & Travel",
+      shortDescription: "Travel Agency Portal",
+      description:
+        "A visually engaging landing page and booking catalog for tour packages, designed to enhance customer engagement.",
+      image: imgEternalTour,
+      techStack: ["Next.js", "Tailwind"],
+      link: "https://github.com/AxelanO7/eternal-tour",
+      gradient: "from-sky-400 to-blue-600",
+    },
+    {
+      id: 25,
+      name: "Pajakita.id",
+      shortDescription: "Tax Consultation Platform",
+      description:
+        "Digital platform connecting users with tax consultants, featuring service listings and appointment scheduling.",
+      image: imgPajakita,
+      techStack: ["Next.js", "Go", "PostgreSQL"],
+      link: "https://github.com/AxelanO7/pajakita",
+      gradient: "from-yellow-500 to-orange-500",
+    },
+    {
+      id: 26,
+      name: "Unit Media Sarpras",
+      shortDescription: "Corporate Asset Management",
+      description:
+        "Internal inventory system for a private enterprise to track incoming and outgoing goods, asset condition, and stock levels.",
+      image: imgSarpras,
+      techStack: ["React", "Go", "MySQL"],
+      link: "https://github.com/AxelanO7/sarpras-system",
+      gradient: "from-red-600 to-red-800",
+    },
+    {
+      id: 27,
+      name: "Jeep Back Office",
+      shortDescription: "Adventure Fleet Admin",
+      description:
+        "Administrative panel for managing Jeep tour schedules, fleet availability, and booking confirmations.",
+      image: imgJeepAdmin,
+      techStack: ["React", "Go"],
+      link: "https://github.com/AxelanO7/jeep-admin",
+      gradient: "from-lime-500 to-green-700",
+    },
+    {
+      id: 28,
+      name: "Montrack",
+      shortDescription: "Personal Finance Tracker",
+      description:
+        "Mobile application for financial health tracking, allowing users to input transactions and generate expense reports.",
+      image: imgMontrack,
+      techStack: ["Flutter", "Go"],
+      link: "https://github.com/AxelanO7/montrack-app",
+      gradient: "from-indigo-500 to-violet-500",
     },
   ];
 
@@ -407,7 +567,10 @@ export default function ProjectSection() {
   const featuredProjects = projects.filter((project) => project.featured);
 
   return (
-    <section id="projects" className="relative w-full projects py-16 overflow-hidden">
+    <section
+      id="projects"
+      className="relative w-full projects py-16 overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
