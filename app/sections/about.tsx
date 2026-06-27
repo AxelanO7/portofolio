@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { m as motion } from "framer-motion";
-import { Rocket, Target, Zap, Cpu, Calendar, Code, CheckCircle, GraduationCap } from "lucide-react";
+import { Rocket, Target, Zap, Bot } from "lucide-react";
 
 export default function AboutSection() {
   const achievements = [
@@ -26,7 +26,7 @@ export default function AboutSection() {
       gradient: "from-emerald-950/40 to-slate-900/40",
     },
     {
-      icon: <Cpu className="w-8 h-8 text-emerald-400" />,
+      icon: <Bot className="w-8 h-8 text-emerald-400" />,
       title: "AI Integration",
       description: "Implementing cutting-edge AI solutions for business growth",
       gradient: "from-emerald-950/40 to-slate-900/40",

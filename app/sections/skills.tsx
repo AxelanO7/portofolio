@@ -1,57 +1,26 @@
 "use client";
 
-import React, { useState, ReactNode } from "react";
+import React, { useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
-import { Code2, Cpu, Database, Blocks } from "lucide-react";
-import {
-  AngularIcon,
-  CodeIgniterIcon,
-  NodeJsIcon,
-  FlaskIcon,
-  FlutterIcon,
-  LaravelIcon,
-  NetIcon,
-  NextJsIcon,
-  ReactJsIcon,
-  VueJsIcon,
-} from "@/components/icons/programming/frameworks";
-import {
-  CPlusPlusIcon,
-  CSharpIcon,
-  DartIcon,
-  GoIcon,
-  JavaIcon,
-  JavaScriptIcon,
-  KotlinIcon,
-  PhpIcon,
-  PythonIcon,
-  SwiftIcon,
-  TypeScriptIcon,
-} from "@/components/icons/programming/languages";
+import { Code2, Cpu, Database, Blocks, Terminal } from "lucide-react";
+
+type SkillCategory = "languages" | "frameworks" | "databases" | "cloud" | "ai";
 
 interface Skill {
   name: string;
-  icon: ReactNode;
-  color: string;
+  tag: string;
 }
-
-type SkillCategory = "languages" | "frameworks" | "cloud" | "ai";
 
 interface SkillsData {
   languages: Skill[];
   frameworks: Skill[];
+  databases: Skill[];
   cloud: Skill[];
   ai: Skill[];
 }
 
-interface SkillCardProps {
-  skill: Skill;
-  index: number;
-}
-
 export default function SkillSection() {
-  const [activeCategory, setActiveCategory] =
-    useState<SkillCategory>("languages");
+  const [activeCategory, setActiveCategory] = useState<SkillCategory>("languages");
 
   const categories = [
     {
@@ -61,139 +30,110 @@ export default function SkillSection() {
     },
     {
       id: "frameworks",
-      name: "Frameworks",
+      name: "Backend & Frameworks",
       icon: <Blocks className="w-4 h-4" />,
+    },
+    {
+      id: "databases",
+      name: "Databases",
+      icon: <Database className="w-4 h-4" />,
     },
     {
       id: "cloud",
       name: "Cloud & DevOps",
-      icon: <Database className="w-4 h-4" />,
+      icon: <Terminal className="w-4 h-4" />,
     },
     {
       id: "ai",
-      name: "AI & Tools",
+      name: "AI & Automation",
       icon: <Cpu className="w-4 h-4" />,
     },
   ];
 
   const skillsData: SkillsData = {
     languages: [
-      {
-        name: "JavaScript",
-        icon: <JavaScriptIcon />,
-        color: "from-amber-400 to-yellow-500",
-      },
-      {
-        name: "TypeScript",
-        icon: <TypeScriptIcon />,
-        color: "from-blue-500 to-indigo-600",
-      },
-      { name: "Go", icon: <GoIcon />, color: "from-cyan-400 to-blue-500" },
-      {
-        name: "Python",
-        icon: <PythonIcon />,
-        color: "from-emerald-400 to-emerald-600",
-      },
-      { name: "Dart", icon: <DartIcon />, color: "from-blue-400 to-cyan-500" },
-      {
-        name: "Kotlin",
-        icon: <KotlinIcon />,
-        color: "from-purple-500 to-indigo-500",
-      },
-      {
-        name: "Swift",
-        icon: <SwiftIcon />,
-        color: "from-orange-500 to-red-500",
-      },
-      { name: "Java", icon: <JavaIcon />, color: "from-red-600 to-orange-600" },
-      { name: "PHP", icon: <PhpIcon />, color: "from-indigo-600 to-blue-600" },
-      {
-        name: "C++",
-        icon: <CPlusPlusIcon />,
-        color: "from-blue-600 to-purple-600",
-      },
-      {
-        name: "C#",
-        icon: <CSharpIcon />,
-        color: "from-purple-600 to-indigo-600",
-      },
+      { name: "Golang", tag: "Language" },
+      { name: "TypeScript", tag: "Language" },
+      { name: "JavaScript", tag: "Language" },
+      { name: "Python", tag: "Language" },
+      { name: "Dart", tag: "Language" },
+      { name: "PHP", tag: "Language" },
+      { name: "Kotlin", tag: "Language" },
+      { name: "Swift", tag: "Language" },
+      { name: "Java", tag: "Language" },
+      { name: "C++", tag: "Language" },
+      { name: "C#", tag: "Language" },
     ],
     frameworks: [
-      {
-        name: "React.js",
-        icon: <ReactJsIcon />,
-        color: "from-cyan-400 to-blue-500",
-      },
-      {
-        name: "Next.js",
-        icon: <NextJsIcon />,
-        color: "from-slate-700 to-slate-500",
-      },
-      {
-        name: "Vue.js",
-        icon: <VueJsIcon />,
-        color: "from-emerald-400 to-emerald-600",
-      },
-      {
-        name: "Angular",
-        icon: <AngularIcon />,
-        color: "from-red-500 to-pink-500",
-      },
-      {
-        name: "Flutter",
-        icon: <FlutterIcon />,
-        color: "from-blue-400 to-cyan-500",
-      },
-      {
-        name: "Node.js",
-        icon: <NodeJsIcon />,
-        color: "from-emerald-500 to-emerald-600",
-      },
-      {
-        name: "Laravel",
-        icon: <LaravelIcon />,
-        color: "from-red-500 to-orange-500",
-      },
-      {
-        name: "Flask",
-        icon: <FlaskIcon />,
-        color: "from-slate-700 to-slate-900",
-      },
-      { name: ".NET", icon: <NetIcon />, color: "from-indigo-600 to-purple-600" },
-      {
-        name: "CodeIgniter",
-        icon: <CodeIgniterIcon />,
-        color: "from-orange-500 to-red-500",
-      },
+      // Backend
+      { name: "Node.js", tag: "Backend" },
+      { name: "Express.js", tag: "Backend" },
+      { name: "Gin", tag: "Backend" },
+      { name: "FastAPI", tag: "Backend" },
+      { name: "Laravel", tag: "Backend" },
+      { name: "CodeIgniter", tag: "Backend" },
+      { name: "Flask", tag: "Backend" },
+      { name: ".NET", tag: "Backend" },
+      // Mobile
+      { name: "Flutter", tag: "Mobile" },
+      { name: "React Native", tag: "Mobile" },
+      { name: "Expo", tag: "Mobile" },
+      // Web
+      { name: "React.js", tag: "Web" },
+      { name: "Next.js", tag: "Web" },
+      { name: "Vue.js", tag: "Web" },
+      { name: "Angular", tag: "Web" },
+    ],
+    databases: [
+      { name: "PostgreSQL", tag: "RDBMS" },
+      { name: "MongoDB", tag: "NoSQL" },
+      { name: "Redis", tag: "In-Memory" },
+      { name: "Supabase", tag: "BaaS" },
+      { name: "Neo4j", tag: "Graph DB" },
     ],
     cloud: [
-      { name: "Docker", icon: "🐳", color: "from-blue-500 to-cyan-500" },
-      { name: "AWS", icon: "☁️", color: "from-amber-400 to-yellow-500" },
-      { name: "CI/CD", icon: "🔄", color: "from-emerald-500 to-teal-500" },
-      { name: "Linux", icon: "🐧", color: "from-slate-700 to-slate-900" },
-      { name: "Kubernetes", icon: "⚙️", color: "from-blue-500 to-indigo-600" },
-      { name: "MongoDB", icon: "🍃", color: "from-emerald-600 to-teal-600" },
-      { name: "PostgreSQL", icon: "🐘", color: "from-blue-600 to-indigo-700" },
-      { name: "MySQL", icon: "🗄️", color: "from-amber-500 to-orange-600" },
+      { name: "AWS", tag: "Cloud" },
+      { name: "Cloudflare", tag: "CDN & DNS" },
+      { name: "DigitalOcean", tag: "Cloud" },
+      { name: "Docker", tag: "Container" },
+      { name: "CI/CD", tag: "Pipeline" },
+      { name: "GitHub Actions", tag: "Automation" },
+      { name: "Linux", tag: "OS" },
+      { name: "Coolify", tag: "PaaS" },
+      { name: "Prometheus", tag: "Monitoring" },
+      { name: "Grafana", tag: "Visualization" },
+      { name: "Loki", tag: "Logging" },
+      { name: "Alertmanager", tag: "Alerts" },
     ],
     ai: [
-      { name: "n8n", icon: "🔗", color: "from-red-500 to-pink-500" },
-      { name: "Chatbot", icon: "🤖", color: "from-blue-500 to-indigo-500" },
-      {
-        name: "Machine Learning",
-        icon: "🧠",
-        color: "from-purple-500 to-pink-500",
-      },
-      { name: "OpenAI API", icon: "⚡", color: "from-emerald-400 to-cyan-500" },
-      { name: "Git", icon: "📚", color: "from-orange-500 to-red-500" },
-      { name: "ClickUp", icon: "📋", color: "from-purple-500 to-indigo-500" },
-      { name: "Automation", icon: "🔧", color: "from-cyan-400 to-blue-500" },
-      {
-        name: "API Integration",
-        icon: "🔌",
-        color: "from-emerald-500 to-teal-500",
-      },
+      { name: "Local LLMs", tag: "AI/ML" },
+      { name: "Ollama", tag: "AI/ML" },
+      { name: "DeepSeek", tag: "AI/ML" },
+      { name: "AI Agents", tag: "AI/ML" },
+      { name: "RAG Pipelines", tag: "AI/ML" },
+      { name: "Whisper ASR", tag: "AI/ML" },
+      { name: "Text-to-Speech", tag: "AI/ML" },
+      { name: "Workflow Automation", tag: "Automation" },
+      { name: "n8n", tag: "Automation" },
+      { name: "Git", tag: "Version Control" },
+      { name: "GitHub", tag: "Collaboration" },
+      { name: "ClickUp", tag: "PM Tool" },
     ],
+  };
+
+  const getCategoryIcon = (cat: SkillCategory) => {
+    switch (cat) {
+      case "languages":
+        return <Code2 className="w-5 h-5 text-emerald-400" />;
+      case "frameworks":
+        return <Blocks className="w-5 h-5 text-emerald-400" />;
+      case "databases":
+        return <Database className="w-5 h-5 text-emerald-400" />;
+      case "cloud":
+        return <Terminal className="w-5 h-5 text-emerald-400" />;
+      case "ai":
+        return <Cpu className="w-5 h-5 text-emerald-400" />;
+    }
   };
 
   const containerVariants = {
@@ -201,17 +141,16 @@ export default function SkillSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.04,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0, scale: 0.95 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      scale: 1,
       transition: {
         type: "spring" as const,
         stiffness: 150,
@@ -220,47 +159,11 @@ export default function SkillSection() {
     },
   };
 
-  const SkillCard = ({ skill, index }: SkillCardProps) => (
-    <motion.div
-      variants={itemVariants}
-      className="group relative"
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    >
-      <div className="relative bg-slate-900/50 backdrop-blur-md rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/20 transition-all duration-300 overflow-hidden">
-        <div className="relative z-10 flex items-center gap-4">
-          {/* Icon */}
-          <div className="w-12 h-12 flex items-center justify-center bg-slate-950 rounded-xl border border-slate-800 group-hover:border-emerald-500/10 transition-colors">
-            {typeof skill.icon === "string" ? (
-              <span className="text-2xl">{skill.icon}</span>
-            ) : (
-              <div className="w-7 h-7 transform group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                {skill.icon}
-              </div>
-            )}
-          </div>
-
-          {/* Skill name */}
-          <div>
-            <h4 className="text-white font-bold text-sm tracking-wide">
-              {skill.name}
-            </h4>
-            <div className="mt-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
-              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Expertise</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-
   return (
     <section
       id="skills"
       className="relative w-full py-20 overflow-hidden bg-slate-950 border-t border-slate-900"
     >
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/[0.01] rounded-full blur-3xl" />
       </div>
@@ -321,7 +224,33 @@ export default function SkillSection() {
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             {skillsData[activeCategory].map((skill, index) => (
-              <SkillCard key={skill.name} skill={skill} index={index} />
+              <motion.div
+                key={skill.name}
+                variants={itemVariants}
+                className="group relative"
+                whileHover={{ y: -3, scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="relative bg-slate-900/40 backdrop-blur-sm rounded-2xl p-5 border border-slate-800/80 hover:border-emerald-500/20 transition-all duration-300 overflow-hidden">
+                  <div className="relative z-10 flex items-center gap-4">
+                    {/* Icon */}
+                    <div className="w-12 h-12 flex items-center justify-center bg-slate-950 rounded-xl border border-slate-800 group-hover:border-emerald-500/10 transition-colors">
+                      {getCategoryIcon(activeCategory)}
+                    </div>
+
+                    {/* Skill name */}
+                    <div>
+                      <h4 className="text-white font-bold text-sm tracking-wide">
+                        {skill.name}
+                      </h4>
+                      <div className="mt-1 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
+                        <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{skill.tag}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>

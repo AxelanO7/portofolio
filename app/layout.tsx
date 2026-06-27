@@ -3,7 +3,7 @@ import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
-import { fontMonserrat } from "@/config/fonts";
+import { fontSans, fontMono } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import FooterSection from "../components/footer";
 import { Providers } from "./providers";
@@ -36,11 +36,10 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen font-sans antialiased bg-c_dark_gray overflow-x-hidden"
+          "min-h-screen font-sans antialiased bg-slate-950 overflow-x-hidden",
+          fontSans.variable,
+          fontMono.variable
         )}
-        style={{
-          fontFamily: fontMonserrat.variable,
-        }}
         suppressHydrationWarning
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
