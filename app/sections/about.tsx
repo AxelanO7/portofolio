@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { m as motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Rocket, Target, Zap, Bot } from "lucide-react";
 
 export default function AboutSection() {
@@ -10,26 +10,22 @@ export default function AboutSection() {
       title: "Tech Leadership",
       description:
         "Leading cross-functional teams in building scalable solutions",
-      gradient: "from-emerald-950/40 to-slate-900/40",
     },
     {
       icon: <Target className="w-8 h-8 text-emerald-400" />,
       title: "Strategic Innovation",
       description:
         "Driving digital transformation with AI-powered technologies",
-      gradient: "from-emerald-950/40 to-slate-900/40",
     },
     {
       icon: <Zap className="w-8 h-8 text-emerald-400" />,
       title: "DevOps Excellence",
       description: "Architecting robust infrastructure and CI/CD pipelines",
-      gradient: "from-emerald-950/40 to-slate-900/40",
     },
     {
       icon: <Bot className="w-8 h-8 text-emerald-400" />,
       title: "AI Integration",
       description: "Implementing cutting-edge AI solutions for business growth",
-      gradient: "from-emerald-950/40 to-slate-900/40",
     },
   ];
 
@@ -62,30 +58,10 @@ export default function AboutSection() {
       id="about"
       className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center items-center py-20 overflow-hidden bg-slate-950"
     >
-      {/* Background Elements */}
+      {/* Background ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 right-20 w-64 h-64 bg-emerald-500/[0.03] rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-20 w-72 h-72 bg-emerald-600/[0.02] rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+        <div className="absolute top-20 right-20 w-64 h-64 bg-emerald-500/[0.03] rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-emerald-600/[0.02] rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">

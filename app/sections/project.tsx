@@ -1,710 +1,300 @@
 "use client";
 
-import React, { useState, Suspense, useRef } from "react";
+import React, { useRef } from "react";
 import { m as motion, useInView } from "framer-motion";
-import { Card, CardBody } from "@heroui/react";
 import Image, { StaticImageData } from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
-// Import all project images
 import imgSiapenku from "@/public/siapenku.png";
-import imgSigapura from "@/public/sigapura.png";
 import imgKoi from "@/public/koi.png";
-import imgTeacherPayroll from "@/public/teacher_payroll.png";
-import imgColorLearning from "@/public/color_learning.png";
-import imgCalculator from "@/public/calculator.png";
-import imgAssyarif from "@/public/assyarif.png";
-import imgBnShop from "@/public/bn_shop.png";
-import imgVillaManis from "@/public/villa_manis.png";
 import imgSmartBtw from "@/public/smartbtw.png";
+import imgJobseekerApp from "@/public/jobseeker_app.png";
 import imgBtwEdutech from "@/public/btwedutech.png";
-import imgJobseerApp from "@/public/jobseeker_app.png";
-import imgJobseerPartners from "@/public/jobseeker_partners.png";
+import imgVillaManis from "@/public/villa_manis.png";
+import imgBnShop from "@/public/bn_shop.png";
+import imgTeacherPayroll from "@/public/teacher_payroll.png";
 import imgSujana from "@/public/sujana.png";
-import imgVMUC from "@/public/vmuc.png";
 
-// Fallbacks for missing images
-const imgGuestlistWeb = "";
-const imgGuestlistLanding = "";
-const imgGuestlistAdmin = "";
-const imgGuestlistMobile = "";
-const imgGuestlistPartner = "";
-const imgGuestlistLink = "";
-const imgGuestlistForm = "";
-const imgLasVegasAI = "";
-const imgEternalTour = "";
-const imgPajakita = "";
-const imgSarpras = "";
-const imgJeepAdmin = "";
-const imgMontrack = "";
-
-// Define the type for a single project
 interface Project {
   id: number;
   name: string;
-  shortDescription: string;
+  role: string;
   description: string;
-  image: StaticImageData | string;
+  image: StaticImageData | null;
   techStack: string[];
-  link: string;
-  featured?: boolean;
-  gradient: string;
+  link?: string;
+  tag: string;
 }
 
-// Define the type for the ProjectCard component's props
-interface ProjectCardProps {
-  project: Project;
-  index: number;
+const projects: Project[] = [
+  {
+    id: 1,
+    name: "Guestlist Ecosystem",
+    role: "CTO & Lead Architect",
+    description:
+      "Digital ecosystem connecting tourism, lifestyle, entertainment, and premium service providers in Bali. Built 4 platforms: consumer web, mobile app, partner portal, and back-office.",
+    image: null,
+    techStack: ["Next.js", "Go", "Flutter", "PostgreSQL", "Docker", "AWS"],
+    tag: "Current",
+  },
+  {
+    id: 2,
+    name: "Jobseeker App",
+    role: "Senior Mobile Engineer",
+    description:
+      "Social-first job search platform with skill-based matching and instant opportunities. Published on Google Play.",
+    image: imgJobseekerApp,
+    techStack: ["Flutter", "Node.js", "MongoDB"],
+    link: "https://play.google.com/store/apps/details?id=com.jobseeker.app&hl=id",
+    tag: "Mobile",
+  },
+  {
+    id: 3,
+    name: "Smart BTW",
+    role: "Mobile Engineering Lead",
+    description:
+      "Job preparation simulator with realistic tryout simulations, interactive exercises, and performance analytics.",
+    image: imgSmartBtw,
+    techStack: ["Flutter", "Firebase"],
+    tag: "Mobile",
+  },
+  {
+    id: 4,
+    name: "BTW Edutech Platform",
+    role: "Mobile Engineering Lead",
+    description:
+      "Full educational platform for skill development and career preparation across iOS, Android, and Web.",
+    image: imgBtwEdutech,
+    techStack: ["Flutter", "React", "Firebase"],
+    tag: "Platform",
+  },
+  {
+    id: 5,
+    name: "KOI Campus Platform",
+    role: "Full-Stack Engineer",
+    description:
+      "Campus community platform optimizing student–organization interactions with event management and activity tracking.",
+    image: imgKoi,
+    techStack: ["React", "Go", "PostgreSQL"],
+    link: "https://github.com/AxelanO7/koi-frontend-web-js",
+    tag: "Web",
+  },
+  {
+    id: 6,
+    name: "Siapenku",
+    role: "Full-Stack Engineer",
+    description:
+      "Administrative data management for village governance — population data, letter management, and service delivery.",
+    image: imgSiapenku,
+    techStack: ["Laravel", "Vue.js", "MySQL"],
+    link: "http://siapenku.stion.site",
+    tag: "Web",
+  },
+  {
+    id: 7,
+    name: "Villa Manis FinTech",
+    role: "Full-Stack Engineer",
+    description:
+      "Financial reporting and accounting system for the hospitality industry with real-time analytics.",
+    image: imgVillaManis,
+    techStack: ["React", "Go", "PostgreSQL"],
+    link: "https://github.com/AxelanO7/villa-manis-frontend-web-js",
+    tag: "FinTech",
+  },
+  {
+    id: 8,
+    name: "BN Shop Inventory",
+    role: "Full-Stack Engineer",
+    description:
+      "Smart inventory management with real-time stock tracking, automated reorder alerts, and analytics dashboard.",
+    image: imgBnShop,
+    techStack: ["React", "Go", "Redis"],
+    link: "https://github.com/AxelanO7/bn-shop-frontend-web-js",
+    tag: "Web",
+  },
+  {
+    id: 9,
+    name: "Teacher Payroll",
+    role: "Mobile & Backend Engineer",
+    description:
+      "HR management mobile app with attendance tracking, leave management, and digital payroll for schools.",
+    image: imgTeacherPayroll,
+    techStack: ["Flutter", "Laravel", "MySQL"],
+    link: "https://github.com/AxelanO7/payroll-mobile-flutter",
+    tag: "Mobile",
+  },
+  {
+    id: 10,
+    name: "Sujana Travel",
+    role: "Full-Stack Engineer",
+    description:
+      "Tour & travel booking system with integrated payment processing, itinerary management, and customer portal.",
+    image: imgSujana,
+    techStack: ["React", "Go", "Stripe API"],
+    link: "https://github.com/AxelanO7/sujana-frontend-web-js",
+    tag: "Web",
+  },
+];
+
+const tagColor: Record<string, string> = {
+  Current: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  Mobile: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  Platform: "bg-violet-500/10 text-violet-400 border-violet-500/20",
+  Web: "bg-slate-700/60 text-slate-300 border-slate-700",
+  FinTech: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
+};
+
+const itemVariants = {
+  hidden: { y: 24, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: "spring" as const, stiffness: 120, damping: 16 },
+  },
+};
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <motion.div variants={itemVariants} className="group h-full">
+      <div className="h-full flex flex-col bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/20 transition-all duration-300 hover:shadow-[0_0_24px_rgba(16,185,129,0.06)]">
+        {/* Image / Placeholder */}
+        <div className="relative h-44 overflow-hidden bg-slate-900 flex-shrink-0">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.name}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-950 flex items-center justify-center">
+              <div className="text-center space-y-2 px-6">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto">
+                  <div className="w-3 h-3 rounded-full bg-emerald-400/60" />
+                </div>
+                <p className="text-xs font-mono text-emerald-400/60 uppercase tracking-widest">In Production</p>
+              </div>
+            </div>
+          )}
+
+          {/* Tag badge */}
+          <div className="absolute top-3 left-3">
+            <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold border ${tagColor[project.tag] ?? "bg-slate-800 text-slate-400 border-slate-700"}`}>
+              {project.tag}
+            </span>
+          </div>
+
+          {/* Link arrow */}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 bg-slate-950/80 backdrop-blur rounded-lg border border-slate-700 hover:border-emerald-500/30"
+            >
+              <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+            </a>
+          )}
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-1 p-5 space-y-3">
+          <div>
+            <p className="text-[10px] font-mono text-emerald-400/70 uppercase tracking-widest mb-1">
+              {project.role}
+            </p>
+            <h3 className="text-base font-bold text-white leading-snug">
+              {project.name}
+            </h3>
+          </div>
+
+          <p className="text-slate-400 text-sm leading-relaxed flex-1 font-light">
+            {project.description}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="px-2 py-0.5 bg-slate-800/80 text-slate-300 text-[10px] font-mono rounded-md border border-slate-700/60"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
 export default function ProjectSection() {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
-  const isGridInView = useInView(gridRef, { once: true, amount: 0.2 });
-
-  const projects: Project[] = [
-    {
-      id: 1,
-      name: "Siapenku",
-      shortDescription: "Administrative Data Management System",
-      description:
-        "Comprehensive system for managing population data and administrative letters in Bulian Village, enhancing governance and service delivery.",
-      image: imgSiapenku,
-      techStack: ["Laravel", "Vue.js", "MySQL"],
-      link: "http://siapenku.stion.site",
-      featured: true,
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      id: 2,
-      name: "KOI Campus Platform",
-      shortDescription: "Campus Community Management",
-      description:
-        "Platform optimizing interactions among students, organizations, and activities within campus community with categorized event management.",
-      image: imgKoi,
-      techStack: ["React", "Go", "PostgreSQL"],
-      link: "https://github.com/AxelanO7/koi-frontend-web-js",
-      featured: true,
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      id: 3,
-      name: "Smart BTW",
-      shortDescription: "Job Preparation Simulator",
-      description:
-        "Mobile application providing realistic simulation experience for job tryouts with interactive exercises and assessments.",
-      image: imgSmartBtw,
-      techStack: ["Flutter", "Firebase"],
-      link: "",
-      featured: true,
-      gradient: "from-emerald-500 to-teal-500",
-    },
-    {
-      id: 4,
-      name: "Jobseeker App",
-      shortDescription: "Social Job Search Platform",
-      description:
-        "Revolutionary job search app with social media-like interface, skill-based matching, and instant job opportunities.",
-      image: imgJobseerApp,
-      techStack: ["Flutter", "Node.js", "MongoDB"],
-      link: "https://play.google.com/store/apps/details?id=com.jobseeker.app&hl=id",
-      featured: true,
-      gradient: "from-orange-500 to-red-500",
-    },
-    {
-      id: 5,
-      name: "Sigapura 3D",
-      shortDescription: "3D Temple Digitization",
-      description:
-        "Innovative platform for digitizing temple shrines with advanced 3D modeling and immersive virtual exploration.",
-      image: imgSigapura,
-      techStack: ["PHP", "Three.js", "WebGL"],
-      link: "https://github.com/AxelanO7/sigapura-web-php",
-      gradient: "from-indigo-500 to-purple-500",
-    },
-    {
-      id: 6,
-      name: "BN Shop Inventory",
-      shortDescription: "Smart Inventory Management",
-      description:
-        "Comprehensive inventory management system with real-time tracking, automated reordering, and analytics dashboard.",
-      image: imgBnShop,
-      techStack: ["React", "Go", "Redis"],
-      link: "https://github.com/AxelanO7/bn-shop-frontend-web-js",
-      gradient: "from-cyan-500 to-blue-500",
-    },
-    {
-      id: 7,
-      name: "Villa Manis FinTech",
-      shortDescription: "Financial Management System",
-      description:
-        "Advanced financial reporting and accounting system for hospitality industry with real-time analytics.",
-      image: imgVillaManis,
-      techStack: ["React", "Go", "PostgreSQL"],
-      link: "https://github.com/AxelanO7/villa-manis-frontend-web-js",
-      gradient: "from-pink-500 to-rose-500",
-    },
-    {
-      id: 8,
-      name: "Teacher Payroll",
-      shortDescription: "HR Management Mobile App",
-      description:
-        "Complete HR solution for teachers with attendance tracking, leave management, and digital payroll system.",
-      image: imgTeacherPayroll,
-      techStack: ["Flutter", "Laravel", "MySQL"],
-      link: "https://github.com/AxelanO7/payroll-mobile-flutter",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      id: 9,
-      name: "BTW Edutech",
-      shortDescription: "Educational Technology Platform",
-      description:
-        "Advanced educational platform for skill development and career preparation with AI-powered assessments.",
-      image: imgBtwEdutech,
-      techStack: ["Flutter", "AI/ML", "Firebase"],
-      link: "",
-      gradient: "from-violet-500 to-purple-500",
-    },
-    {
-      id: 10,
-      name: "VMUC FinTech",
-      shortDescription: "Villa Financial Intelligence",
-      description:
-        "Sophisticated financial reporting system for Villa Munduk with automated transaction processing and analytics.",
-      image: imgVMUC,
-      techStack: ["React", "Go", "TimescaleDB"],
-      link: "https://github.com/AxelanO7/vmuc-fintech-frontend-web-js",
-      gradient: "from-teal-500 to-cyan-500",
-    },
-    {
-      id: 11,
-      name: "Sujana Travel",
-      shortDescription: "Travel Booking System",
-      description:
-        "Comprehensive booking system for Sujana Tour & Travel with integrated payment processing and itinerary management.",
-      image: imgSujana,
-      techStack: ["React", "Go", "Stripe API"],
-      link: "https://github.com/AxelanO7/sujana-frontend-web-js",
-      gradient: "from-amber-500 to-orange-500",
-    },
-    {
-      id: 12,
-      name: "Color Learning",
-      shortDescription: "Interactive Color Education",
-      description:
-        "Engaging mobile application for color theory education with interactive games and visual learning tools.",
-      image: imgColorLearning,
-      techStack: ["Java", "Android SDK"],
-      link: "https://github.com/AxelanO7/color-learning-mobile-java",
-      gradient: "from-indigo-500 to-pink-500",
-    },
-    {
-      id: 13,
-      name: "Calculator Pro",
-      shortDescription: "Versatile Calculator Application",
-      description:
-        "Versatile calculator application capable of adapting to various screen sizes while incorporating user authentication and external data retrieval functionalities.",
-      image: imgCalculator,
-      techStack: ["Flutter"],
-      link: "https://github.com/AxelanO7/live-code-hybrid-flutter",
-      gradient: "from-blue-500 to-purple-500",
-    },
-    {
-      id: 14,
-      name: "Assyarif Inventory",
-      shortDescription: "Streamlined Inventory Management",
-      description:
-        "Web-based application that streamlines inventory management by providing real-time tracking, automated reordering, accurate reporting, and tools to improve inventory accuracy and visibility.",
-      image: imgAssyarif,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/assyarif-frontend-web-js",
-      gradient: "from-emerald-500 to-blue-500",
-    },
-    {
-      id: 15,
-      name: "Jobseeker Partners",
-      shortDescription: "Partner Management Platform",
-      description:
-        "Mobile app for job seekers with easy job search, skill matching, and fast job opportunities for business partners.",
-      image: imgJobseerPartners,
-      techStack: ["Flutter"],
-      link: "https://play.google.com/store/apps/details?id=com.jobseeker.partners&hl=id",
-      gradient: "from-purple-500 to-cyan-500",
-    },
-    {
-      id: 16,
-      name: "Guestlist Website",
-      shortDescription: "Official Platform Portal",
-      description:
-        "The core web platform for the Guestlist ecosystem, facilitating comprehensive user interactions and service aggregation.",
-      image: imgGuestlistWeb,
-      techStack: ["Next.js", "Go", "PostgreSQL"],
-      link: "https://github.com/AxelanO7/guestlist-web",
-      gradient: "from-pink-500 to-purple-600",
-    },
-    {
-      id: 17,
-      name: "Guestlist Landing Page",
-      shortDescription: "Corporate & Marketing Profile",
-      description:
-        "Modern company profile and marketing landing page designed to showcase Guestlist's services with high conversion optimization.",
-      image: imgGuestlistLanding,
-      techStack: ["Next.js", "Tailwind CSS"],
-      link: "https://github.com/AxelanO7/guestlist-landing",
-      gradient: "from-purple-500 to-indigo-500",
-    },
-    {
-      id: 18,
-      name: "Guestlist Back Office",
-      shortDescription: "Centralized Admin Dashboard",
-      description:
-        "Comprehensive administrative dashboard for managing users, content moderation, and system-wide configurations.",
-      image: imgGuestlistAdmin,
-      techStack: ["React", "Go", "Redis"],
-      link: "https://github.com/AxelanO7/guestlist-backoffice",
-      gradient: "from-slate-700 to-slate-900",
-    },
-    {
-      id: 19,
-      name: "Guestlist Mobile App",
-      shortDescription: "User Experience Application",
-      description:
-        "Native mobile application delivering the full Guestlist experience, allowing users to discover events and manage bookings on the go.",
-      image: imgGuestlistMobile,
-      techStack: ["Flutter", "Go"],
-      link: "https://github.com/AxelanO7/guestlist-mobile",
-      featured: true,
-      gradient: "from-violet-600 to-fuchsia-600",
-    },
-    {
-      id: 20,
-      name: "Guestlist Partner App",
-      shortDescription: "Merchant Management System",
-      description:
-        "Dedicated mobile tool for partners to manage inventory, scan tickets, and view real-time analytics and revenue reports.",
-      image: imgGuestlistPartner,
-      techStack: ["Flutter", "Go"],
-      link: "https://github.com/AxelanO7/guestlist-partner",
-      gradient: "from-blue-600 to-cyan-600",
-    },
-    {
-      id: 21,
-      name: "Guestlist Link",
-      shortDescription: "Bio-Link Management Tool",
-      description:
-        "A customizable bio-link tool similar to Linktree, allowing users to aggregate their digital presence into a single accessible page.",
-      image: imgGuestlistLink,
-      techStack: ["React", "Go", "PostgreSQL"],
-      link: "https://github.com/AxelanO7/guestlist-link",
-      gradient: "from-gray-600 to-gray-800",
-    },
-    {
-      id: 22,
-      name: "Guestlist Form",
-      shortDescription: "Dynamic Form Builder",
-      description:
-        "Versatile form builder application allowing users to create custom surveys and data collection forms with real-time responses.",
-      image: imgGuestlistForm,
-      techStack: ["React", "Go", "MongoDB"],
-      link: "https://github.com/AxelanO7/guestlist-form",
-      gradient: "from-orange-400 to-red-400",
-    },
-    {
-      id: 23,
-      name: "Las Vegas Chatbot AI",
-      shortDescription: "Intelligent CS Agent",
-      description:
-        "Automated customer service agent powered by OpenAI and n8n workflows, integrated with Twilio for seamless user communication.",
-      image: imgLasVegasAI,
-      techStack: ["OpenAI API", "n8n", "Twilio"],
-      link: "https://github.com/AxelanO7/las-vegas-bot",
-      featured: true,
-      gradient: "from-emerald-400 to-green-600",
-    },
-    {
-      id: 24,
-      name: "Eternal Tour & Travel",
-      shortDescription: "Travel Agency Portal",
-      description:
-        "A visually engaging landing page and booking catalog for tour packages, designed to enhance customer engagement.",
-      image: imgEternalTour,
-      techStack: ["Next.js", "Tailwind"],
-      link: "https://github.com/AxelanO7/eternal-tour",
-      gradient: "from-sky-400 to-blue-600",
-    },
-    {
-      id: 25,
-      name: "Pajakita.id",
-      shortDescription: "Tax Consultation Platform",
-      description:
-        "Digital platform connecting users with tax consultants, featuring service listings and appointment scheduling.",
-      image: imgPajakita,
-      techStack: ["Next.js", "Go", "PostgreSQL"],
-      link: "https://github.com/AxelanO7/pajakita",
-      gradient: "from-yellow-500 to-orange-500",
-    },
-    {
-      id: 26,
-      name: "Unit Media Sarpras",
-      shortDescription: "Corporate Asset Management",
-      description:
-        "Internal inventory system for a private enterprise to track incoming and outgoing goods, asset condition, and stock levels.",
-      image: imgSarpras,
-      techStack: ["React", "Go", "MySQL"],
-      link: "https://github.com/AxelanO7/sarpras-system",
-      gradient: "from-red-600 to-red-800",
-    },
-    {
-      id: 27,
-      name: "Jeep Back Office",
-      shortDescription: "Adventure Fleet Admin",
-      description:
-        "Administrative panel for managing Jeep tour schedules, fleet availability, and booking confirmations.",
-      image: imgJeepAdmin,
-      techStack: ["React", "Go"],
-      link: "https://github.com/AxelanO7/jeep-admin",
-      gradient: "from-lime-500 to-green-700",
-    },
-    {
-      id: 28,
-      name: "Montrack",
-      shortDescription: "Personal Finance Tracker",
-      description:
-        "Mobile application for financial health tracking, allowing users to input transactions and generate expense reports.",
-      image: imgMontrack,
-      techStack: ["Flutter", "Go"],
-      link: "https://github.com/AxelanO7/montrack-app",
-      gradient: "from-indigo-500 to-violet-500",
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0, scale: 0.9 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-  };
-
-  const ProjectCard = ({ project, index }: ProjectCardProps) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const [imageError, setImageError] = useState(false);
-
-    return (
-      <motion.div
-        variants={itemVariants}
-        className="group relative"
-        whileHover={{ y: -10, scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        onHoverStart={() => setHoveredProject(project.id)}
-        onHoverEnd={() => setHoveredProject(null)}
-      >
-        <Card className="h-full bg-white/5 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden group-hover:shadow-2xl">
-          <CardBody className="p-0">
-            {/* Image Container */}
-            <div className="relative overflow-hidden h-48 md:h-56 bg-gray-800">
-              <motion.div
-                className="absolute inset-0 bg-black/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={false}
-              />
-
-              {project.image && !imageError ? (
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  className={`object-cover w-full h-full transition-all duration-500 group-hover:scale-110 ${
-                    imageLoaded ? "opacity-100" : "opacity-0"
-                  }`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  onLoad={() => setImageLoaded(true)}
-                  onError={() => setImageError(true)}
-                  priority={index < 6} // Prioritize first 6 images
-                />
-              ) : (
-                // Fallback when image is missing or fails to load
-                <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br ${project.gradient} p-6`}>
-                  <div className="text-center">
-                    <div className="text-4xl mb-2 filter saturate-200">💻</div>
-                    <div className="text-white font-black uppercase tracking-wider text-sm">
-                      {project.name}
-                    </div>
-                    <div className="text-white/60 text-xs font-mono mt-1">
-                      {project.techStack.slice(0, 2).join(" • ")}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Loading skeleton */}
-              {!imageLoaded && !imageError && (
-                <div className="absolute inset-0 bg-gray-700 animate-pulse" />
-              )}
-
-              {/* Overlay Content */}
-              <motion.div
-                className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={false}
-              >
-                <motion.a
-                  href={project.link || "#"}
-                  target={project.link ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  className={`px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-                    !project.link ? "cursor-not-allowed opacity-75" : ""
-                  }`}
-                  whileHover={{ scale: project.link ? 1.05 : 1 }}
-                  whileTap={{ scale: project.link ? 0.95 : 1 }}
-                  onClick={(e) => {
-                    if (!project.link) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  {project.link ? "View Project" : "Coming Soon"}
-                </motion.a>
-              </motion.div>
-
-              {/* Featured Badge */}
-              {project.featured && (
-                <motion.div
-                  className="absolute top-4 right-4 z-30"
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div
-                    className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white text-xs font-bold rounded-full shadow-lg`}
-                  >
-                    ⭐ Featured
-                  </div>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="p-6 space-y-4">
-              {/* Header */}
-              <div className="space-y-2">
-                <motion.h3
-                  className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
-                  style={{
-                    backgroundImage:
-                      hoveredProject === project.id
-                        ? `linear-gradient(to right, var(--tw-gradient-stops))`
-                        : "none",
-                  }}
-                  onMouseEnter={() => {
-                    const fromColor =
-                      project.gradient.match(/from-([a-z]+-[0-9]+)/)?.[0];
-                    const toColor =
-                      project.gradient.match(/to-([a-z]+-[0-9]+)/)?.[0];
-                    const element = document.getElementById(
-                      `project-title-${project.id}`
-                    );
-                    if (element && fromColor && toColor) {
-                      element.style.setProperty(
-                        "--tw-gradient-from",
-                        `var(--color-${fromColor})`
-                      );
-                      element.style.setProperty(
-                        "--tw-gradient-to",
-                        `var(--color-${toColor})`
-                      );
-                    }
-                  }}
-                  id={`project-title-${project.id}`}
-                >
-                  {project.name}
-                </motion.h3>
-
-                <p className="text-gray-400 text-sm font-medium">
-                  {project.shortDescription}
-                </p>
-              </div>
-
-              {/* Description */}
-              <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-                {project.description}
-              </p>
-
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech: string, techIndex: number) => (
-                  <motion.span
-                    key={`${project.id}-tech-${techIndex}`}
-                    className="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-full border border-white/20 hover:border-white/40 transition-colors"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + techIndex * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-      </motion.div>
-    );
-  };
-
-  const featuredProjects = projects.filter((project) => project.featured);
+  const isGridInView = useInView(gridRef, { once: true, amount: 0.1 });
 
   return (
     <section
       id="projects"
-      className="relative w-full projects py-16 overflow-hidden"
+      className="relative w-full py-20 overflow-hidden bg-slate-950 border-t border-slate-900"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-40 right-40 w-96 h-96 bg-emerald-500/[0.02] rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
-          initial={{ y: 50, opacity: 0 }}
+          initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <motion.h1
-            className="text-4xl sm:text-5xl font-black mb-4 uppercase tracking-tight text-white"
-            initial={{ scale: 0.8 }}
-            whileInView={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-          >
-            Featured <span className="text-emerald-400">Projects</span>
-          </motion.h1>
-          <motion.div
-            className="w-24 h-1 bg-emerald-500 rounded-full mx-auto mb-6"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          />
-          <motion.p
-            className="text-xl text-gray-300 max-w-2xl mx-auto"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            Innovative solutions that showcase technical excellence and creative
-            problem-solving
-          </motion.p>
+          <h2 className="text-4xl sm:text-5xl font-black mb-4 uppercase tracking-tight text-white">
+            Selected <span className="text-emerald-400">Work</span>
+          </h2>
+          <div className="w-24 h-1 bg-emerald-500 rounded-full mx-auto mb-6" />
+          <p className="text-slate-400 text-sm max-w-xl mx-auto font-light leading-relaxed">
+            Production systems and platforms shipped across mobile, web, backend, and cloud infrastructure.
+          </p>
         </motion.div>
 
         {/* Projects Grid */}
-        <Suspense
-          fallback={
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="h-96 bg-gray-700 animate-pulse rounded-2xl"
-                />
-              ))}
-            </div>
-          }
-        >
-          {featuredProjects.length > 0 ? (
-            <motion.div
-              ref={gridRef}
-              variants={containerVariants}
-              initial="hidden"
-              animate={isGridInView ? "visible" : "hidden"}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
-            >
-              {featuredProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </motion.div>
-          ) : (
-            <div className="text-center text-gray-300 py-12 border border-white/10 rounded-2xl">
-              Projects are on the way. Stay tuned!
-            </div>
-          )}
-        </Suspense>
-
-        {/* Stats Section */}
         <motion.div
-          className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          ref={gridRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isGridInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </motion.div>
+
+        {/* Bottom Stats */}
+        <motion.div
+          className="mt-20 grid grid-cols-3 gap-6 pt-12 border-t border-slate-900 text-center"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           {[
-            {
-              number: `${projects.length}+`,
-              label: "Projects Completed",
-              color: "from-blue-500 to-cyan-500",
-            },
-            {
-              number: "15+",
-              label: "Technologies Used",
-              color: "from-purple-500 to-pink-500",
-            },
-            {
-              number: "100%",
-              label: "Client Satisfaction",
-              color: "from-emerald-500 to-teal-500",
-            },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              className="space-y-2"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                delay: index * 0.1,
-              }}
-              viewport={{ once: true }}
-            >
-              <motion.div
-                className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: index * 0.2,
-                }}
-              >
+            { number: `${projects.length}+`, label: "Projects Shipped" },
+            { number: "6+", label: "Years Building" },
+            { number: "5+", label: "Tech Domains" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="text-4xl md:text-5xl font-black text-emerald-400">
                 {stat.number}
-              </motion.div>
-              <div className="text-gray-300 font-medium">{stat.label}</div>
-            </motion.div>
+              </div>
+              <div className="text-slate-500 text-xs font-mono uppercase tracking-wider mt-2">
+                {stat.label}
+              </div>
+            </div>
           ))}
         </motion.div>
       </div>
