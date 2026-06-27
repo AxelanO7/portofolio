@@ -116,8 +116,8 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-4">
-              <p className="text-slate-400 leading-relaxed font-light font-mono text-sm border-l-2 border-emerald-500/30 pl-4 py-1">
-                // ponytail: engineering-first approach. I value lean codebases, high performance, and minimal operational overhead.
+              <p className="text-slate-400 leading-relaxed font-light text-sm border-l-2 border-emerald-500/30 pl-4 py-1">
+                Currently building the Guestlist Ecosystem — a marketplace for entertainment, lifestyle, and premium experiences across Bali and Indonesia.
               </p>
             </motion.div>
 
