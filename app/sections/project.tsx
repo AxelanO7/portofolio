@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { m as motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { m as motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -25,7 +25,6 @@ interface Project {
   techStack: string[];
   link?: string;
   tag: string;
-  category: "cto" | "freelance";
 }
 
 const projects: Project[] = [
@@ -39,7 +38,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Go", "Gin", "PostgreSQL", "MongoDB", "JWT", "Docker"],
     tag: "Backend",
-    category: "cto",
   },
   {
     id: 2,
@@ -50,7 +48,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["React Native", "Expo", "Redux"],
     tag: "Mobile",
-    category: "cto",
   },
   {
     id: 3,
@@ -61,7 +58,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js 16", "React 19", "Redux", "Tailwind"],
     tag: "Web",
-    category: "cto",
   },
   {
     id: 4,
@@ -72,7 +68,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["React Native", "Expo", "Redux"],
     tag: "Mobile",
-    category: "cto",
   },
   {
     id: 5,
@@ -83,7 +78,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js 16", "HeroUI", "TypeScript"],
     tag: "Web",
-    category: "cto",
   },
   {
     id: 6,
@@ -94,7 +88,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js", "Tailwind"],
     tag: "Web",
-    category: "cto",
   },
   {
     id: 7,
@@ -105,7 +98,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js", "TypeScript"],
     tag: "Web",
-    category: "cto",
   },
   {
     id: 8,
@@ -116,7 +108,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js", "TypeScript"],
     tag: "Web",
-    category: "cto",
   },
   {
     id: 9,
@@ -127,7 +118,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Cypress", "TypeScript"],
     tag: "QA",
-    category: "cto",
   },
   {
     id: 10,
@@ -138,7 +128,6 @@ const projects: Project[] = [
     image: null,
     techStack: ["Next.js", "TypeScript", "Discord API"],
     tag: "Internal",
-    category: "cto",
   },
   {
     id: 11,
@@ -149,9 +138,8 @@ const projects: Project[] = [
     image: null,
     techStack: ["Go", "Python", "FastAPI", "Ollama", "React Native", "Next.js"],
     tag: "AI",
-    category: "cto",
   },
-  // === Freelance ===
+  // === Other Projects ===
   {
     id: 12,
     name: "Jobseeker App",
@@ -162,7 +150,6 @@ const projects: Project[] = [
     techStack: ["Flutter", "Node.js", "MongoDB"],
     link: "https://play.google.com/store/apps/details?id=com.jobseeker.app&hl=id",
     tag: "Mobile",
-    category: "freelance",
   },
   {
     id: 13,
@@ -174,7 +161,6 @@ const projects: Project[] = [
     techStack: ["Flutter"],
     link: "https://play.google.com/store/apps/details?id=com.jobseeker.partners&hl=id",
     tag: "Mobile",
-    category: "freelance",
   },
   {
     id: 14,
@@ -185,7 +171,6 @@ const projects: Project[] = [
     image: imgSmartBtw,
     techStack: ["Flutter", "Firebase"],
     tag: "Mobile",
-    category: "freelance",
   },
   {
     id: 15,
@@ -196,7 +181,6 @@ const projects: Project[] = [
     image: imgBtwEdutech,
     techStack: ["Flutter", "React", "Firebase"],
     tag: "Platform",
-    category: "freelance",
   },
   {
     id: 16,
@@ -208,7 +192,6 @@ const projects: Project[] = [
     techStack: ["React", "Go", "PostgreSQL"],
     link: "https://github.com/AxelanO7/koi-frontend-web-js",
     tag: "Web",
-    category: "freelance",
   },
   {
     id: 17,
@@ -220,7 +203,6 @@ const projects: Project[] = [
     techStack: ["Laravel", "Vue.js", "MySQL"],
     link: "http://siapenku.stion.site",
     tag: "Web",
-    category: "freelance",
   },
   {
     id: 18,
@@ -231,7 +213,6 @@ const projects: Project[] = [
     image: imgVillaManis,
     techStack: ["React", "Go", "PostgreSQL"],
     tag: "FinTech",
-    category: "freelance",
   },
   {
     id: 19,
@@ -242,7 +223,6 @@ const projects: Project[] = [
     image: imgBnShop,
     techStack: ["React", "Go", "Redis"],
     tag: "Web",
-    category: "freelance",
   },
   {
     id: 20,
@@ -253,7 +233,6 @@ const projects: Project[] = [
     image: imgTeacherPayroll,
     techStack: ["Flutter", "Laravel", "MySQL"],
     tag: "Mobile",
-    category: "freelance",
   },
   {
     id: 21,
@@ -264,7 +243,6 @@ const projects: Project[] = [
     image: imgSujana,
     techStack: ["React", "Go", "Stripe API"],
     tag: "Web",
-    category: "freelance",
   },
 ];
 
@@ -281,7 +259,7 @@ const tagColor: Record<string, string> = {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
 };
 
 const itemVariants = {
@@ -375,15 +353,7 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-type FilterType = "all" | "cto" | "freelance";
-
 export default function ProjectSection() {
-  const [filter, setFilter] = useState<FilterType>("all");
-
-  const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
-  const ctoCount = projects.filter((p) => p.category === "cto").length;
-  const freelanceCount = projects.filter((p) => p.category === "freelance").length;
-
   return (
     <section id="projects" className="relative w-full py-20 overflow-hidden bg-slate-950 border-t border-slate-900">
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
@@ -404,48 +374,18 @@ export default function ProjectSection() {
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
+        {/* Grid */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-10"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.05 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {([
-            { key: "all", label: `All  (${projects.length})` },
-            { key: "cto", label: `CTO @ NDS  (${ctoCount})` },
-            { key: "freelance", label: `Freelance  (${freelanceCount})` },
-          ] as { key: FilterType; label: string }[]).map(({ key, label }) => (
-            <button
-              key={key}
-              onClick={() => setFilter(key)}
-              className={`px-5 py-2 rounded-xl text-xs font-mono font-semibold tracking-wider border transition-all duration-200 ${
-                filter === key
-                  ? "bg-emerald-500 border-emerald-500 text-slate-950"
-                  : "bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700"
-              }`}
-            >
-              {label.toUpperCase()}
-            </button>
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </motion.div>
-
-        {/* Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={filter}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-          >
-            {filtered.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
 
         {/* Stats */}
         <motion.div
