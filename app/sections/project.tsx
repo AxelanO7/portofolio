@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { m as motion, useInView, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { m as motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -293,10 +293,18 @@ const itemVariants = {
   },
 };
 
+function getAbbr(name: string): string {
+  const base = name.split("—")[0].trim().toLowerCase();
+  if (base.startsWith("guestlist")) return "GL";
+  if (base.startsWith("lerka")) return "LK";
+  if (base.startsWith("it pulse")) return "IT";
+  return name.split(/[\s—]+/).map(w => w[0] ?? "").join("").substring(0, 3).toUpperCase();
+}
+
 function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.div variants={itemVariants} className="group h-full">
-      <div className="h-full flex flex-col bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/20 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+      <div className="h-full flex flex-col bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 hover:shadow-[inset_3px_0_0_rgba(16,185,129,0.4),0_0_24px_rgba(16,185,129,0.06)]">
         {/* Image / Placeholder */}
         <div className="relative h-40 overflow-hidden bg-slate-900 flex-shrink-0">
           {project.image ? (
@@ -308,9 +316,19 @@ function ProjectCard({ project }: { project: Project }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950/30 flex items-center justify-center">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950/20 flex items-center justify-center">
+              <div className="relative select-none">
+                <span className="text-5xl font-black tracking-tighter text-emerald-500/10 group-hover:text-emerald-500/20 transition-colors duration-300 font-mono">
+                  {getAbbr(project.name)}
+                </span>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-2xl font-black tracking-tight text-emerald-400/60 group-hover:text-emerald-400/80 transition-colors duration-300 font-mono">
+                    {getAbbr(project.name)}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute bottom-3 right-3 text-[9px] font-mono text-emerald-500/50 uppercase tracking-widest">
+                In Production
               </div>
             </div>
           )}
@@ -361,8 +379,6 @@ type FilterType = "all" | "cto" | "freelance";
 
 export default function ProjectSection() {
   const [filter, setFilter] = useState<FilterType>("all");
-  const gridRef = useRef<HTMLDivElement | null>(null);
-  const isGridInView = useInView(gridRef, { once: true, amount: 0.05 });
 
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const ctoCount = projects.filter((p) => p.category === "cto").length;
@@ -390,7 +406,7 @@ export default function ProjectSection() {
 
         {/* Filter Tabs */}
         <motion.div
-          className="flex justify-center gap-3 mb-10"
+          className="flex flex-wrap justify-center gap-2 mb-10"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -419,10 +435,10 @@ export default function ProjectSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={filter}
-            ref={gridRef}
             variants={containerVariants}
             initial="hidden"
-            animate={isGridInView ? "visible" : "hidden"}
+            animate="visible"
+            exit={{ opacity: 0, transition: { duration: 0.15 } }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {filtered.map((project) => (

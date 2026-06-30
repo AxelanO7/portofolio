@@ -240,7 +240,7 @@ export default function SkillSection() {
 
                     {/* Skill name */}
                     <div>
-                      <h4 className="text-white font-bold text-sm tracking-wide">
+                      <h4 className="text-white group-hover:text-emerald-400 font-bold text-sm tracking-wide transition-colors duration-200">
                         {skill.name}
                       </h4>
                       <div className="mt-1 flex items-center gap-1.5">
