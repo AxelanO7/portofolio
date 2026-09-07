@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
 import { LazyMotion, domAnimation, MotionConfig } from "framer-motion";
+import { I18nProvider } from "@/lib/i18n";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -18,9 +19,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>
-        <LazyMotion features={domAnimation} strict>
-          <MotionConfig reducedMotion="user">{children}</MotionConfig>
-        </LazyMotion>
+        <I18nProvider>
+          <LazyMotion features={domAnimation} strict>
+            <MotionConfig reducedMotion="user">{children}</MotionConfig>
+          </LazyMotion>
+        </I18nProvider>
       </NextThemesProvider>
     </HeroUIProvider>
   );

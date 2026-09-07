@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import { m as motion } from "framer-motion";
-import { Mail, MessageSquare, ArrowUpRight, Phone, Send } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -20,165 +20,107 @@ const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function ContactSection() {
-  const contactMethods = [
-    {
-      icon: <Mail className="w-6 h-6 text-emerald-400" />,
-      title: "Email",
-      description: "jeremia123.jm@gmail.com",
-      link: "mailto:jeremia123.jm@gmail.com",
-    },
-    {
-      icon: <LinkedinIcon className="w-6 h-6 text-emerald-400" />,
-      title: "LinkedIn",
-      description: "Connect professionally",
-      link: "https://linkedin.com/in/jeremia-axelano",
-    },
-    {
-      icon: <MessageSquare className="w-6 h-6 text-emerald-400" />,
-      title: "WhatsApp",
-      description: "+62 822 4603 4453",
-      link: "https://wa.me/6282246034453",
-    },
-    {
-      icon: <GithubIcon className="w-6 h-6 text-emerald-400" />,
-      title: "GitHub",
-      description: "Explore my source code",
-      link: "https://github.com/AxelanO7",
-    },
+  const { t } = useI18n();
+
+  const methods = [
+    { icon: <Mail className="h-5 w-5" />, label: "Email", value: "jeremia123.jm@gmail.com", href: "mailto:jeremia123.jm@gmail.com" },
+    { icon: <Phone className="h-5 w-5" />, label: "WhatsApp", value: "+62 822 4603 4453", href: "https://wa.me/6282246034453" },
+    { icon: <LinkedinIcon className="h-5 w-5" />, label: "LinkedIn", value: "/in/jeremia-axelano", href: "https://linkedin.com/in/jeremia-axelano" },
+    { icon: <GithubIcon className="h-5 w-5" />, label: "GitHub", value: "@AxelanO7", href: "https://github.com/AxelanO7" },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
   return (
-    <section
-      id="contact"
-      className="relative w-full py-24 overflow-hidden bg-slate-950 border-t border-slate-900"
-    >
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -bottom-20 right-20 w-80 h-80 bg-emerald-500/[0.02] rounded-full blur-3xl" />
-        <div className="absolute top-20 left-20 w-72 h-72 bg-slate-900/[0.05] rounded-full blur-3xl" />
-      </div>
+    <section id="contact" className="relative w-full overflow-hidden bg-ink-elev py-24 md:py-32">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+      <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="font-tech text-xs uppercase tracking-[0.28em] text-accent/80"
         >
-          <h2 className="text-4xl sm:text-5xl font-black mb-4 uppercase tracking-tight text-white">
-            Let's <span className="text-emerald-400">Connect</span>
-          </h2>
-          <div className="w-24 h-1 bg-emerald-500 rounded-full mx-auto mb-6" />
-          <p className="text-slate-400 text-sm max-w-xl mx-auto font-light leading-relaxed">
-            Currently building Guestlist Ecosystem as CTO. Open for strategic discussions, architecture consulting, and scalability conversations.
-          </p>
+          {t("contact_eyebrow")}
+        </motion.span>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-5xl"
+        >
+          {t("contact_title_1")} <span className="underline decoration-2 underline-offset-4">{t("contact_title_2")}</span>.
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mx-auto mt-5 max-w-lg text-base font-light leading-relaxed text-white/60"
+        >
+          {t("contact_desc")}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mt-9 flex flex-wrap items-center justify-center gap-3"
+        >
+          <a
+            href="mailto:jeremia123.jm@gmail.com"
+            className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-ink transition-all hover:scale-[1.02] hover:shadow-[0_0_36px_rgba(168,151,255,0.35)]"
+          >
+            {t("contact_cta_email")}
+          </a>
+          <a
+            href="https://wa.me/6282246034453"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/[0.06]"
+          >
+            {t("contact_cta_whatsapp")}
+          </a>
         </motion.div>
 
-        <div className="grid md:grid-cols-5 gap-6 items-stretch">
-          {/* Left: Contact Methods (Bento Grid tiles) */}
-          <motion.div
-            className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {contactMethods.map((method, index) => (
-              <motion.a
-                key={index}
-                href={method.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={itemVariants}
-                className="group relative flex flex-col justify-between p-6 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-emerald-500/20 transition-all duration-300 backdrop-blur-sm"
-                whileHover={{ y: -3 }}
-              >
-                <div className="flex justify-between items-start w-full">
-                  <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 group-hover:border-emerald-500/10 transition-colors">
-                    {method.icon}
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-
-                <div className="mt-8">
-                  <h3 className="text-sm font-mono text-slate-500 uppercase tracking-wider">{method.title}</h3>
-                  <p className="text-white font-bold text-base mt-1 truncate">{method.description}</p>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* Right: Premium CTA Card */}
-          <motion.div
-            className="md:col-span-2 flex flex-col justify-between p-8 bg-slate-900/50 border border-slate-800 rounded-2xl relative overflow-hidden backdrop-blur-sm"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            {/* Visual glow overlay */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="space-y-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span className="relative flex h-3 w-3 items-center justify-center">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-40"></span>
-                  <span className="animate-ping absolute inline-flex h-[150%] w-[150%] rounded-full bg-emerald-400 opacity-20" style={{ animationDelay: "0.4s" }}></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                Active Channels
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mx-auto mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4"
+        >
+          {methods.map((m) => (
+            <a
+              key={m.label}
+              href={m.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glass flex flex-col items-center gap-2 rounded-2xl border-white/8 px-4 py-5 transition-all hover:border-white/20"
+            >
+              <span className="text-accent">{m.icon}</span>
+              <span className="text-xs font-semibold text-white">{m.label}</span>
+              <span className="flex items-center gap-1 truncate text-[11px] text-white/40">
+                {m.value}
+                <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
               </span>
-              <h3 className="text-2xl font-bold text-white tracking-tight">
-                Start a conversation
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed font-light">
-                Feel free to reach out via email for structured inquiries, or send a WhatsApp message for quick, direct updates.
-              </p>
-            </div>
+            </a>
+          ))}
+        </motion.div>
 
-            <div className="space-y-3 mt-8">
-              <a
-                href="mailto:jeremia123.jm@gmail.com"
-                className="flex items-center justify-center gap-2 w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-emerald-500/5 hover:scale-[1.01] active:scale-[0.99] transition-all text-sm"
-              >
-                <Send className="w-4 h-4" />
-                Send structured email
-              </a>
-              <a
-                href="https://wa.me/6282246034453"
-                className="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-750 text-slate-300 font-semibold rounded-xl transition-all text-sm"
-              >
-                <Phone className="w-4 h-4 text-emerald-400" />
-                Direct WhatsApp chat
-              </a>
-            </div>
-          </motion.div>
-        </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-10 flex items-center justify-center gap-1.5 font-tech text-xs text-white/35"
+        >
+          <MapPin className="h-3.5 w-3.5" /> Bali, Indonesia · UTC+8
+        </motion.p>
       </div>
     </section>
   );

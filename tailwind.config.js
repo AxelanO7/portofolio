@@ -14,11 +14,23 @@ module.exports = {
       colors: {
         c_dark_gray: '#1e293b',
         c_black: '#0f172a',
+        // "Signal" tokens — monochrome base + one accent
+        ink: {
+          DEFAULT: '#050505',
+          elev: '#0a0a0a',
+          surface: '#111111',
+          surface2: '#171717',
+        },
+        accent: {
+          DEFAULT: '#c9a875',
+          bright: '#e8caa0',
+          deep: '#8f7248',
+        },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        tech: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--ff-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--ff-mono)', 'ui-monospace', 'monospace'],
+        tech: ['var(--ff-mono)', 'ui-monospace', 'monospace'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

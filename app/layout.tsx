@@ -7,6 +7,7 @@ import { fontSans, fontMono } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import FooterSection from "../components/footer";
 import { Providers } from "./providers";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
   title: {
@@ -32,17 +33,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={clsx(fontSans.variable, fontMono.variable)}
+    >
       <head />
       <body
-        className={clsx(
-          "min-h-screen font-sans antialiased bg-slate-950 overflow-x-hidden",
-          fontSans.variable,
-          fontMono.variable
-        )}
+        className="min-h-screen font-sans antialiased overflow-x-hidden grain"
         suppressHydrationWarning
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+          <SmoothScroll />
           <div className="relative flex flex-col min-h-screen w-full">
             <Navbar />
             <main className="flex-grow w-full">{children}</main>
