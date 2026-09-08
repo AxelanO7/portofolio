@@ -74,60 +74,76 @@ export default function ConstellationFallback({ reduced }: { reduced?: boolean }
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        {!reduced && (
+          <style>{`
+            @keyframes cfallback-drift {
+              0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+              50% { transform: translate(-10px, 7px) rotate(0.7deg); }
+            }
+            .cfallback-drift {
+              transform-origin: ${W / 2}px ${H / 2}px;
+              animation: cfallback-drift 16s ease-in-out infinite;
+            }
+          `}</style>
+        )}
       </defs>
 
-      {/* Edges */}
-      <g stroke="currentColor" strokeWidth="1">
-        {EDGES.map((e, i) => {
-          const a = pos[e.a];
-          const b = pos[e.b];
-          if (!a || !b) return null;
-          return (
-            <line
-              key={i}
-              x1={a.x}
-              y1={a.y}
-              x2={b.x}
-              y2={b.y}
-              stroke={e.bridge ? WARM : "#6b6b66"}
-              strokeOpacity={e.bridge ? 0.5 : 0.28}
-              strokeWidth={e.bridge ? 1.4 : 1}
-            >
-              {!reduced && (
-                <animate
-                  attributeName="stroke-opacity"
-                  values={
-                    e.bridge
-                      ? "0.5;0.85;0.5"
-                      : "0.18;0.42;0.18"
-                  }
-                  dur={`${3 + (i % 5) * 0.6}s`}
-                  repeatCount="indefinite"
-                />
-              )}
-            </line>
-          );
-        })}
-      </g>
+      {/* Whole graph gets a slow drift so it visibly reads as "alive" even
+          when the per-node opacity pulse alone is too subtle to notice. */}
+      <g className={!reduced ? "cfallback-drift" : undefined}>
+        {/* Edges */}
+        <g stroke="currentColor" strokeWidth="1">
+          {EDGES.map((e, i) => {
+            const a = pos[e.a];
+            const b = pos[e.b];
+            if (!a || !b) return null;
+            return (
+              <line
+                key={i}
+                x1={a.x}
+                y1={a.y}
+                x2={b.x}
+                y2={b.y}
+                stroke={e.bridge ? WARM : "#6b6b66"}
+                strokeOpacity={e.bridge ? 0.5 : 0.28}
+                strokeWidth={e.bridge ? 1.4 : 1}
+              >
+                {!reduced && (
+                  <animate
+                    attributeName="stroke-opacity"
+                    values={
+                      e.bridge
+                        ? "0.4;0.95;0.4"
+                        : "0.12;0.5;0.12"
+                    }
+                    dur={`${3 + (i % 5) * 0.6}s`}
+                    repeatCount="indefinite"
+                  />
+                )}
+              </line>
+            );
+          })}
+        </g>
 
-      {/* Nodes */}
-      <g filter="url(#cglow)">
-        {NODES.map((node) => {
-          const p = pos[node.id];
-          if (!p) return null;
-          return (
-            <circle key={node.id} cx={p.x} cy={p.y} r={p.r} fill={p.c}>
-              {!reduced && (
-                <animate
-                  attributeName="opacity"
-                  values="0.75;1;0.75"
-                  dur={`${2.4 + (node.weight * 2)}s`}
-                  repeatCount="indefinite"
-                />
-              )}
-            </circle>
-          );
-        })}
+        {/* Nodes */}
+        <g filter="url(#cglow)">
+          {NODES.map((node) => {
+            const p = pos[node.id];
+            if (!p) return null;
+            return (
+              <circle key={node.id} cx={p.x} cy={p.y} r={p.r} fill={p.c}>
+                {!reduced && (
+                  <animate
+                    attributeName="opacity"
+                    values="0.5;1;0.5"
+                    dur={`${2.4 + (node.weight * 2)}s`}
+                    repeatCount="indefinite"
+                  />
+                )}
+              </circle>
+            );
+          })}
+        </g>
       </g>
     </svg>
   );

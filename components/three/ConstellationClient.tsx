@@ -33,11 +33,11 @@ export default function ConstellationClient({
     return <ConstellationScene scrollRef={scrollRef} reduced={cap.reduced} />;
   }
 
-  // Mobile / low-power / no-WebGL → 2D graph. Keep a gentle pulse alive so it
-  // never looks dead (kept subtle, low vestibular risk).
+  // Mobile / low-power / no-WebGL → 2D graph. Respects the visitor's actual
+  // reduced-motion preference (was hardcoded to always-animate before).
   return (
     <div className="absolute inset-0 text-white/40">
-      <ConstellationFallback reduced={false} />
+      <ConstellationFallback reduced={cap.reduced} />
     </div>
   );
 }
