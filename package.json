@@ -48,5 +48,8 @@
   "resolutions": {
     "string-width": "^4.2.0",
     "glob-parent": "^6.0.2"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
