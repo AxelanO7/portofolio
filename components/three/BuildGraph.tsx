@@ -91,6 +91,7 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
     const lines: THREE.LineSegments[] = [];
     const disposables: { dispose(): void }[] = [];
     let alive = true;
+    let built = false;
     let visible = true;
     let raf = 0;
     let px = 0;
@@ -146,6 +147,7 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
       const dm = new THREE.PointsMaterial({ color: 0x8fadc2, size: 0.04, transparent: true, opacity: 0.55 });
       group.add(new THREE.Points(dg, dm));
       disposables.push(cg, cm, dg, dm);
+      built = true;
       frame(performance.now());
     };
 
@@ -161,7 +163,7 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
       return true;
     };
     const draw = (t: number) => {
-      if (!size()) return;
+      if (!built || !size()) return;
       const s = (t - t0) / 1000;
       group.rotation.y = reduce ? 0.5 : s * 0.14 + px;
       group.rotation.x = 0.95 + (reduce ? 0 : Math.sin(s * 0.16) * 0.06) + py;
@@ -190,7 +192,7 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
       else raf = 0;
     };
     const wake = () => {
-      if (!raf && alive && visible && !document.hidden && !reduce) raf = requestAnimationFrame(frame);
+      if (built && !raf && alive && visible && !document.hidden && !reduce) raf = requestAnimationFrame(frame);
     };
 
     const io = new IntersectionObserver(([e]) => {
