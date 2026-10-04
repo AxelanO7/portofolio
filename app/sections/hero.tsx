@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import BuildGraph from "@/components/three/BuildGraphClient";
+import GalaxyPlaceholder from "@/components/three/GalaxyPlaceholder";
 import { ARSENAL, TOOL_COUNT } from "@/config/arsenal";
 import { AGENTS, WEB3 } from "@/config/work";
 import { useI18n } from "@/lib/i18n";
@@ -11,6 +12,7 @@ const PLATFORMS = 7;
 export default function HeroSection() {
   const { t } = useI18n();
   const [focus, setFocus] = useState<number | null>(null);
+  const [ready, setReady] = useState(false);
 
   const proof = [
     { value: TOOL_COUNT, label: t("proof_tools") },
@@ -29,7 +31,8 @@ export default function HeroSection() {
             <i />
             build-graph · {TOOL_COUNT} tools · {ARSENAL.length} stacks
           </div>
-          <BuildGraph focus={focus} />
+          <GalaxyPlaceholder ready={ready} />
+          <BuildGraph focus={focus} onReady={() => setReady(true)} />
         </div>
 
         <div className="legend mt-5" role="group" aria-label="Isolate a stack">

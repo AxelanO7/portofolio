@@ -1,7 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import {
+  BufferGeometry,
+  CanvasTexture,
+  Float32BufferAttribute,
+  Group,
+  LineBasicMaterial,
+  LineSegments,
+  LinearFilter,
+  Mesh,
+  MeshBasicMaterial,
+  PerspectiveCamera,
+  Points,
+  PointsMaterial,
+  Scene,
+  SphereGeometry,
+  Sprite,
+  SpriteMaterial,
+  Texture,
+  Vector3,
+  WebGLRenderer,
+} from "three";
 import { ARSENAL, CROSS_LINKS } from "@/config/arsenal";
 
 /**
@@ -49,14 +69,14 @@ function makeLabel(text: string, color: string, big: boolean) {
   x.textBaseline = "middle";
   x.fillStyle = color;
   x.fillText(text, 210, 44);
-  const tex = new THREE.CanvasTexture(c);
-  tex.minFilter = THREE.LinearFilter;
-  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+  const tex = new CanvasTexture(c);
+  tex.minFilter = LinearFilter;
+  const sp = new Sprite(new SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
   sp.scale.set(big ? 3.3 : 2.55, big ? 0.66 : 0.51, 1);
   return sp;
 }
 
-export default function BuildGraph({ focus }: { focus: number | null }) {
+export default function BuildGraph({ focus, onReady }: { focus: number | null; onReady?: () => void }) {
   const host = useRef<HTMLDivElement>(null);
   const focusRef = useRef<number | null>(focus);
   const [failed, setFailed] = useState(false);
@@ -65,9 +85,9 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
   useEffect(() => {
     const el = host.current;
     if (!el) return;
-    let renderer: THREE.WebGLRenderer;
+    let renderer: WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new WebGLRenderer({ antialias: true, alpha: true });
     } catch {
       setFailed(true);
       return;
@@ -78,17 +98,17 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const R = 4.2;
-    const scene = new THREE.Scene();
-    const cam = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
+    const scene = new Scene();
+    const cam = new PerspectiveCamera(46, 1, 0.1, 100);
     cam.position.set(0, 0, 10.6);
-    const group = new THREE.Group();
+    const group = new Group();
     scene.add(group);
 
     const L = buildLayout();
-    const meshes: THREE.Mesh[] = [];
-    const halos: THREE.Mesh[] = [];
-    const sprites: THREE.Sprite[] = [];
-    const lines: THREE.LineSegments[] = [];
+    const meshes: Mesh[] = [];
+    const halos: Mesh[] = [];
+    const sprites: Sprite[] = [];
+    const lines: LineSegments[] = [];
     const disposables: { dispose(): void }[] = [];
     let alive = true;
     let built = false;
@@ -103,15 +123,15 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
       L.nodes.forEach((n) => {
         const core = n.cat < 0;
         const col = core ? "#f4c97a" : ARSENAL[n.cat].color;
-        const g1 = new THREE.SphereGeometry(core ? 0.36 : 0.13, 10, 8);
-        const m1 = new THREE.MeshBasicMaterial({ color: col, transparent: true });
-        const mesh = new THREE.Mesh(g1, m1);
+        const g1 = new SphereGeometry(core ? 0.36 : 0.13, 10, 8);
+        const m1 = new MeshBasicMaterial({ color: col, transparent: true });
+        const mesh = new Mesh(g1, m1);
         mesh.position.set(...n.p);
         group.add(mesh);
         meshes.push(mesh);
-        const g2 = new THREE.SphereGeometry(core ? 0.7 : 0.27, 10, 8);
-        const m2 = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.13 });
-        const halo = new THREE.Mesh(g2, m2);
+        const g2 = new SphereGeometry(core ? 0.7 : 0.27, 10, 8);
+        const m2 = new MeshBasicMaterial({ color: col, transparent: true, opacity: 0.13 });
+        const halo = new Mesh(g2, m2);
         halo.position.copy(mesh.position);
         group.add(halo);
         halos.push(halo);
@@ -119,39 +139,40 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
         sp.position.set(n.p[0], n.p[1] + (core ? 0.85 : 0.38), n.p[2]);
         group.add(sp);
         sprites.push(sp);
-        disposables.push(g1, m1, g2, m2, sp.material, (sp.material as THREE.SpriteMaterial).map as THREE.Texture);
+        disposables.push(g1, m1, g2, m2, sp.material, (sp.material as SpriteMaterial).map as Texture);
       });
       ARSENAL.forEach((a, k) => {
         const arr: number[] = [];
         L.edges.forEach((e) => {
           if (e[2] === k) arr.push(...L.nodes[e[0]].p, ...L.nodes[e[1]].p);
         });
-        const g = new THREE.BufferGeometry();
-        g.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
-        const m = new THREE.LineBasicMaterial({ color: a.color, transparent: true, opacity: 0.34 });
-        const ls = new THREE.LineSegments(g, m);
+        const g = new BufferGeometry();
+        g.setAttribute("position", new Float32BufferAttribute(arr, 3));
+        const m = new LineBasicMaterial({ color: a.color, transparent: true, opacity: 0.34 });
+        const ls = new LineSegments(g, m);
         group.add(ls);
         lines.push(ls);
         disposables.push(g, m);
       });
       const ca: number[] = [];
       L.cross.forEach((e) => ca.push(...L.nodes[e[0]].p, ...L.nodes[e[1]].p));
-      const cg = new THREE.BufferGeometry();
-      cg.setAttribute("position", new THREE.Float32BufferAttribute(ca, 3));
-      const cm = new THREE.LineBasicMaterial({ color: 0xcfe9f0, transparent: true, opacity: 0.16 });
-      group.add(new THREE.LineSegments(cg, cm));
+      const cg = new BufferGeometry();
+      cg.setAttribute("position", new Float32BufferAttribute(ca, 3));
+      const cm = new LineBasicMaterial({ color: 0xcfe9f0, transparent: true, opacity: 0.16 });
+      group.add(new LineSegments(cg, cm));
       const dust: number[] = [];
       for (let i = 0; i < 160; i++) dust.push((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12);
-      const dg = new THREE.BufferGeometry();
-      dg.setAttribute("position", new THREE.Float32BufferAttribute(dust, 3));
-      const dm = new THREE.PointsMaterial({ color: 0x8fadc2, size: 0.04, transparent: true, opacity: 0.55 });
-      group.add(new THREE.Points(dg, dm));
+      const dg = new BufferGeometry();
+      dg.setAttribute("position", new Float32BufferAttribute(dust, 3));
+      const dm = new PointsMaterial({ color: 0x8fadc2, size: 0.04, transparent: true, opacity: 0.55 });
+      group.add(new Points(dg, dm));
       disposables.push(cg, cm, dg, dm);
       built = true;
       frame(performance.now());
+      onReady?.();
     };
 
-    const v = new THREE.Vector3();
+    const v = new Vector3();
     const t0 = performance.now();
     const size = () => {
       const w = el.clientWidth;
@@ -172,16 +193,16 @@ export default function BuildGraph({ focus }: { focus: number | null }) {
       for (let k = 0; k < cur.length; k++) {
         const tgt = f == null || f === k ? 1 : 0;
         cur[k] += (tgt - cur[k]) * 0.14;
-        (lines[k].material as THREE.LineBasicMaterial).opacity = 0.34 * (0.15 + 0.85 * cur[k]);
+        (lines[k].material as LineBasicMaterial).opacity = 0.34 * (0.15 + 0.85 * cur[k]);
       }
       L.nodes.forEach((n, i) => {
         const a = n.cat < 0 ? 1 : 0.1 + 0.9 * cur[n.cat];
-        (meshes[i].material as THREE.MeshBasicMaterial).opacity = a;
-        (halos[i].material as THREE.MeshBasicMaterial).opacity = 0.13 * a;
+        (meshes[i].material as MeshBasicMaterial).opacity = a;
+        (halos[i].material as MeshBasicMaterial).opacity = 0.13 * a;
         sprites[i].getWorldPosition(v);
         const dp = Math.max(0, Math.min(1, (v.z + R) / (2 * R)));
         const base = n.cat < 0 ? 0.65 + 0.35 * dp : 0.04 + 0.9 * Math.pow(dp, 1.9);
-        (sprites[i].material as THREE.SpriteMaterial).opacity = base * a;
+        (sprites[i].material as SpriteMaterial).opacity = base * a;
       });
       renderer.render(scene, cam);
     };
