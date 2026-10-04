@@ -1,307 +1,155 @@
+/* Fonts are self-hosted (latin only). No request to a third-party font host. */
+@import "@fontsource/outfit/latin-500.css";
+@import "@fontsource/outfit/latin-600.css";
+@import "@fontsource/outfit/latin-700.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================================
-   DESIGN TOKENS — "Signal" monochrome system
-   Near-black/white/gray base + ONE accent (warm gold). The two-act
-   narrative reads through INTENSITY, not a second hue: Foundation
-   renders neutral (the base), AI-native + flagship moments render
-   in the accent (the layer AI added on top).
-   ============================================================ */
 :root {
-  /* Backgrounds */
-  --bg: #050505;
-  --bg-elev: #0a0a0a;
-  --surface: #111111;
-  --surface-2: #171717;
-
-  /* Text */
-  --text: #f2f2f0;
-  --text-dim: #a3a39c;
-  --text-mute: #6b6b66;
-
-  /* Borders / hairlines */
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
-
-  /* The one accent — desaturated warm gold, not neon */
-  --accent: #c9a875;
-  --accent-bright: #e8caa0;
-  --accent-deep: #8f7248;
-
-  /* Glow (accent only — no cool glow anymore) */
-  --glow-accent: rgba(201, 168, 117, 0.4);
-
-  /* Fonts (wired from next/font Geist variables) */
-  --ff-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --ff-mono: var(--font-geist-mono), ui-monospace, monospace;
-}
-
-* {
-  box-sizing: border-box;
+  --ink: #07151d;
+  --surface: #0f1d25;
+  --raised: #142129;
+  --line: rgba(255, 255, 255, 0.09);
+  --tx: #e9f1f6;
+  --mist: #a5b9cc;
+  --cy: #22d3ee;
+  --gold: #d4af6a;
 }
 
 html {
-  /* Lenis owns scroll animation — native `scroll-behavior: smooth` here would
-     fight Lenis's RAF-driven scrollTop on every anchor click/scrollIntoView,
-     causing the scroll to stutter/stick. */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(201, 168, 117, 0.3) transparent;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+  background: var(--ink);
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
+  background: var(--ink);
+  color: var(--tx);
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.5;
   overflow-x: hidden;
-  font-family: var(--ff-sans);
-  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
-  /* Subtle single-tone vignette — depth without introducing new hues */
-  background-image:
-    radial-gradient(60rem 40rem at 82% -10%, rgba(255, 255, 255, 0.035), transparent 60%),
-    radial-gradient(50rem 50rem at 10% 110%, rgba(201, 168, 117, 0.05), transparent 60%);
-  background-attachment: fixed;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(201, 168, 117, 0.4);
-  border-radius: 8px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 202, 160, 0.6);
-}
+h1, h2, h3 { text-wrap: balance; }
+img { max-width: 100%; }
+::selection { background: rgba(34, 211, 238, 0.28); color: #fff; }
+:focus-visible { outline: 2px solid var(--cy); outline-offset: 2px; }
 
-/* Selection */
-::selection {
-  background: rgba(201, 168, 117, 0.28);
-  color: #fff;
-}
-::-moz-selection {
-  background: rgba(201, 168, 117, 0.28);
-  color: #fff;
-}
+/* ---- shared building blocks ---- */
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: 20px; }
+@media (min-width: 768px) { .wrap { padding-inline: 40px; } }
 
-/* Focus */
-*:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
+.section { border-top: 1px solid var(--line); padding-block: 64px; }
+@media (min-width: 768px) { .section { padding-block: 96px; } }
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
-
-.font-tech {
-  font-family: var(--ff-mono);
-}
-
-/* Solid-color emphasis — no gradients. Confidence comes from weight/contrast,
-   not a rainbow behind the text (that's the AI-slop tell we're removing). */
-.text-accent-solid {
-  color: var(--accent);
-}
-
-/* Film grain overlay — cinematic texture; fixed, non-interactive */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Glass surface */
-.glass {
-  background: rgba(17, 17, 17, 0.6);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--line);
-}
-
-/* Hairline top-edge shimmer (used on premium tiles) — single accent tone */
-.shimmer-border {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(201, 168, 117, 0.9),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: shimmer-move 3.5s linear infinite;
-}
-
-/* ============================================================
-   KEYFRAMES
-   ============================================================ */
-@keyframes shimmer-move {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-@keyframes float-soft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes pulse-ring {
-  0% { transform: scale(0.9); opacity: 0.7; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-@keyframes drift {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(2%, -2%, 0); }
-}
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-float-soft { animation: float-soft 7s ease-in-out infinite; }
-.animate-drift { animation: drift 16s ease-in-out infinite; }
-.animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
-
-/* Constellation persistent node labels */
-.c-node-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+.eyebrow {
+  font: 500 11.5px "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(242, 242, 240, 0.8);
-  white-space: nowrap;
-  transform: translateY(-15px);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
-  user-select: none;
+  color: var(--cy);
 }
-.c-node-label[data-act="foundation"] {
-  color: rgba(242, 242, 240, 0.8);
+.h2 {
+  margin-top: 10px;
+  font: 600 clamp(26px, 5vw, 40px) / 1.1 Outfit, Inter, sans-serif;
+  letter-spacing: -0.02em;
 }
-.c-node-label[data-act="ai"] {
-  color: var(--accent-bright);
-}
+.lead { margin-top: 10px; max-width: 62ch; color: var(--mist); }
 
-/* Constellation core identity chip */
-.c-core-chip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  transform: translateY(28px);
-  text-align: center;
-  white-space: nowrap;
-  user-select: none;
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 999px; padding: 12px 22px;
+  font: 600 14px Inter, sans-serif; color: #031018;
+  background: linear-gradient(180deg, #3fe0f5, #22d3ee);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 28px rgba(34, 211, 238, 0.25);
+  transition: transform 0.15s ease;
 }
-.c-core-name {
-  font-family: var(--ff-sans);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+.btn-cta:hover { transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); border-radius: 999px; padding: 12px 22px;
+  font: 500 14px Inter, sans-serif; color: var(--tx);
+  transition: border-color 0.15s ease;
 }
-.c-core-role {
-  font-family: var(--ff-mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--accent);
-}
+.btn-ghost:hover { border-color: rgba(255, 255, 255, 0.3); }
 
-/* Architecture 3D node labels */
-.arch-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  white-space: nowrap;
-  user-select: none;
-  transition: opacity 0.2s ease;
+.chip {
+  font: 500 12px "JetBrains Mono", ui-monospace, monospace;
+  color: var(--mist); background: transparent;
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 11px; cursor: pointer;
 }
-.arch-label[data-dim="true"] {
-  opacity: 0.4;
-}
-.arch-name {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #f2f2f0;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
-}
-.arch-tech {
-  font-family: var(--ff-mono);
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.2s ease, max-height 0.2s ease;
-}
-.arch-label[data-hover="true"] .arch-tech {
-  opacity: 0.9;
-  max-height: 20px;
-}
+.chip[aria-pressed="true"] { color: var(--tx); border-color: var(--tx); }
 
-/* Constellation hover tooltip */
-.constellation-tip {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  background: rgba(10, 10, 10, 0.85);
-  border: 1px solid var(--line-strong);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transform: translateY(-140%);
-  white-space: nowrap;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-}
-.constellation-tip .tip-label {
-  font-family: var(--ff-sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-.constellation-tip .tip-sub {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
 
-/* Interactive transitions */
-a, button {
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease,
-    opacity 0.2s ease, transform 0.2s ease;
+.status {
+  font: 500 10.5px "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em; text-transform: uppercase; color: #34d399; white-space: nowrap;
 }
+.status[data-s="beta"], .status[data-s="build"] { color: var(--gold); }
+.status[data-s="internal"], .status[data-s="delivered"], .status[data-s="planned"], .status[data-s="concept"] { color: var(--mist); }
 
-/* ============================================================
-   REDUCED MOTION — honor user preference
-   ============================================================ */
+.shot { display: block; width: 100%; object-fit: cover; object-position: top; background: #000; }
+
+/* ---- hero ---- */
+.stage {
+  position: relative; overflow: hidden; touch-action: pan-y;
+  aspect-ratio: 1 / 1; width: min(760px, 100%); margin-inline: auto; border-radius: 28px;
+  background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.16), transparent 66%);
+}
+@media (min-width: 768px) { .stage { aspect-ratio: 1 / 0.82; } }
+.hud {
+  position: absolute; left: 14px; top: 12px; z-index: 2; display: none; align-items: center; gap: 10px;
+  font: 500 11px "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; color: var(--mist);
+}
+@media (min-width: 768px) { .hud { display: flex; } }
+.hud i { width: 7px; height: 7px; border-radius: 50%; background: #34d399; display: inline-block; animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+.legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.legend button { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+.term {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+  font-family: "JetBrains Mono", ui-monospace, monospace; text-align: left;
+}
+.term-head { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--mist); font-size: 12px; }
+.term-head i { width: 8px; height: 8px; border-radius: 50%; background: #2a3b47; display: inline-block; }
+.term-head span { margin-left: 8px; }
+.term-body { padding: 14px; font-size: 12.5px; line-height: 1.85; color: var(--mist); }
+.term-body div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; animation: lineIn 0.35s ease forwards; }
+.term-body div:nth-child(1) { animation-delay: 0.1s; } .term-body div:nth-child(2) { animation-delay: 0.25s; }
+.term-body div:nth-child(3) { animation-delay: 0.4s; } .term-body div:nth-child(4) { animation-delay: 0.55s; }
+.term-body div:nth-child(5) { animation-delay: 0.7s; } .term-body div:nth-child(6) { animation-delay: 0.85s; }
+.term-body div:nth-child(7) { animation-delay: 1s; } .term-body div:nth-child(8) { animation-delay: 1.15s; }
+@keyframes lineIn { to { opacity: 1; } }
+.term .p { color: var(--cy); } .term .v { color: var(--tx); } .term .g { color: var(--gold); }
+.cursor { display: inline-block; width: 7px; height: 13px; background: var(--cy); vertical-align: -2px; animation: blink 1.1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* link hub: full-page capture that pans on its own */
+.pan { aspect-ratio: 9 / 19; object-fit: cover; object-position: 50% 0%; animation: pan 16s ease-in-out infinite alternate; }
+@keyframes pan { from { object-position: 50% 0%; } to { object-position: 50% 100%; } }
+
+/* horizontal rail (CSS snap only) */
+.rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .term-body div { opacity: 1; }
 }
