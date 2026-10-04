@@ -41,16 +41,19 @@ export function useCapability(): Capability {
     }
 
     const cores = navigator.hardwareConcurrency ?? 8;
-    const coarse = window.matchMedia?.("(pointer: coarse)").matches;
-    const small = window.innerWidth < 820;
+    const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    const tinyViewport = window.innerWidth < 380;
 
-    // Mobile / touch / tiny viewport / genuinely weak CPU → lighter 2D
-    // fallback (battery + thermal + fill-rate). NOTE: deviceMemory used to
-    // factor in here too, but Chrome buckets/caps that value low on plenty
-    // of normal 8GB+ laptops, which was silently routing capable desktops
-    // into the flat SVG fallback (no labels, no motion) instead of the real
-    // WebGL scene. Coarse pointer + small viewport already catch mobile.
-    const low = coarse || small || cores <= 2;
+    // Being a touchscreen/small-ish viewport used to be enough to force the
+    // flat 2D fallback, but that punished every modern phone (iPhones report
+    // 6 cores same as a laptop) just for being mobile. Judge actual weakness
+    // instead: low core count or low RAM (deviceMemory isn't exposed on iOS
+    // Safari, so it simply won't factor in there) or a genuinely tiny screen.
+    // Flagship phones now get the real WebGL scene; only budget devices fall
+    // back to the 2D graph.
+    const weakCPU = cores <= 4;
+    const weakMemory = typeof memory === "number" && memory <= 4;
+    const low = weakCPU || weakMemory || tinyViewport;
 
     setCap({ ready: true, tier: low ? "low" : "high", reduced: !!reduced });
   }, []);
