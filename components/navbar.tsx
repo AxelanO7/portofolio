@@ -15,6 +15,7 @@ export const Navbar = () => {
   }, []);
 
   const items = [
+    { label: t("nav_cases"), href: "#cases" },
     { label: t("nav_work"), href: "#work" },
     { label: t("nav_arsenal"), href: "#arsenal" },
     { label: t("nav_contact"), href: "#contact" },

@@ -1,5 +1,6 @@
 "use client";
 
+import { ENGAGEMENTS } from "@/config/cases";
 import { useI18n } from "@/lib/i18n";
 
 const LINKS = [
@@ -14,6 +15,17 @@ export default function ContactSection() {
   return (
     <section id="contact" className="section">
       <div className="wrap">
+        <p className="eyebrow">{t("work_eyebrow")}</p>
+        <h2 className="h2">{t("work_title")}</h2>
+        <ul className="mt-6 grid gap-3.5 md:grid-cols-3">
+          {ENGAGEMENTS.map((e) => (
+            <li key={e.title} className="border-t-2 border-cy pt-3">
+              <h3 className="font-display text-lg font-semibold">{e.title}</h3>
+              <p className="mt-1 text-sm text-mist">{e.text}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-14" />
         <p className="eyebrow">{t("contact_eyebrow")}</p>
         <h2 className="h2 max-w-[18ch]">{t("contact_title")}</h2>
         <p className="lead">{t("contact_desc")}</p>
@@ -25,7 +37,8 @@ export default function ContactSection() {
             {t("contact_whatsapp")}
           </a>
         </div>
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <p className="mt-8 max-w-[62ch] text-sm text-mist">{t("work_about")}</p>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {LINKS.map((l) => (
             <li key={l.label}>
               <a href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="card block p-4 transition-colors hover:border-white/30">
