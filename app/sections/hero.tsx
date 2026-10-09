@@ -18,7 +18,7 @@ export default function HeroSection() {
   return (
     <section id="top" className="pb-12 pt-8 md:pb-16 md:pt-14">
       <div className="wrap">
-        <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-4">
+        <div className="grid items-center gap-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] md:gap-4">
           <div>
             <p className="eyebrow">{t("hero_eyebrow")}</p>
             <h1 className="mt-3.5 font-display text-[clamp(36px,9.5vw,60px)] font-bold leading-[1.04] tracking-[-0.03em]">

@@ -1,5 +1,4 @@
 import HeroSection from "./sections/hero";
-import StackSection from "./sections/stack";
 import CasesSection from "./sections/cases";
 import FlagshipSection from "./sections/flagship";
 import AgentsSection from "./sections/agents";
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <StackSection />
       <CasesSection />
       <FlagshipSection />
       <AgentsSection />
