@@ -45,6 +45,9 @@ export default function ContactSection() {
           <a href="https://wa.me/6282246034453" target="_blank" rel="noopener noreferrer" className="btn-ghost">
             {t("contact_whatsapp")}
           </a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+            {t("contact_cv")}
+          </a>
         </div>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {LINKS.map((l) => (
