@@ -9,10 +9,10 @@ export default function HeroSection() {
   const { t } = useI18n();
 
   const proof = [
-    { value: PROOF.events, label: t("proof_events") },
-    { value: PROOF.venues, label: t("proof_venues") },
-    { value: PROOF.lighthouse, label: t("proof_lighthouse") },
-    { value: String(AGENTS.length), label: t("proof_agents") },
+    { value: PROOF.visitors, label: t("proof_visitors") },
+    { value: PROOF.bookings, label: t("proof_bookings") },
+    { value: PROOF.partners, label: t("proof_partners") },
+    { value: String(AGENTS.filter((a) => a.status === "live" || a.status === "internal").length), label: t("proof_agents") },
   ];
 
   return (

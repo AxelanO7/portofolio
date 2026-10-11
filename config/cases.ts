@@ -9,11 +9,16 @@ export interface Case {
   status: Status;
 }
 
-/** Headline numbers. Draft figures from the NDS state, confirm before treating as final. */
+/**
+ * Headline numbers, Bali production only. Rounded down to a "+" floor from the prod
+ * database on 2026-10-11 (30,207 unique visitors tracked, 111 partner businesses,
+ * 727 booking records in Sep 2026, most of them hand-offs to the partner's checkout).
+ * Re-check against the database before raising any number.
+ */
 export const PROOF = {
-  events: "1,500+",
-  venues: "45+",
-  lighthouse: "61 → 95",
+  visitors: "30,000+",
+  bookings: "700+",
+  partners: "110+",
 };
 
 export const CASES: Case[] = [
@@ -22,7 +27,7 @@ export const CASES: Case[] = [
     title: "Search traffic, rebuilt",
     problem: "The homepage rendered on the client, and the sitemap listed 186 redirect URLs next to the real pages.",
     approach: "Server-rendered the homepage, rebuilt the sitemap and added attribution tracking for ads.",
-    result: "Lighthouse 61 → 95 on mobile. Sitemap 328 → 74 URLs.",
+    result: "Sitemap 328 → 70 URLs, so search engines only see real pages.",
     status: "live",
   },
   {
@@ -30,7 +35,7 @@ export const CASES: Case[] = [
     title: "Agents that run the company",
     problem: "Event data entry, testing and alerting took manual hours every week.",
     approach: "Agents for data insert, testing, alerts and analysis, each with a human owner who reviews the output.",
-    result: "11 agents in daily use.",
+    result: "6 agents in daily use, 4 more in build, beta or planning.",
     status: "live",
   },
   {
@@ -38,7 +43,7 @@ export const CASES: Case[] = [
     title: "A new city, from a spreadsheet",
     problem: "Opening a new market meant weeks of manual venue research.",
     approach: "A pipeline that finds, checks and cites venue data, then asks a person to approve before anything goes live.",
-    result: "Running in dev. Production launch pending.",
+    result: "1,700+ events and 45+ venues staged in dev. Production launch in October 2026.",
     status: "build",
   },
 ];

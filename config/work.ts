@@ -58,11 +58,11 @@ export interface Tile {
 }
 
 export const GUESTLIST_TILES: Tile[] = [
-  { id: "glw", name: "Guestlist Ticket Web", text: "Entertainment-first marketplace for nightlife, events and experiences, rebuilt and rebranded. Lighthouse 95 on mobile.", status: "live", size: "hero", shot: "glw-d", url: "https://guestlistticket.com" },
+  { id: "glw", name: "Guestlist Ticket Web", text: "Entertainment-first marketplace for nightlife, events and experiences, rebuilt and rebranded.", status: "live", size: "hero", shot: "glw-d", url: "https://guestlistticket.com" },
   { id: "glm", name: "Guestlist Ticket Mobile", text: "Consumer app with a dark redesign, new Home and Discover, and per-guest QR tickets.", status: "build", size: "phone", phones: ["glm-home", "glm-events"] },
   { id: "pm", name: "Partner App", text: "Offline-first QR check-in, excess-guest approval and a venue dashboard for venues and promoters.", status: "build", size: "phone", phones: ["pm-scan", "pm-home"] },
   { id: "lnk", name: "Link Hub", text: "Link-in-bio hub in English and Indonesian with dynamic campaign tags. Full page, scrolling on its own.", status: "live", size: "small", phones: ["lnk-full"], pan: true, url: "https://link.guestlistticket.com" },
-  { id: "lp", name: "Landing Page", text: "\"Your night out, sorted.\" with 3D phones, a Tonight in Bali rail and store badges. Lighthouse 90+.", status: "live", size: "small", shot: "lp-d", url: "https://landing.guestlistticket.com" },
+  { id: "lp", name: "Landing Page", text: "\"Your night out, sorted.\" with 3D phones, a Tonight in Bali rail and store badges.", status: "live", size: "small", shot: "lp-d", url: "https://landing.guestlistticket.com" },
   { id: "bo", name: "Back Office", text: "About 65 admin screens for bookings, partners, affiliates, imports, analytics and error history.", status: "internal", size: "small", shot: "gl-bo" },
 ];
 
@@ -72,7 +72,7 @@ export const LAS_VEGAS = {
   text: "Vegas venues with USD pricing, a daily event import pipeline with human approval, and multi-currency checkout, on top of advanced SEO for a new market.",
   stats: [
     { value: "45+", label: "Vegas venues" },
-    { value: "1,500+", label: "events imported" },
+    { value: "1,700+", label: "events imported" },
     { value: "USD", label: "multi-currency" },
   ],
 };
@@ -226,11 +226,11 @@ export const WEB3: Item[] = [
 /* ------------------------------------------------------------------ */
 
 export const INFRA = [
-  { value: "7+1", label: "services", name: "Go Microservices", text: "A gateway plus seven services behind the marketplace." },
+  { value: "6+1", label: "services", name: "Go Microservices", text: "A gateway plus six services run the marketplace in production." },
   { value: "650→150s", label: "build time", name: "Faster Deploys", text: "Back-office build cut by two thirds, backend builds only what changed." },
   { value: "2", label: "backup sites", name: "Self-hosted Data", text: "Moved off a hosted database, with off-site backups and a prod-mirror staging environment." },
   { value: "0", label: "downtime", name: "Domain and Email Move", text: "Brand moved to a new domain with Google Change of Address accepted." },
-  { value: "61→95", label: "Lighthouse", name: "Performance", text: "Homepage rendering fix. Accessibility, SEO and agentic scores at 100." },
+  { value: "328→70", label: "sitemap URLs", name: "Clean Sitemap", text: "Redirect entries removed, so search engines only see real pages." },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -240,7 +240,7 @@ export const INFRA = [
 export const EXPERIENCE = [
   { date: "Mar 2025", title: "CTO, New Directions Success", text: "Guestlist Ticket across web, mobile, back office and AI agents." },
   { date: "Sep 2024", title: "Senior Mobile Engineer, Jobseeker", text: "Matching platforms for job seekers and employers." },
-  { date: "Aug 2022", title: "Mobile Engineering Lead, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
+  { date: "Aug 2022", title: "Tech Lead Mobile Engineer, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
   { date: "Aug 2021", title: "President, student executive board", text: "Led 114 members and more than 40 programs." },
   { date: "Dec 2019", title: "Freelance Full-Stack", text: "Client work across the whole stack, and the start of the Web3 launch sites." },
 ];
