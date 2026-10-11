@@ -85,14 +85,15 @@ export const AGENTS: Item[] = [
   I("ag1", "IT Automation Agent", "Telegram and WhatsApp bot grounded in the issue tracker and 11 repositories. Answers questions, sets reminders and opens pull requests.", "internal"),
   I("ag2", "Hermes Ops Agent", "Daily briefing, commits grouped into tickets, and the weekly tech report written automatically.", "internal"),
   I("ag3", "Error Alert Agents", "Every failed request becomes a plain-language alert with a help code and a paste-ready AI prompt.", "live", { label: "production" }),
-  I("ag4", "Event and Listing Data Agent", "Pulls events from partner sites and a ticketing catalog into staging. A human approves before anything goes live.", "internal"),
-  I("ag5", "Testing Agent", "End-to-end tests, hourly smoke checks and schema-drift alerts. Being rebuilt for staging.", "build"),
+  I("ag4", "Agent Board and Event Import", "AI reads venue pages and proposes each field with its source, and a person approves before anything goes live. Also pulls events from partner sites and a ticketing catalog into staging.", "internal"),
+  I("ag5", "Testing Agent", "End-to-end tests, hourly smoke checks and an alert when the database stops matching the code. Being rebuilt for staging.", "build"),
   I("ag6", "Social Analytics Agent", "A headless Claude Code job reads Instagram, Facebook and TikTok metrics through MCP and summarises them.", "internal"),
   I("ag7", "Pending-Conversion Analyst", "Explains why bookings stay unpaid and suggests fixes, with a weekly summary for the founder.", "build"),
-  I("ag8", "Lerka", "Ask once, several models answer, a judge merges one reply. Includes a podcast companion with voice.", "beta"),
+  I("ag8", "Lerka", "A multi-model assistant: ask once, several AI models answer, and a judge merges them into one reply. Includes a podcast companion with voice.", "beta"),
   I("ag9", "Claude Code Team Setup", "Persistent remote coding sessions, cost-aware model routing and a shared status dashboard.", "internal"),
   I("ag10", "AutoSDR and Bali AI Suite", "Outreach agent plus demand forecasting and trend scanners for Bali tourism.", "delivered", { label: "github.com/AxelanO7", url: "https://github.com/AxelanO7" }),
-  I("ag11", "Agent Roadmap", "Customer-support agent, admin copilot and event-data v2, each with an owner and a cost case.", "planned"),
+  I("ag11", "Customer-Support Agent", "Answers guest questions on WhatsApp from trained replies, with an AI fallback. Staff always win: it steps in only when nobody replies in time, and refunds and complaints go to a person.", "build"),
+  I("ag12", "Admin Copilot and Event Data v2", "Next on the roadmap, each with a named owner and a cost case.", "planned"),
 ];
 
 /* ------------------------------------------------------------------ */

@@ -42,7 +42,7 @@ const CORE: { group: Group; r: number; spd: number; col: string; size: number; i
   {
     group: "agent", r: 1.55, spd: -0.15, col: "#f472b6", size: 6.5,
     items: [
-      ["Event data agent", "Finds and inserts event data"],
+      ["Agent Board", "Reads venue pages, a person approves each field"],
       ["Testing agent", "Runs regression checks"],
       ["Alert agent", "Watches errors and pings the team"],
       ["Automation", "Scheduled jobs and imports"],

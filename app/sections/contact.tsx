@@ -15,6 +15,12 @@ export default function ContactSection() {
   return (
     <section id="contact" className="section">
       <div className="wrap">
+        <p className="eyebrow">{t("about_eyebrow")}</p>
+        <h2 className="h2">{t("about_title")}</h2>
+        <p className="lead max-w-[70ch]">{t("about_bio")}</p>
+        <p className="mt-3 max-w-[70ch] text-mist">{t("about_principles")}</p>
+        <p className="mt-3 max-w-[70ch] text-sm text-mist">{t("work_about")}</p>
+        <div className="mt-14" />
         <p className="eyebrow">{t("work_eyebrow")}</p>
         <h2 className="h2">{t("work_title")}</h2>
         <ul className="mt-6 grid gap-3.5 md:grid-cols-3">
@@ -30,15 +36,17 @@ export default function ContactSection() {
         <h2 className="h2 max-w-[18ch]">{t("contact_title")}</h2>
         <p className="lead">{t("contact_desc")}</p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <a href="mailto:jeremia123.jm@gmail.com" className="btn-cta">
+          <a href="mailto:jeremia123.jm@gmail.com?subject=Intro%20call" className="btn-cta">
+            {t("contact_call")}
+          </a>
+          <a href="mailto:jeremia123.jm@gmail.com" className="btn-ghost">
             {t("contact_email")}
           </a>
           <a href="https://wa.me/6282246034453" target="_blank" rel="noopener noreferrer" className="btn-ghost">
             {t("contact_whatsapp")}
           </a>
         </div>
-        <p className="mt-8 max-w-[62ch] text-sm text-mist">{t("work_about")}</p>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {LINKS.map((l) => (
             <li key={l.label}>
               <a href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="card block p-4 transition-colors hover:border-white/30">

@@ -8,7 +8,7 @@ export default function AgentsSection() {
         <SectionHead
           eyebrow="AI agents"
           title="Agents that run the company"
-          lead="Built and operated for NDS: reporting, alerts, testing, data entry and analysis. Each one has a human owner."
+          lead="Built and operated for NDS: reporting, alerts, testing, data entry, customer support and analysis. Each one has a human owner."
         />
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {AGENTS.map((a) => (
