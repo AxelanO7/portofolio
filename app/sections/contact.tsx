@@ -36,6 +36,9 @@ export default function ContactSection() {
           <a href="https://wa.me/6282246034453" target="_blank" rel="noopener noreferrer" className="btn-ghost">
             {t("contact_whatsapp")}
           </a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+            {t("contact_cv")}
+          </a>
         </div>
         <p className="mt-8 max-w-[62ch] text-sm text-mist">{t("work_about")}</p>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

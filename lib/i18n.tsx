@@ -34,6 +34,7 @@ const dict = {
     contact_desc: "Full-stack, engineering leadership, AI agents or Web3: send a message and I will get back to you.",
     contact_email: "Send an email",
     contact_whatsapp: "WhatsApp",
+    contact_cv: "Download CV",
     footer_note: "Built end to end, no shortcuts.",
   },
   id: {
@@ -61,6 +62,7 @@ const dict = {
     contact_desc: "Full-stack, kepemimpinan engineering, AI agent atau Web3: kirim pesan dan saya akan membalas.",
     contact_email: "Kirim email",
     contact_whatsapp: "WhatsApp",
+    contact_cv: "Unduh CV",
     footer_note: "Dibangun end to end, tanpa jalan pintas.",
   },
 } as const;
