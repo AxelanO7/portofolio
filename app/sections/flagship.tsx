@@ -31,7 +31,7 @@ function Visual({ tile }: { tile: Tile }) {
         alt={`${tile.name} screenshot`}
         loading="lazy"
         decoding="async"
-        className={`shot mt-auto border-t border-white/[0.09] ${tile.size === "hero" ? "aspect-[16/9] md:min-h-0 md:flex-1 md:aspect-auto" : "aspect-[16/9]"}`}
+        className={`shot mt-auto border-t border-white/[0.09] ${tile.size === "hero" ? "shot-fit aspect-[1600/1240] md:min-h-0 md:flex-1 md:aspect-auto" : "aspect-[16/9]"}`}
       />
     );
   }

@@ -101,6 +101,8 @@ img { max-width: 100%; }
 .status[data-s="internal"], .status[data-s="delivered"], .status[data-s="planned"], .status[data-s="concept"] { color: var(--mist); }
 
 .shot { display: block; width: 100%; object-fit: cover; object-position: top; background: #000; }
+/* hero tile is taller than the capture: show the whole page instead of cropping the sides */
+.shot-fit { object-fit: contain; background: #06141c; }
 
 /* ---- stack legend (one scrolling row on phones, wraps on desktop) ---- */
 .legend { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
