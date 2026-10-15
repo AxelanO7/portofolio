@@ -77,3 +77,19 @@ export function Marquee({ items, speed = 40, reverse, gap = 24, vertical, classN
     </div>
   );
 }
+
+/**
+ * Letters whose weight rises and falls in a wave (Outfit Variable has a real weight axis).
+ * It re-lays the text every frame, so keep it to one short word. Off on phones and with reduced motion.
+ */
+export function WeightWave({ text }: { text: string }) {
+  return (
+    <span className="vw" aria-label={text}>
+      {text.split("").map((c, i) => (
+        <span key={i} aria-hidden="true" style={{ ["--i" as string]: i }}>
+          {c}
+        </span>
+      ))}
+    </span>
+  );
+}

@@ -30,6 +30,11 @@
 .wl-in { position: relative; z-index: 3; min-height: 700px; display: flex; flex-direction: column; justify-content: center; padding-top: 60px; padding-bottom: 60px; }
 .wl h2 { font: 800 clamp(46px, 8.2vw, 128px) / 0.9 var(--disp); letter-spacing: -0.055em; max-width: 7em; }
 .wl h2 em { font-style: normal; color: var(--cy); }
+.vw span { display: inline-block; font-variation-settings: "wght" 800; }
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .vw span { font-variation-settings: "wght" 300; animation: vww 2.8s ease-in-out infinite; animation-delay: calc(var(--i) * 90ms); }
+}
+@keyframes vww { 0%, 100% { font-variation-settings: "wght" 300; } 50% { font-variation-settings: "wght" 900; } }
 .wl p.lead { margin-top: 26px; max-width: 26em; color: #b9ccd6; font-size: clamp(16px, 1.4vw, 19px); }
 .wl-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
 .wl-chips span { font: 500 12px/1 var(--mono); letter-spacing: 0.04em; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: rgba(5, 15, 22, 0.85); }

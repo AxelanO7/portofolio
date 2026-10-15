@@ -1,5 +1,5 @@
 import LazyMount from "@/components/lazy-mount";
-import { BrowserFrame, Marquee, PhoneFrame } from "@/components/ui";
+import { BrowserFrame, Marquee, PhoneFrame, WeightWave } from "@/components/ui";
 import { GL_BO, gl, phone, shot } from "@/config/media";
 import { CLIENTS, MOBILE, WEB3 } from "@/config/work";
 
@@ -28,7 +28,7 @@ export default function WallSection() {
       <div className="wrap wl-in">
         <span className="eyebrow">Everything I have shipped</span>
         <h2 style={{ marginTop: 18 }}>
-          All of it, <em>shipped.</em>
+          All of it, <em><WeightWave text="shipped." /></em>
         </h2>
         <p className="lead">Marketplace platforms, mobile apps, back offices, AI agents and {WEB3.length} Web3 launch pages. Built and led end to end, from the first screen to the server that keeps it up.</p>
         <div className="wl-chips">
