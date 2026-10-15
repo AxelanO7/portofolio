@@ -38,7 +38,7 @@ config/           all copy, numbers and image descriptors (site, work, builds, c
 lib/              i18n (EN/ID), events, geo-dots (land dots for the globe)
 styles/           base, fx, top, mid, deep, end
 public/work/      screenshots and photos (WebP), public/logos/sprite.svg for tool and brand marks
-scripts/          capture-sites.mjs and the QA scripts
+scripts/          capture-sites.mjs, the QA scripts, and brand/ (draws the JA mark and builds the favicon and app icons)
 docs/             component catalog and code reference
 ```
 
@@ -52,6 +52,8 @@ Screenshots are captured at 1440x900 @2x and stored as 800x500 WebP (16:10), so 
 npm i --no-save playwright && npx playwright install chromium
 node scripts/capture-sites.mjs scripts/sites.example.json public/work/t
 ```
+
+The JA mark is drawn from a handful of numbers in `scripts/brand/mark.mjs` (a cyan plate with two cut corners, heavy letters, a coral dot). `components/ui.tsx` carries the same numbers for the React `<Mark />`. After changing the artwork, run `node scripts/brand/build-icons.mjs` to rewrite `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png` and the PNG icons in `public/`.
 
 ## QA
 

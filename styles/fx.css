@@ -112,9 +112,12 @@ html.ld-on .ld { display: grid; }
 @keyframes ldf { to { opacity: 0; } }
 .ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 14px; }
 .ld-in svg { width: 150px; height: 110px; overflow: visible; }
-.ld-in path { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 1.6s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
+.ld-in path { fill: none; stroke-width: 12.3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 1s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
 .ld-in path:nth-child(1) { stroke: var(--cy); }
-.ld-in path:nth-child(2) { stroke: var(--gold); animation-delay: 0.35s; }
+.ld-in path:nth-child(2) { stroke: var(--gold); animation-delay: 0.2s; }
+.ld-in path.bar { stroke: var(--gold); stroke-width: 9.9; animation-duration: 0.3s; animation-delay: 0.85s; }
+.ld-in circle { fill: var(--coral); transform-box: fill-box; transform-origin: center; transform: scale(0); animation: mkpop 0.45s 0.95s cubic-bezier(0.3, 1.6, 0.5, 1) forwards; }
 @keyframes dash { to { stroke-dashoffset: 0; } }
+@keyframes mkpop { to { transform: scale(1); } }
 .ld-n { font: 800 64px/1 var(--disp); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
 html.ld-on .rv.in { animation-play-state: paused; }
