@@ -1,53 +1,72 @@
-# Next.js & HeroUI Template
+# Jeremia Axelano, portfolio
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+Source of [portfolio.axelano.space](https://portfolio.axelano.space): a one-page portfolio for a CTO who builds marketplaces and AI agents. It is built to stay smooth on an iPhone, so every effect is time based or runs once, and nothing follows the scroll position.
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+## Stack
 
-## Technologies Used
+- Next.js 14.2.35 (App Router) and TypeScript. 14.2.35 or newer closes the App Router DoS advisories CVE-2025-55184 and CVE-2025-67779.
+- Plain CSS in `styles/`, no Tailwind and no animation library. All motion is CSS keyframes, a one-shot `IntersectionObserver`, or canvas 2D driven by time.
+- Fonts are self-hosted with Fontsource (Outfit Variable, Inter, JetBrains Mono, latin subset). There are no third-party requests.
+- Deployed on Vercel from `main`. Node 24.x, no lockfile (`.npmrc` sets `package-lock=false`).
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://www.heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+## Run it
 
 ```bash
 npm install
+npm run dev          # http://localhost:3000
+npm run build && npm start
 ```
 
-### Run the development server
+Add `?nointro` to the URL to skip the intro. It plays once per browser session.
+
+## Rules the code follows
+
+1. No scroll-linked animation (`useScroll`, ScrollTrigger scrub, Lenis, parallax). Sticky positioning, `scroll-snap` and one-shot reveals instead.
+2. No large `filter: blur()` and no `backdrop-filter` on fixed or sticky elements. WebKit repaints them on every scroll.
+3. Everything that loops pauses while off screen (`data-pausable` plus `data-vis` from `components/fx-root.tsx`).
+4. Images are never drawn larger than their own pixels times the device pixel ratio. Frames follow the screenshot's aspect ratio, so nothing is cropped or stretched.
+5. The top of the page does not wait for JavaScript. The hero entrance is CSS only, and the `.js` class set in `<head>` is removed again after 5 s if hydration never finishes.
+6. `prefers-reduced-motion` ends every animation immediately and skips the intro.
+
+## Structure
+
+```text
+app/sections/     one file per section, in the order of app/page.tsx
+app/cases/[id]/   full case-study pages
+components/       ui.tsx (frames, marquee), fx-root.tsx (page-wide effects), intro, nav, palette, globe, ...
+config/           all copy, numbers and image descriptors (site, work, builds, cases, arsenal, logos, media)
+lib/              i18n (EN/ID), events, geo-dots (land dots for the globe)
+styles/           base, fx, top, mid, deep, end
+public/work/      screenshots and photos (WebP), public/logos/sprite.svg for tool and brand marks
+scripts/          capture-sites.mjs and the QA scripts
+docs/             component catalog and code reference
+```
+
+Content lives in `config/*.ts`, not in JSX. To change a number, a project or a status, edit the matching config file.
+
+## Assets
+
+Screenshots are captured at 1440x900 @2x and stored as 800x500 WebP (16:10), so the browser frame fits exactly:
 
 ```bash
-npm run dev
+npm i --no-save playwright && npx playwright install chromium
+node scripts/capture-sites.mjs scripts/sites.example.json public/work/t
 ```
 
-### Setup pnpm (optional)
+## QA
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+The scripts use Playwright. They check console errors and sideways overflow (`site.mjs`), blurry images (`blur-audit.mjs`), real touch scrolling over every interactive area (`swipe.mjs`), loading time on a throttled iPhone profile (`throttle.mjs`) and anchor offsets (`anchors.mjs`).
 
 ```bash
-public-hoist-pattern[]=*@heroui/*
+npm i --no-save playwright && npx playwright install chromium webkit
+npm run build && npm start &
+node scripts/qa/site.mjs http://localhost:3000/
+node scripts/qa/swipe.mjs http://localhost:3000/
+node scripts/qa/throttle.mjs "http://localhost:3000/?nointro" 5
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+## Using this as a reference
 
-## License
+`docs/COMPONENT-CATALOG.md` lists the 22 page blocks and 56 effect components (what each does, how it behaves on a phone, which file builds it, and the order to build it in). `docs/COMPONENT-CODE.md` has copy-paste HTML, CSS and JS for every component.
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+The code is MIT licensed (see `LICENSE`). The screenshots, venue photos, testimonials, CV and product names belong to their owners and are not covered by that license. Replace them before publishing your own site.

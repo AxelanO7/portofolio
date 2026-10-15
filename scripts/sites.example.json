@@ -1,0 +1,4 @@
+[
+  { "slug": "example-home", "url": "https://example.com" },
+  { "slug": "example-docs", "url": "https://example.org", "wait": 2500, "width": 800, "q": 80 }
+]
