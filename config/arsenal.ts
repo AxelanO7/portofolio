@@ -7,16 +7,16 @@ export interface Stack {
 }
 
 export const ARSENAL: Stack[] = [
-  { name: "Languages", color: "#f4c97a", tools: ["Go", "TypeScript", "JavaScript", "Python", "Dart", "Java", "PHP", "SQL"] },
-  { name: "Frontend", color: "#22d3ee", tools: ["Next.js", "React", "Vue", "Angular", "Astro", "Vite", "Tailwind", "HeroUI", "shadcn/ui", "Framer Motion", "Three.js"] },
-  { name: "Mobile", color: "#5eead4", tools: ["Flutter", "React Native", "Expo", "Java Android", "GetX", "BLoC", "EAS builds"] },
-  { name: "Backend", color: "#60a5fa", tools: ["Gin", "Fiber", "FastAPI", "Express", "Laravel", "API gateway", "SSE / WebSocket", "Payment gateway"] },
-  { name: "Data", color: "#a78bfa", tools: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "pgvector", "Neo4j", "Firebase", "MySQL"] },
-  { name: "Cloud and DevOps", color: "#94a3b8", tools: ["Docker", "Coolify", "Woodpecker CI", "Cloudflare", "nginx", "Linux VPS", "Vercel", "AWS", "Prometheus", "Grafana", "Loki", "Alertmanager"] },
-  { name: "AI and automation", color: "#f9a8d4", tools: ["Claude Code", "MCP", "n8n", "LiteLLM", "Ollama", "OpenRouter", "RAG", "Whisper", "LLM gateway"] },
-  { name: "Web3", color: "#fdba74", tools: ["Astro launch sites", "Vite + React sites", "BSC RPC", "DexScreener API", "wagmi", "Reown wallet connect"] },
-  { name: "Advanced SEO", color: "#fca5a5", tools: ["Search Console", "Schema / JSON-LD", "Meta Pixel", "UTM attribution", "Core Web Vitals", "AEO / GEO"] },
-  { name: "Testing and tools", color: "#86efac", tools: ["Playwright", "Cypress", "Lighthouse", "Linear", "Git", "Postman", "Google Stitch"] },
+  { name: "Languages", color: "#e9c27d", tools: ["Go", "TypeScript", "JavaScript", "Python", "Dart", "Java", "PHP", "SQL"] },
+  { name: "Frontend", color: "#2dd4e8", tools: ["Next.js", "React", "Vue", "Angular", "Astro", "Vite", "Tailwind", "HeroUI", "shadcn/ui", "Framer Motion", "Three.js"] },
+  { name: "Mobile", color: "#4fe0bd", tools: ["Flutter", "React Native", "Expo", "Java Android", "GetX", "BLoC", "EAS builds"] },
+  { name: "Backend", color: "#7cebf7", tools: ["Gin", "Fiber", "FastAPI", "Express", "Laravel", "API gateway", "SSE / WebSocket", "Payment gateway"] },
+  { name: "Data", color: "#e9c27d", tools: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "pgvector", "Neo4j", "Firebase", "MySQL"] },
+  { name: "Cloud and DevOps", color: "#2dd4e8", tools: ["Docker", "Coolify", "Woodpecker CI", "Cloudflare", "nginx", "Linux VPS", "Vercel", "AWS", "Prometheus", "Grafana", "Loki", "Alertmanager"] },
+  { name: "AI and automation", color: "#ff7b5c", tools: ["Claude Code", "MCP", "n8n", "LiteLLM", "Ollama", "OpenRouter", "RAG", "Whisper", "LLM gateway"] },
+  { name: "Web3", color: "#4fe0bd", tools: ["Astro launch sites", "Vite + React sites", "BSC RPC", "DexScreener API", "wagmi", "Reown wallet connect"] },
+  { name: "Advanced SEO", color: "#7cebf7", tools: ["Search Console", "Schema / JSON-LD", "Meta Pixel", "UTM attribution", "Core Web Vitals", "AEO / GEO"] },
+  { name: "Testing and tools", color: "#e9c27d", tools: ["Playwright", "Cypress", "Lighthouse", "Linear", "Git", "Postman", "Google Stitch"] },
 ];
 
 export const TOOL_COUNT = ARSENAL.reduce((n, s) => n + s.tools.length, 0);

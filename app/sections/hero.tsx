@@ -1,53 +1,101 @@
 "use client";
 
-import SystemMap from "@/components/SystemMap";
-import { PROOF } from "@/config/cases";
-import { AGENTS } from "@/config/work";
+import { PhoneFrame } from "@/components/ui";
+import { PHOTO, heroPhone } from "@/config/media";
 import { useI18n } from "@/lib/i18n";
+import { v } from "@/lib/css";
 
 export default function HeroSection() {
   const { t } = useI18n();
-
-  const proof = [
-    { value: PROOF.visitors, label: t("proof_visitors") },
-    { value: PROOF.bookings, label: t("proof_bookings") },
-    { value: PROOF.partners, label: t("proof_partners") },
-    { value: String(AGENTS.filter((a) => a.status === "live" || a.status === "internal").length), label: t("proof_agents") },
-  ];
-
   return (
-    <section id="top" className="pb-12 pt-8 md:pb-16 md:pt-14">
-      <div className="wrap">
-        <div className="grid items-center gap-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] md:gap-4">
-          <div>
-            <p className="eyebrow">{t("hero_eyebrow")}</p>
-            <h1 className="mt-3.5 font-display text-[clamp(36px,9.5vw,60px)] font-bold leading-[1.04] tracking-[-0.03em]">
-              {t("hero_title_a")} <span className="text-gold">{t("hero_title_b")}</span> {t("hero_title_c")}
-            </h1>
-            <p className="lead">{t("hero_sub")}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#cases" className="btn-cta">
-                {t("hero_cta_work")}
-              </a>
-              <a href="#contact" className="btn-ghost">
-                {t("hero_cta_call")}
-              </a>
+    <section className="sec hr" id="top" data-pausable>
+      <div className="hr-bg">
+        {/* sizes understates the width on purpose: the photo sits under a dark gradient, so phones fetch the 900 px file */}
+        <img
+          src={PHOTO.hero.src}
+          srcSet={`${PHOTO.hero.srcMobile} ${PHOTO.hero.wMobile}w, ${PHOTO.hero.src} ${PHOTO.hero.w}w`}
+          sizes="(max-width: 700px) 300px, 100vw"
+          width={PHOTO.hero.w}
+          height={PHOTO.hero.h}
+          alt=""
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      </div>
+      <div className="hr-rays" aria-hidden="true">
+        <i />
+        <i />
+      </div>
+      <div className="wrap hr-in">
+        <div>
+          <span className="chip rise">
+            <span className="dot" />
+            <span className="dec">{t("hero_eyebrow")}</span>
+          </span>
+          <h1 className="rise" style={v({ "--d": ".08s" })}>
+            {t("hero_title_a")} <span className="shine">{t("hero_title_b")}</span>
+          </h1>
+          <p className="lead rise" style={v({ "--d": ".16s" })}>
+            {t("hero_sub")}
+          </p>
+          <div className="hr-cta rise" style={v({ "--d": ".24s" })}>
+            <a className="btn pri beam" href="#cases">
+              {t("hero_cta_cases")} <span aria-hidden="true">↗</span>
+            </a>
+            <a className="btn pulse" href="#trailer">
+              {t("hero_cta_trailer")} <span aria-hidden="true">▶</span>
+            </a>
+          </div>
+          <div className="hr-states rise" style={v({ "--d": ".32s" })}>
+            <span className="chip">
+              <span className="dot" />
+              Bali <small>{t("state_live")}</small>
+            </span>
+            <span className="chip">
+              <span className="dot off" />
+              Las Vegas <small>Oct 2026</small>
+            </span>
+            <span className="chip">
+              <span className="dot off" />
+              Next city <small>TBA</small>
+            </span>
+          </div>
+        </div>
+        <div className="hr-stack">
+          <div className="hr-glow" />
+          <PhoneFrame className="ph l" img={heroPhone("gl-nightlife")} priority low />
+          <PhoneFrame className="ph r" img={heroPhone("gl-ticket")} priority low />
+          <PhoneFrame className="ph c" img={heroPhone("gl-home")} priority alt="Guestlist Ticket app, Home screen" />
+          <div className="hr-float f1">
+            <i>QR</i>
+            <div>
+              <b>Ticket ready</b>
+              <span>Show it at the door</span>
             </div>
           </div>
-          <SystemMap />
-        </div>
-
-        <dl className="mt-10 grid grid-cols-2 border-y border-white/[0.09] md:grid-cols-4">
-          {proof.map((p, k) => (
-            <div
-              key={p.label}
-              className={`px-3.5 py-4 ${k % 2 === 0 ? "border-r border-white/[0.09]" : ""} ${k < 2 ? "border-b border-white/[0.09] md:border-b-0" : ""} ${k < 3 ? "md:border-r md:border-white/[0.09]" : "md:border-r-0"}`}
-            >
-              <dt className="whitespace-nowrap font-display text-[clamp(20px,5.4vw,28px)] font-bold leading-none tabular-nums">{p.value}</dt>
-              <dd className="mt-1.5 text-[12.5px] text-mist">{p.label}</dd>
+          <div className="hr-float f2">
+            <i>30k</i>
+            <div>
+              <b>30,000+ visitors</b>
+              <span>tracked in production</span>
             </div>
-          ))}
-        </dl>
+          </div>
+          <div className="hr-float f3">
+            <i>AI</i>
+            <div>
+              <b>6 agents</b>
+              <span>in daily use</span>
+            </div>
+          </div>
+          <div className="hr-float f4">
+            <i>110</i>
+            <div>
+              <b>110+ partners</b>
+              <span>venues and operators</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

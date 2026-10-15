@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CASES } from "@/config/cases";
-import { StatusTag } from "@/components/status";
+import { CASES, ENGAGEMENTS } from "@/config/cases";
+import { EMAIL, SITE_URL } from "@/config/site";
+import { StatusPill } from "@/components/ui";
 
 export const dynamicParams = false;
 
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
   const c = CASES.find((x) => x.id === params.id);
   if (!c) return {};
-  const url = `https://portfolio.axelano.space/cases/${c.id}`;
+  const url = `${SITE_URL}/cases/${c.id}`;
   return {
     title: c.title,
     description: c.summary,
@@ -43,51 +44,39 @@ export default function CasePage({ params }: { params: { id: string } }) {
   ] as const;
 
   return (
-    <article className="section border-t-0">
-      <div className="wrap max-w-[860px]">
-        <Link href="/#cases" className="font-mono text-xs uppercase tracking-[0.14em] text-mist hover:text-white">
-          ← All case studies
-        </Link>
-        <div className="mt-6">
-          <StatusTag status={c.status} />
+    <article className="cp">
+      <div className="wrap">
+        <Link href="/#cases" className="back">← All case studies</Link>
+        <div style={{ marginTop: 26 }}>
+          <StatusPill status={c.status} />
         </div>
-        <h1 className="mt-2 font-display text-[clamp(30px,7vw,48px)] font-bold leading-[1.06] tracking-[-0.02em]">{c.title}</h1>
+        <h1>{c.title}</h1>
         <p className="lead">{c.summary}</p>
-
-        <dl className="mt-10 flex flex-col gap-8">
-          {blocks.map(([k, v]) => (
-            <div key={k} className="border-t border-white/[0.09] pt-4">
-              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-cy">{k}</dt>
-              <dd className="mt-2 max-w-[66ch] text-[16px] leading-relaxed text-mist">{v}</dd>
+        <dl>
+          {blocks.map(([k, val]) => (
+            <div key={k}>
+              <dt>{k}</dt>
+              <dd>{val}</dd>
             </div>
           ))}
-          <div className="border-t border-white/[0.09] pt-4">
-            <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-cy">Outcome</dt>
+          <div>
+            <dt>Outcome</dt>
             <dd>
-              <ul className="mt-2 flex max-w-[66ch] flex-col gap-2.5 text-[16px] leading-relaxed">
-                {c.outcome.map((o) => (
-                  <li key={o} className="flex gap-3">
-                    <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                    <span>{o}</span>
-                  </li>
-                ))}
+              <ul className="out">
+                {c.outcome.map((o) => <li key={o}>{o}</li>)}
               </ul>
             </dd>
           </div>
-          <div className="border-t border-white/[0.09] pt-4">
-            <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-cy">Still open</dt>
-            <dd className="mt-2 max-w-[66ch] text-[16px] leading-relaxed text-mist">{c.next}</dd>
+          <div>
+            <dt>Still open</dt>
+            <dd>{c.next}</dd>
           </div>
         </dl>
-
-        <div className="mt-12 flex flex-wrap gap-3">
-          <a href="mailto:jeremia123.jm@gmail.com?subject=Intro%20call" className="btn-cta">
-            Book an intro call
-          </a>
-          <Link href={`/cases/${next.id}`} className="btn-ghost">
-            Next: {next.title} →
-          </Link>
+        <div className="acts">
+          <a className="btn pri" href={`mailto:${EMAIL}?subject=Intro%20call`}>Book an intro call</a>
+          <Link className="btn" href={`/cases/${next.id}`}>Next: {next.title} →</Link>
         </div>
+        <p className="cap" style={{ marginTop: 28 }}>{ENGAGEMENTS.map((e) => e.title).join(" · ")}</p>
       </div>
     </article>
   );

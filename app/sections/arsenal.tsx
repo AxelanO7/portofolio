@@ -1,45 +1,53 @@
+import LazyMount from "@/components/lazy-mount";
+import { Logo, Marquee } from "@/components/ui";
 import { ARSENAL, TOOL_COUNT } from "@/config/arsenal";
-import { INFRA } from "@/config/work";
-import { SectionHead } from "@/components/status";
+import { LOGO } from "@/config/logos";
+import { BAND_TOOLS } from "@/config/site";
 
+const chip = (t: string) => (
+  <span className="xchip" key={t}>
+    {LOGO[t] && <Logo id={LOGO[t]} />}
+    {t}
+  </span>
+);
+
+/** The full arsenal: a logo band, then every tool grouped by stack. */
 export default function ArsenalSection() {
+  const a = BAND_TOOLS.slice(0, 10);
+  const b = BAND_TOOLS.slice(10);
   return (
-    <section id="arsenal" className="section">
-      <div className="wrap">
-        <SectionHead
-          eyebrow="Tech arsenal"
-          title={`${TOOL_COUNT} tools, used for real`}
-          lead="The only place the stack is listed. Every tool here runs in a production system, a shipped site or an actual repository."
-        />
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ARSENAL.map((s) => (
-            <div key={s.name}>
-              <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.12em]" style={{ color: s.color }}>
-                {s.name}
-              </h3>
-              <ul className="mt-2.5 flex flex-wrap gap-1.5">
-                {s.tools.map((t) => (
-                  <li key={t} className="rounded-md border border-white/[0.09] px-2.5 py-1 text-[12.5px] font-medium">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <>
+      <div className="stk-band" data-pausable>
+        <div className="wrap">
+          <span className="eyebrow">{TOOL_COUNT} tools across {ARSENAL.length} stacks</span>
         </div>
-
-        <h3 className="mt-16 font-display text-2xl font-semibold tracking-tight">The part users never see</h3>
-        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-5">
-          {INFRA.map((i) => (
-            <div key={i.name} className="card p-4">
-              <p className="whitespace-nowrap font-display text-[clamp(20px,5.4vw,30px)] font-semibold leading-none text-cy">{i.value}</p>
-              <p className="mt-1 text-xs text-mist">{i.label}</p>
-              <p className="mt-3 text-[13px] font-medium">{i.name}</p>
-              <p className="mt-1 text-xs text-mist">{i.text}</p>
-            </div>
-          ))}
-        </div>
+        <LazyMount className="stk-rows" style={{ minHeight: 86 }}>
+          <Marquee speed={34} gap={10} items={a.map(chip)} />
+          <Marquee speed={40} gap={10} reverse items={b.map(chip)} />
+        </LazyMount>
       </div>
-    </section>
+      <section className="sec" id="arsenal">
+        <div className="wrap">
+          <div className="head">
+            <div>
+              <span className="eyebrow">Tech arsenal</span>
+              <h2 className="t">What I build with.</h2>
+            </div>
+            <p>Only tools used in real repositories, production systems or past roles. A mark appears where the tool has one.</p>
+          </div>
+          <div className="arsenal">
+            {ARSENAL.map((s) => (
+              <article className="ars rv" key={s.name}>
+                <header>
+                  <h3><i style={{ ["--c" as string]: s.color }} />{s.name}</h3>
+                  <span>{s.tools.length}</span>
+                </header>
+                <ul>{s.tools.map((t) => <li key={t}>{LOGO[t] && <Logo id={LOGO[t]} />}{t}</li>)}</ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

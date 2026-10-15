@@ -1,0 +1,120 @@
+/* ---- reveal once (IntersectionObserver adds .in). Gated by .js so content is
+   visible without script and when hydration never finishes (the head script
+   drops .js after 5 s). ---- */
+.js .rv { opacity: 0; transform: translateY(18px); }
+.js .rv.in { animation: rv-in 0.75s var(--ease) both; animation-delay: var(--d, 0s); }
+@keyframes rv-in { to { opacity: 1; transform: none; } }
+/* above-the-fold entrance: pure CSS, runs on first paint, no script needed (keeps LCP independent of hydration) */
+.rise { opacity: 0; transform: translateY(18px); animation: rv-in 0.75s var(--ease) both; animation-delay: var(--d, 0s); }
+html.ld-on .rise { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .js .rv, .js .rv.in, .rise { opacity: 1; transform: none; animation: none; } }
+
+/* ---- marquee: the track holds the set twice, so -50% loops with no seam ---- */
+.mq { overflow: hidden; display: flex; }
+.mq-track { display: flex; flex: none; width: max-content; animation: mq var(--dur, 40s) linear infinite; }
+.mq-track > * { flex: none; margin-right: var(--g, 24px); }
+.mq[data-dir="rev"] .mq-track { animation-direction: reverse; }
+.mq:hover .mq-track { animation-play-state: var(--hov, running); }
+@keyframes mq { to { transform: translateX(-50%); } }
+.mq-y { overflow: hidden; display: flex; flex-direction: column; }
+.mq-y .mq-track { flex-direction: column; width: auto; height: max-content; animation-name: mqy; }
+.mq-y .mq-track > * { margin-right: 0; margin-bottom: var(--g, 24px); }
+.mq-y[data-dir="rev"] .mq-track { animation-direction: reverse; }
+@keyframes mqy { to { transform: translateY(-50%); } }
+[data-vis="0"] .mq-track { animation-play-state: paused !important; }
+
+/* ---- phone frame: the screen takes the exact aspect ratio of the screenshot
+   (width/height attributes on the img), so nothing is cropped or stretched.
+   A status bar row sits above the image instead of covering it. ---- */
+.phone {
+  --w: 260px;
+  width: var(--w);
+  border-radius: calc(var(--w) * 0.15);
+  padding: calc(var(--w) * 0.026);
+  background: linear-gradient(145deg, #26303a, #06090c);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 0 1px #000, 0 40px 70px -28px rgba(0, 0, 0, 0.7);
+  position: relative;
+  flex: none;
+}
+.phone::before {
+  content: ""; position: absolute; top: calc(var(--w) * 0.05); left: 50%; width: calc(var(--w) * 0.27); height: calc(var(--w) * 0.07);
+  transform: translateX(-50%); background: #000; border-radius: 99px; z-index: 3;
+}
+.phone .scr { position: relative; width: 100%; border-radius: calc(var(--w) * 0.125); overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
+.phone .sb {
+  height: calc(var(--w) * 0.085); flex: none; display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 calc(var(--w) * 0.075) calc(var(--w) * 0.012); font: 600 calc(var(--w) * 0.04) / 1 var(--body); color: #fff; background: var(--bg);
+}
+.phone .sb i { display: block; width: calc(var(--w) * 0.1); height: calc(var(--w) * 0.04); border-radius: 2px; background: linear-gradient(90deg, #fff 0 55%, rgba(255, 255, 255, 0.35) 55%); opacity: 0.85; }
+.phone .scr img { width: 100%; height: auto; display: block; }
+.phone .scr::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.14) 48%, transparent 60%);
+  transform: translateX(-120%); animation: sheen 7s ease-in-out infinite; animation-delay: var(--sd, 1s);
+}
+@keyframes sheen { 0%, 60% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+
+/* ---- browser frame: 16:10 captures, shown whole ---- */
+.bw { border-radius: 12px; overflow: hidden; background: var(--bg-1); box-shadow: inset 0 0 0 1px var(--line-2), 0 30px 60px -30px rgba(0, 0, 0, 0.55); }
+.bw > b { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: rgba(255, 255, 255, 0.04); font: 500 11px/1 var(--mono); color: var(--mut); }
+.bw > b i { width: 8px; height: 8px; border-radius: 50%; background: #34505f; display: block; }
+.bw > b span { margin-left: 8px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 10px; border-radius: 99px; background: rgba(255, 255, 255, 0.06); }
+.bw img { width: 100%; height: auto; display: block; }
+
+/* ---- laptop frame: the lid takes the screenshot's own ratio ---- */
+.lap { width: min(100%, 460px); perspective: 900px; }
+.lap .lid { border-radius: 12px 12px 4px 4px; background: #0b0c0f; padding: 7px 7px 9px; box-shadow: inset 0 0 0 1.5px #3a3f48; transform-origin: 50% 100%; animation: laprock 9s ease-in-out infinite alternate; }
+.lap .lid img { width: 100%; height: auto; display: block; border-radius: 5px; }
+.lap .base { height: 11px; margin: 0 -5%; border-radius: 0 0 14px 14px; background: linear-gradient(#cfd3da, #8f959f); position: relative; }
+.lap .base::after { content: ""; position: absolute; left: 50%; top: 0; width: 18%; height: 4px; margin-left: -9%; border-radius: 0 0 6px 6px; background: #6c727c; }
+@keyframes laprock { from { transform: rotateX(-8deg) rotateY(-14deg); } to { transform: rotateX(2deg) rotateY(12deg); } }
+
+/* ---- rotating conic border (needs @property, Safari 16.4+; static line otherwise) ---- */
+@property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.beam { position: relative; isolation: isolate; }
+.beam::before {
+  content: ""; position: absolute; inset: -1.5px; border-radius: inherit; padding: 1.5px;
+  background: conic-gradient(from var(--ang), transparent 0 62%, var(--bc, var(--cy)) 82%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: ang 3.4s linear infinite; pointer-events: none; z-index: -1;
+}
+@keyframes ang { to { --ang: 360deg; } }
+
+/* ---- pointer effects: spotlight and tilt (desktop only, set by script) ---- */
+[data-tilt] { --rx: 0; --ry: 0; transform: perspective(900px) rotateX(calc(var(--rx) * -7deg)) rotateY(calc(var(--ry) * 9deg)); transition: transform 0.2s ease-out; }
+
+/* ---- custom cursor label ---- */
+.cl {
+  position: fixed; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; z-index: 9990;
+  pointer-events: none; display: none; place-items: center; opacity: 0; will-change: transform;
+  transition: width 0.25s, height 0.25s, margin 0.25s, background 0.25s, opacity 0.2s;
+}
+.cl.on { display: grid; opacity: 1; }
+.cl.big { width: 78px; height: 78px; margin: -39px 0 0 -39px; background: var(--cy); }
+.cl span { font: 600 10px var(--mono); color: var(--ink); opacity: 0; text-transform: uppercase; transition: opacity 0.2s; }
+.cl.big span { opacity: 1; }
+[data-cur] { cursor: none; }
+@media (hover: none) { .cl { display: none !important; } [data-cur] { cursor: auto; } }
+
+/* ---- intro loader: monogram draws, counter runs, a cyan curtain lifts. Home page, once per session. ---- */
+.ld { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; place-items: center; overflow: hidden; animation: ldfail 0s 4.6s forwards; }
+html.ld-on .ld { display: grid; }
+@keyframes ldfail { to { opacity: 0; visibility: hidden; } }
+.ld.gone { display: none !important; }
+.ld.out { opacity: 0; pointer-events: none; transition: opacity 0.25s; animation: none; }
+.ld-c { position: absolute; inset: 0; background: var(--cy); transform: translateY(101%); }
+.ld.go { animation: ldbg 0.95s forwards; }
+.ld.go .ld-c { animation: ldc 0.95s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
+.ld.go .ld-in { animation: ldf 0.2s 0.3s forwards; }
+@keyframes ldbg { 0%, 54% { background: var(--bg); } 55%, 100% { background: transparent; } }
+@keyframes ldc { 0% { transform: translateY(101%); } 55% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+@keyframes ldf { to { opacity: 0; } }
+.ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 14px; }
+.ld-in svg { width: 150px; height: 110px; overflow: visible; }
+.ld-in path { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 1.6s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
+.ld-in path:nth-child(1) { stroke: var(--cy); }
+.ld-in path:nth-child(2) { stroke: var(--gold); animation-delay: 0.35s; }
+@keyframes dash { to { stroke-dashoffset: 0; } }
+.ld-n { font: 800 64px/1 var(--disp); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+html.ld-on .rv.in { animation-play-state: paused; }

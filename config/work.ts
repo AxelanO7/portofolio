@@ -41,43 +41,6 @@ const I = (
 ): Item => ({ id, name, text, status, ...extra });
 
 /* ------------------------------------------------------------------ */
-/* Guestlist Ticket                                                    */
-/* ------------------------------------------------------------------ */
-
-export interface Tile {
-  id: string;
-  name: string;
-  text: string;
-  status: Status;
-  size: "hero" | "phone" | "small";
-  shot?: string;
-  phones?: string[];
-  /** auto-panning full-page capture instead of a cropped phone */
-  pan?: boolean;
-  url?: string;
-}
-
-export const GUESTLIST_TILES: Tile[] = [
-  { id: "glw", name: "Guestlist Ticket Web", text: "Entertainment-first marketplace for nightlife, events and experiences, rebuilt and rebranded.", status: "live", size: "hero", shot: "glw-d", url: "https://guestlistticket.com" },
-  { id: "glm", name: "Guestlist Ticket Mobile", text: "Consumer app with a dark redesign, new Home and Discover, and per-guest QR tickets.", status: "build", size: "phone", phones: ["glm-home", "glm-events"] },
-  { id: "pm", name: "Partner App", text: "Offline-first QR check-in, excess-guest approval and a venue dashboard for venues and promoters.", status: "build", size: "phone", phones: ["pm-scan", "pm-home"] },
-  { id: "lnk", name: "Link Hub", text: "Link-in-bio hub in English and Indonesian with dynamic campaign tags. Full page, scrolling on its own.", status: "live", size: "small", phones: ["lnk-full"], pan: true, url: "https://link.guestlistticket.com" },
-  { id: "lp", name: "Landing Page", text: "\"Your night out, sorted.\" with 3D phones, a Tonight in Bali rail and store badges.", status: "live", size: "small", shot: "lp-d", url: "https://landing.guestlistticket.com" },
-  { id: "bo", name: "Back Office", text: "About 65 admin screens for bookings, partners, affiliates, imports, analytics and error history.", status: "internal", size: "small", shot: "gl-bo" },
-];
-
-export const LAS_VEGAS = {
-  name: "Las Vegas expansion",
-  status: "build" as Status,
-  text: "Vegas venues with USD pricing, a daily event import pipeline with human approval, and multi-currency checkout, on top of advanced SEO for a new market.",
-  stats: [
-    { value: "45+", label: "Vegas venues" },
-    { value: "1,700+", label: "events imported" },
-    { value: "USD", label: "multi-currency" },
-  ],
-};
-
-/* ------------------------------------------------------------------ */
 /* AI agents                                                           */
 /* ------------------------------------------------------------------ */
 

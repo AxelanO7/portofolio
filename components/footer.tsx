@@ -1,15 +1,27 @@
 "use client";
 
+import { Mark } from "@/components/ui";
 import { useI18n } from "@/lib/i18n";
 
-export default function FooterSection() {
+export default function Footer() {
   const { t } = useI18n();
+  const again = () => {
+    try {
+      sessionStorage.removeItem("ax-seen");
+    } catch {
+      /* storage blocked */
+    }
+    window.location.assign("/");
+  };
   return (
-    <footer className="border-t border-white/[0.09] py-10">
-      <div className="wrap flex flex-col items-start justify-between gap-4 text-sm text-mist sm:flex-row sm:items-center">
-        <p className="font-display text-base font-bold text-white">Jeremia Axelano</p>
-        <p>{t("footer_note")}</p>
-        <p className="font-mono text-xs">© {new Date().getFullYear()}</p>
+    <footer className="wrap">
+      <div className="ft">
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+          <Mark size={22} /> © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Jeremia Axelano · CTO, Bali (UTC+8)
+        </span>
+        <span>
+          {t("footer_note")} · <button type="button" onClick={again}>replay intro</button>
+        </span>
       </div>
     </footer>
   );
