@@ -35,10 +35,24 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const PERSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jeremia Axelano",
+  alternateName: "Axel",
+  jobTitle: "Chief Technology Officer",
+  url: SITE,
+  worksFor: { "@type": "Organization", name: "Guestlist", url: "https://guestlistticket.com" },
+  address: { "@type": "PostalAddress", addressLocality: "Denpasar", addressRegion: "Bali", addressCountry: "ID" },
+  knowsAbout: ["Marketplace platforms", "AI agents", "Mobile apps", "Cloud infrastructure", "Web3"],
+  sameAs: ["https://www.linkedin.com/in/jeremia-axelano/", "https://github.com/AxelanO7", "https://link.axelano.space"],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_LD) }} />
         <Providers>
           <Navbar />
           <main>{children}</main>

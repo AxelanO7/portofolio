@@ -15,10 +15,10 @@ export const Navbar = () => {
   }, []);
 
   const items = [
-    { label: t("nav_cases"), href: "#cases" },
-    { label: t("nav_work"), href: "#work" },
-    { label: t("nav_arsenal"), href: "#arsenal" },
-    { label: t("nav_contact"), href: "#contact" },
+    { label: t("nav_cases"), href: "/#cases" },
+    { label: t("nav_work"), href: "/#work" },
+    { label: t("nav_arsenal"), href: "/#arsenal" },
+    { label: t("nav_contact"), href: "/#contact" },
   ];
 
   const toggle = (
@@ -37,7 +37,7 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.09] bg-ink">
       <div className="wrap flex h-16 items-center justify-between">
-        <a href="#top" className="font-display text-base font-bold tracking-tight">
+        <a href="/#top" className="font-display text-base font-bold tracking-tight">
           Jeremia Axelano
         </a>
 

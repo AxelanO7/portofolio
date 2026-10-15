@@ -7,6 +7,7 @@ import Web3Section from "./sections/web3";
 import ClientsSection from "./sections/clients";
 import ArsenalSection from "./sections/arsenal";
 import ExperienceSection from "./sections/experience";
+import TestimonialsSection from "./sections/testimonials";
 import ContactSection from "./sections/contact";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <ClientsSection />
       <ArsenalSection />
       <ExperienceSection />
+      <TestimonialsSection />
       <ContactSection />
     </>
   );

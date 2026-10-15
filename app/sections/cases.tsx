@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CASES } from "@/config/cases";
 import { SectionHead, StatusTag } from "@/components/status";
 
@@ -20,7 +21,7 @@ export default function CasesSection() {
                 ).map(([k, v]) => (
                   <div key={k}>
                     <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-cy">{k}</dt>
-                    <dd className="mt-1 text-[14px] leading-snug text-mist">{v}</dd>
+                    <dd className="mt-1 line-clamp-3 text-[14px] leading-snug text-mist">{v}</dd>
                   </div>
                 ))}
                 <div>
@@ -28,6 +29,9 @@ export default function CasesSection() {
                   <dd className="mt-1 text-[14.5px] font-semibold leading-snug">{c.result}</dd>
                 </div>
               </dl>
+              <Link href={`/cases/${c.id}`} className="mt-auto pt-1 text-sm font-medium text-cy hover:text-cy-soft">
+                Read the case study →
+              </Link>
             </article>
           ))}
         </div>

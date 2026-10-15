@@ -46,7 +46,7 @@ export default function Web3Section() {
         <p className="eyebrow">Web3</p>
         <h2 className="h2">Launch pages for token founders</h2>
         <p className="lead">
-          {WEB3.length} sites built in days, not weeks, from one-page experiments to dashboards with wallet connect and live on-chain stats. Six picks first, the rest in the archive.
+          {WEB3.length} sites for token founders, from one-page launches to dashboards with wallet connect and live on-chain stats. Client work, separate from Guestlist. Six picks first, the rest in the archive.
         </p>
 
         <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
