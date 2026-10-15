@@ -202,9 +202,9 @@ export const INFRA = [
 /* ------------------------------------------------------------------ */
 
 export const EXPERIENCE = [
-  { date: "Mar 2025", title: "CTO, New Directions Success", text: "Guestlist Ticket across web, mobile, back office and AI agents." },
+  { date: "Mar 2025", title: "Chief Technology Officer, New Directions Success", text: "Own technology for Guestlist Ticket: web, mobile, partner app, back office and AI agents on a Go microservices backend. Leading the Las Vegas launch." },
   { date: "Sep 2024", title: "Senior Mobile Engineer, Jobseeker", text: "Matching platforms for job seekers and employers." },
-  { date: "Aug 2022", title: "Tech Lead Mobile Engineer, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
+  { date: "Aug 2022", title: "Mobile Engineering Lead, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
   { date: "Aug 2021", title: "President, student executive board", text: "Led 114 members and more than 40 programs." },
   { date: "Dec 2019", title: "Freelance Full-Stack", text: "Client work across the whole stack, and the start of the Web3 launch sites." },
 ];
