@@ -2,12 +2,7 @@
 .nv { position: sticky; top: 0; z-index: 60; background: rgba(5, 15, 22, 0.96); border-bottom: 1px solid var(--line); }
 .nv .wrap { display: flex; align-items: center; gap: 18px; height: 64px; }
 .brand { font: 700 17px/1 var(--disp); letter-spacing: -0.02em; text-decoration: none; display: flex; align-items: center; gap: 11px; white-space: nowrap; }
-.brand svg { width: 30px; height: 30px; flex: none; }
-/* photo mark: cyan plate with two cut corners, face inside, coral live dot in the top-right cut */
-.mark { position: relative; display: inline-block; flex: none; vertical-align: middle; --cut: 25%; --cutp: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
-.mark::before { content: ""; position: absolute; inset: 0; background: var(--cy); clip-path: var(--cutp); }
-.mark img { position: absolute; z-index: 1; inset: 7%; width: 86%; height: 86%; display: block; object-fit: cover; clip-path: var(--cutp); }
-.mark i { position: absolute; z-index: 2; top: -9%; right: -9%; width: 28%; height: 28%; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 2px var(--bg); }
+.brand svg { width: 32px; height: 32px; flex: none; }
 .np { position: relative; display: flex; gap: 2px; padding: 4px; border-radius: 99px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); margin-left: auto; }
 .np a { position: relative; z-index: 1; padding: 9px 14px; border-radius: 99px; font: 500 13px/1 var(--body); text-decoration: none; color: var(--mut); transition: color 0.3s; }
 .np a:hover { color: var(--fg); }

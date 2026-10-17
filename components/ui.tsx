@@ -3,16 +3,18 @@ import type { Img } from "@/config/media";
 import { STATUS_LABEL, type Status } from "@/config/work";
 
 /**
- * Photo mark: the face on a cyan plate with two cut corners and a coral "live" dot in the top-right cut.
- * Plain CSS clip-path (see .mark in styles/top.css), so it can appear many times on a page. The favicon and app icons come from
- * the same photo: node scripts/brand/build-photo-icons.mjs.
+ * Brand mark: a terminal prompt (chevron + cursor) on a cyan rounded tile. Solid fills and no ids, so it can appear more than once.
+ * The same numbers live in scripts/brand/mark.mjs, which also builds the favicon and app icons (node scripts/brand/build-icons.mjs).
  */
-export function Mark({ size = 40 }: { size?: number }) {
+export function Mark({ size = 32 }: { size?: number }) {
   return (
-    <span className="mark" style={{ width: size, height: size }}>
-      <img src="/me.webp" alt="Jeremia Axelano" width={size} height={size} decoding="async" />
-      <i aria-hidden="true" />
-    </span>
+    <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="Jeremia Axelano">
+      <rect width="64" height="64" rx="15" fill="#2dd4e8" />
+      <g fill="none" stroke="#031018" strokeWidth="7.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 20.5L34 32L20 43.5" />
+        <path d="M39 46H50" />
+      </g>
+    </svg>
   );
 }
 

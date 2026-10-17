@@ -105,7 +105,7 @@ styles/
 public/
   work/{t,phone,gl,photo,poster}/   screenshot dan foto (WebP)
   logos/sprite.svg      62 logo alat dan merek
-  og-image.png  icon-192.png  icon-512.png  icon-maskable-512.png  me.webp  resume.pdf
+  og-image.png  icon-192.png  icon-512.png  icon-maskable-512.png  logo.svg  resume.pdf
 ```
 
 Alur render: `app/layout.tsx` memasang script kecil di `<head>` (kelas `.js`, keputusan intro), lalu `Intro`, `FxRoot`, `Navbar`, `<main>` berisi lima belas section dari `app/page.tsx`, `Footer`, `Palette`, dan `CursorLabel`. Semua isi teks dan angka diambil dari `config/*.ts`, sehingga mengganti konten tidak menyentuh JSX.

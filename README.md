@@ -53,7 +53,7 @@ npm i --no-save playwright && npx playwright install chromium
 node scripts/capture-sites.mjs scripts/sites.example.json public/work/t
 ```
 
-The brand mark is the face photo on a cyan plate with two cut corners and a coral dot. `components/ui.tsx` (`<Mark />`) and `styles/top.css` (`.mark`) draw it in the page. Run `node scripts/brand/build-photo-icons.mjs` (source photo `scripts/brand/me-src.webp`) to rewrite `public/me.webp`, `app/icon.png`, `app/favicon.ico`, `app/apple-icon.png` and the PNG icons in `public/`. The old JA monogram numbers stay in `scripts/brand/mark.mjs` (the intro still draws those letters).
+The brand mark is a terminal prompt (chevron + cursor) on a cyan rounded tile, drawn from the numbers in `scripts/brand/mark.mjs`. `components/ui.tsx` (`<Mark />`) and `components/intro.tsx` carry the same numbers. After changing the artwork, run `node scripts/brand/build-icons.mjs` to rewrite `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png` and the PNG icons in `public/`.
 
 ## QA
 

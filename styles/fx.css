@@ -97,27 +97,28 @@ html.ld-on .rise { animation-play-state: paused; }
 [data-cur] { cursor: none; }
 @media (hover: none) { .cl { display: none !important; } [data-cur] { cursor: auto; } }
 
-/* ---- intro loader: monogram draws, counter runs, a cyan curtain lifts. Home page, once per session. ---- */
+/* ---- intro loader: the prompt mark draws itself, the name settles in, a cyan curtain lifts. Home page, once per session. ---- */
 .ld { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; place-items: center; overflow: hidden; animation: ldfail 0s 4.6s forwards; }
 html.ld-on .ld { display: grid; }
 @keyframes ldfail { to { opacity: 0; visibility: hidden; } }
 .ld.gone { display: none !important; }
 .ld.out { opacity: 0; pointer-events: none; transition: opacity 0.25s; animation: none; }
 .ld-c { position: absolute; inset: 0; background: var(--cy); transform: translateY(101%); }
-.ld.go { animation: ldbg 0.95s forwards; }
-.ld.go .ld-c { animation: ldc 0.95s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
-.ld.go .ld-in { animation: ldf 0.2s 0.3s forwards; }
+.ld.go { animation: ldbg 0.75s forwards; }
+.ld.go .ld-c { animation: ldc 0.75s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
+.ld.go .ld-in { animation: ldf 0.2s 0.2s forwards; }
 @keyframes ldbg { 0%, 54% { background: var(--bg); } 55%, 100% { background: transparent; } }
 @keyframes ldc { 0% { transform: translateY(101%); } 55% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
 @keyframes ldf { to { opacity: 0; } }
-.ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 14px; }
-.ld-in svg { width: 150px; height: 110px; overflow: visible; }
-.ld-in path { fill: none; stroke-width: 12.3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 1s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
-.ld-in path:nth-child(1) { stroke: var(--cy); }
-.ld-in path:nth-child(2) { stroke: var(--gold); animation-delay: 0.2s; }
-.ld-in path.bar { stroke: var(--gold); stroke-width: 9.9; animation-duration: 0.3s; animation-delay: 0.85s; }
-.ld-in circle { fill: var(--coral); transform-box: fill-box; transform-origin: center; transform: scale(0); animation: mkpop 0.45s 0.95s cubic-bezier(0.3, 1.6, 0.5, 1) forwards; }
+.ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 6px; }
+.ld-in svg { width: 84px; height: 84px; overflow: visible; margin-bottom: 14px; }
+.ld-in .tile { fill: var(--cy); transform-box: fill-box; transform-origin: center; transform: scale(0.82); opacity: 0; animation: tilein 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.ld-in path { fill: none; stroke: var(--ink); stroke-width: 7.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 0.32s 0.3s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
+.ld-in path.cur { animation: dash 0.18s 0.58s cubic-bezier(0.6, 0, 0.2, 1) forwards, blink 0.5s 0.8s 2 steps(1); }
+@keyframes tilein { to { transform: scale(1); opacity: 1; } }
 @keyframes dash { to { stroke-dashoffset: 0; } }
-@keyframes mkpop { to { transform: scale(1); } }
-.ld-n { font: 800 64px/1 var(--disp); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+@keyframes blink { 50% { opacity: 0; } }
+.ld-t { font: 700 20px/1.1 var(--disp); letter-spacing: -0.02em; opacity: 0; transform: translateY(6px); animation: ldup 0.4s 0.5s ease-out forwards; }
+.ld-s { font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); opacity: 0; transform: translateY(6px); animation: ldup 0.4s 0.62s ease-out forwards; }
+@keyframes ldup { to { opacity: 1; transform: none; } }
 html.ld-on .rv.in { animation-play-state: paused; }
