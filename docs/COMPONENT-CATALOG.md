@@ -80,7 +80,7 @@ app/
   page.tsx              urutan 15 section
   providers.tsx         provider bahasa (EN/ID)
   error.tsx             halaman error
-  robots.ts  sitemap.ts  manifest.ts  icon.svg  favicon.ico  apple-icon.png
+  robots.ts  sitemap.ts  manifest.ts  icon.png  favicon.ico  apple-icon.png
   cases/[id]/page.tsx   halaman studi kasus (statis)
   sections/             satu file per section:
     hero  ribbon  trailer  platform  system  live  cases  atlas
@@ -105,7 +105,7 @@ styles/
 public/
   work/{t,phone,gl,photo,poster}/   screenshot dan foto (WebP)
   logos/sprite.svg      62 logo alat dan merek
-  og-image.png  icon-192.png  icon-512.png  icon-maskable-512.png  logo.svg  resume.pdf
+  og-image.png  icon-192.png  icon-512.png  icon-maskable-512.png  me.webp  resume.pdf
 ```
 
 Alur render: `app/layout.tsx` memasang script kecil di `<head>` (kelas `.js`, keputusan intro), lalu `Intro`, `FxRoot`, `Navbar`, `<main>` berisi lima belas section dari `app/page.tsx`, `Footer`, `Palette`, dan `CursorLabel`. Semua isi teks dan angka diambil dari `config/*.ts`, sehingga mengganti konten tidak menyentuh JSX.

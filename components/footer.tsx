@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className="wrap">
       <div className="ft">
         <span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-          <Mark size={22} /> © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Jeremia Axelano · CTO, Bali (UTC+8)
+          <Mark size={30} /> © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Jeremia Axelano · CTO, Bali (UTC+8)
         </span>
         <span>
           {t("footer_note")} · <button type="button" onClick={again}>replay intro</button>

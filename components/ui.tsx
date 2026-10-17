@@ -3,21 +3,16 @@ import type { Img } from "@/config/media";
 import { STATUS_LABEL, type Status } from "@/config/work";
 
 /**
- * Monogram mark: a heavy JA on a cyan plate with two cut corners, and a coral "live" dot in the top-right cut.
- * Solid fills and no ids, so it can appear more than once on a page. The same numbers live in scripts/brand/mark.mjs, which
- * also builds the favicon and app icons (node scripts/brand/build-icons.mjs). Change both together.
+ * Photo mark: the face on a cyan plate with two cut corners and a coral "live" dot in the top-right cut.
+ * Plain CSS clip-path (see .mark in styles/top.css), so it can appear many times on a page. The favicon and app icons come from
+ * the same photo: node scripts/brand/build-photo-icons.mjs.
  */
-export function Mark({ size = 30 }: { size?: number }) {
+export function Mark({ size = 40 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="Jeremia Axelano monogram">
-      <polygon points="3.2,3.2 46.67,3.2 60.8,17.33 60.8,60.8 17.33,60.8 3.2,46.67" fill="#2dd4e8" stroke="#2dd4e8" strokeWidth="6.4" strokeLinejoin="round" />
-      <g transform="translate(32 32.8) scale(0.8) translate(-27.1 -32.55)" fill="none" stroke="#031018" strokeWidth="8.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M15.5 10.5V39.6C15.5 48.6 12 52.2 6.2 52" />
-        <path d="M22 54.6L35 10.5L48 54.6" />
-        <path d="M30.83 40.5H39.17" strokeWidth="6.8" />
-      </g>
-      <circle cx="60.2" cy="3.8" r="3.1" fill="#ff7b5c" />
-    </svg>
+    <span className="mark" style={{ width: size, height: size }}>
+      <img src="/me.webp" alt="Jeremia Axelano" width={size} height={size} decoding="async" />
+      <i aria-hidden="true" />
+    </span>
   );
 }
 
