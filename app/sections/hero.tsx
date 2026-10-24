@@ -1,7 +1,7 @@
 "use client";
 
-import { PhoneFrame } from "@/components/ui";
-import { PHOTO, heroPhone } from "@/config/media";
+import { Mark, PhoneFrame } from "@/components/ui";
+import { heroPhone } from "@/config/media";
 import { useI18n } from "@/lib/i18n";
 import { v } from "@/lib/css";
 
@@ -9,28 +9,14 @@ export default function HeroSection() {
   const { t } = useI18n();
   return (
     <section className="sec hr" id="top" data-pausable>
-      <div className="hr-bg">
-        {/* sizes understates the width on purpose: the photo sits under a dark gradient, so phones fetch the 900 px file */}
-        <img
-          src={PHOTO.hero.src}
-          srcSet={`${PHOTO.hero.srcMobile} ${PHOTO.hero.wMobile}w, ${PHOTO.hero.src} ${PHOTO.hero.w}w`}
-          sizes="(max-width: 700px) 300px, 100vw"
-          width={PHOTO.hero.w}
-          height={PHOTO.hero.h}
-          alt=""
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
-      </div>
       <div className="hr-rays" aria-hidden="true">
         <i />
         <i />
       </div>
       <div className="wrap hr-in">
         <div>
-          <span className="chip rise">
-            <span className="dot" />
+          <span className="chip prof rise">
+            <Mark size={40} />
             <span className="dec">{t("hero_eyebrow")}</span>
           </span>
           <h1 className="rise" style={v({ "--d": ".08s" })}>

@@ -30,8 +30,7 @@ export const heroPhone = (name: "gl-home" | "gl-nightlife" | "gl-ticket"): Img =
   name === "gl-home" ? { src: "/work/phone/gl-home-m.webp", w: 640, h: 1263 } : { src: `/work/phone/${name}-xs.webp`, w: 480, h: 947 };
 
 export const PHOTO = {
-  hero: { src: "/work/photo/hero.webp", w: 1600, h: 1067, srcMobile: "/work/photo/hero-m.webp", wMobile: 900 },
   ironFairies: { src: "/work/photo/iron-fairies.webp", w: 960, h: 640 },
   finns: { src: "/work/photo/finns.webp", w: 960, h: 640 },
   tropical: { src: "/work/photo/tropical.webp", w: 960, h: 640 },
-} satisfies Record<string, Img & { srcMobile?: string; wMobile?: number }>;
+} satisfies Record<string, Img>;
