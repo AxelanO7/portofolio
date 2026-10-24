@@ -3,18 +3,17 @@ import type { Img } from "@/config/media";
 import { STATUS_LABEL, type Status } from "@/config/work";
 
 /**
- * Brand mark: a terminal prompt (chevron + cursor) on a cyan rounded tile. Solid fills and no ids, so it can appear more than once.
- * The same numbers live in scripts/brand/mark.mjs, which also builds the favicon and app icons (node scripts/brand/build-icons.mjs).
+ * Photo mark (navbar and footer): the face on a cyan rounded tile, the same tile shape as the favicon and app icons.
+ * Those stay the terminal prompt (chevron + cursor; numbers in scripts/brand/mark.mjs, built with node scripts/brand/build-icons.mjs),
+ * and so does the intro. Plain CSS (.mark in styles/top.css), so it can appear more than once. The text next to it names the person,
+ * hence the empty alt.
  */
-export function Mark({ size = 32 }: { size?: number }) {
+export function Mark({ size = 36 }: { size?: number }) {
+  const ring = Math.max(2, Math.round(size * 0.08)); // px, not %: a % padding would follow the width of the parent
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label="Jeremia Axelano">
-      <rect width="64" height="64" rx="15" fill="#2dd4e8" />
-      <g fill="none" stroke="#031018" strokeWidth="7.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 20.5L34 32L20 43.5" />
-        <path d="M39 46H50" />
-      </g>
-    </svg>
+    <span className="mark" style={{ width: size, height: size, padding: ring }}>
+      <img src="/me.webp" alt="" width={size - ring * 2} height={size - ring * 2} decoding="async" />
+    </span>
   );
 }
 

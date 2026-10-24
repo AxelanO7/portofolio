@@ -71,6 +71,14 @@ export default function AboutSection() {
             </div>
           </div>
           <div>
+            <figure className="me rv">
+              <img src="/about.webp" width={400} height={500} alt="Jeremia Axelano" loading="lazy" decoding="async" />
+              <figcaption>
+                <b>Jeremia Axelano</b>
+                <span>CTO · Guestlist Ticket</span>
+                <small>Bali, Indonesia (UTC+8)</small>
+              </figcaption>
+            </figure>
             <div className="tlg" ref={tl}>
               {TIMELINE.map((e) => (
                 <div key={e.t}>

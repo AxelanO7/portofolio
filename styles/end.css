@@ -11,6 +11,11 @@
 .abeam .nd { fill: #0a1b27; stroke: #1c3a4d; stroke-width: 1.5; }
 .abeam text { font: 500 11px var(--mono); fill: var(--fg); }
 .abeam .cap { margin-top: 6px; }
+.me { display: flex; align-items: center; gap: 20px; margin: 0 0 32px; padding: 14px; border-radius: 22px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.03); }
+.me img { flex: none; width: 96px; height: 120px; border-radius: 15px; object-fit: cover; box-shadow: 0 0 0 1.5px rgba(45, 212, 232, 0.55), 0 14px 34px -14px rgba(45, 212, 232, 0.5); }
+.me b { display: block; font: 700 21px/1.15 var(--disp); letter-spacing: -0.02em; }
+.me span { display: block; margin-top: 8px; font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--cy); }
+.me small { display: block; margin-top: 8px; color: var(--mut); font-size: 14px; line-height: 1.4; }
 .tlg { position: relative; padding-left: 30px; display: grid; gap: 26px; }
 .tlg > div { position: relative; }
 .tlg > div::before { content: ""; position: absolute; left: -23px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: #1c3a4d; transition: all 0.5s; }
