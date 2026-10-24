@@ -1108,7 +1108,7 @@ Yang berikut milik Jeremia, Guestlist, atau kliennya. Jangan terbit dengan ini m
 - [ ] Nama, foto, bio, email, nomor telepon, link sosial, CV (`public/resume.pdf`), dan monogram JA.
 - [ ] Semua screenshot app dan situs (`public/work/*`): itu milik Guestlist dan klien Jeremia, bukan untuk dipakai ulang.
 - [ ] Foto venue di hero dan kolase (`public/work/photo/*`): hak milik venue dan fotografer.
-- [ ] Testimoni (`config/cases.ts`), nama klien, studi kasus, daftar agent, angka (`30,000+`, `700+`, `110+`), dan semua klaim lain. Angka publik harus nyata dan dibulatkan ke bawah dengan tanda "+".
+- [ ] Testimoni (`config/cases.ts`), nama klien, studi kasus, daftar agent, angka (`100,000+`, `700+`, `110+`), dan semua klaim lain. Angka publik harus nyata dan dibulatkan ke bawah dengan tanda "+".
 - [ ] Teks yang menyebut Guestlist, Bali, Las Vegas, atau nama produk Jeremia di `lib/i18n.tsx`, `config/site.ts`, dan metadata `app/layout.tsx`.
 - [ ] OG image, favicon, ikon PWA, domain di `config/site.ts`.
 

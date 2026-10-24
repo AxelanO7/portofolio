@@ -61,9 +61,9 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="hr-float f2">
-            <i>30k</i>
+            <i>100k</i>
             <div>
-              <b>30,000+ visitors</b>
+              <b>100,000+ visits</b>
               <span>tracked in production</span>
             </div>
           </div>

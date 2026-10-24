@@ -19,12 +19,13 @@ export interface Case {
 
 /**
  * Headline numbers, Bali production only. Rounded down to a "+" floor from the prod
- * database on 2026-10-11 (30,207 unique visitors tracked, 111 partner businesses,
- * 727 booking records in Sep 2026, most of them hand-offs to the partner's checkout).
- * Re-check against the database before raising any number.
+ * database on 2026-10-11 (111 partner businesses, 727 booking records in Sep 2026,
+ * most of them hand-offs to the partner's checkout). Visitors are site visits, re-read
+ * from the admin General Visitors totals on 2026-10-24: 100,292 visits, 34,806 unique.
+ * Never label them "unique visitors". Re-check against the database before raising any number.
  */
 export const PROOF = {
-  visitors: "30,000+",
+  visitors: "100,000+",
   bookings: "700+",
   partners: "110+",
 };

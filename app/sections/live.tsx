@@ -42,7 +42,7 @@ function Clock() {
   );
 }
 
-const ODO = "30,000+";
+const ODO = "100,000+";
 
 /** Digits roll to their value once. The server markup already shows the final number. */
 function Odometer() {
@@ -231,7 +231,7 @@ export default function LiveSection() {
             <span className="bn-e">Live marketplace</span>
             <div>
               <Odometer />
-              <div className="cap">visitors tracked in production</div>
+              <div className="cap">site visits tracked in production</div>
               <div className="cap" style={{ marginTop: 14, color: "var(--fg)" }}>
                 700+ booking requests a month<br />110+ partner businesses
               </div>

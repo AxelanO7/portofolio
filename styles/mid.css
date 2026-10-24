@@ -55,8 +55,9 @@
 .bn-clock .big i { font-style: normal; animation: bl 1s steps(2) infinite; color: var(--cy); }
 .bn-clock .sm { font: 400 12px/1.7 var(--mono); color: var(--mut); margin-top: 8px; }
 .bn-clock .sm b { color: var(--fg); font-weight: 500; }
-.bn-vis { --c: var(--gold); }
-.od { display: flex; align-items: center; font: 800 clamp(38px, 4.2vw, 56px) / 1 var(--disp); letter-spacing: -0.04em; height: 1em; overflow: hidden; font-variant-numeric: tabular-nums; }
+.bn-vis { --c: var(--gold); container-type: inline-size; }
+/* "100,000+" is 4.6em wide: the size also follows the tile (cqw), so the digits never get squeezed or clipped on phones */
+.od { display: flex; align-items: center; font: 800 clamp(38px, 4.2vw, 56px) / 1 var(--disp); font-size: min(clamp(38px, 4.2vw, 56px), 21cqw); letter-spacing: -0.04em; height: 1em; overflow: hidden; font-variant-numeric: tabular-nums; }
 .od .d { height: 1em; overflow: hidden; display: block; width: 0.62em; }
 .od .d > div { transition: transform 1.8s var(--ease); transition-delay: calc(var(--i) * 0.1s); }
 .od .d b { display: block; height: 1em; line-height: 1; text-align: center; font-weight: inherit; }

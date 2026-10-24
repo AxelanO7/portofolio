@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Jeremia Axelano",
     type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Jeremia Axelano, CTO, marketplaces and AI agents" }],
+    images: [{ url: "/og-image.jpg?v=2", width: 1200, height: 630, alt: "Jeremia Axelano, CTO, marketplaces and AI agents" }],
   },
-  twitter: { card: "summary_large_image", title: TITLE, images: ["/og-image.jpg"] },
+  twitter: { card: "summary_large_image", title: TITLE, images: ["/og-image.jpg?v=2"] },
   alternates: { canonical: SITE_URL },
 };
 

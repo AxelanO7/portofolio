@@ -151,7 +151,7 @@
 @keyframes rise { to { transform: translateY(var(--y, 0)) rotate(var(--r, 0deg)); opacity: 1; } }
 .rl .c3 { background: linear-gradient(160deg, #f1d59d, #e2b86f); color: var(--ink-warm); }
 .rl .c3 .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 3vw, 40px); margin-top: clamp(20px, 4vw, 50px); }
-.rl .c3 .nums b { display: block; font: 800 clamp(30px, 6.8vw, 104px) / 1 var(--disp); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+.rl .c3 .nums b { display: block; font: 800 clamp(22px, 6.8vw, 104px) / 1 var(--disp); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
 .rl .c3 .nums span { display: block; margin-top: 10px; font: 500 clamp(11px, 1.2vw, 15px) / 1.3 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; }
 .rl .c3 .sticker { position: absolute; right: 6%; top: 18%; width: clamp(80px, 12vw, 150px); aspect-ratio: 1; border-radius: 50%; background: var(--ink-warm); color: var(--gold); display: grid; place-items: center; text-align: center; font: 600 clamp(9px, 1vw, 12px) / 1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; animation: spin 12s linear infinite; }
 .rl .c4 { background: #07131c; }

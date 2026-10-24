@@ -34,7 +34,7 @@ export const CITIES = [
   {
     id: "bali", name: "Bali", co: "8.65°S 115.22°E", state: "Live in production", tone: "b", glow: "rgba(79,224,189,.5)",
     rows: [
-      { k: "Unique visitors tracked", v: "30,000+", n: 30000, s: "+" },
+      { k: "Site visits tracked", v: "100,000+", n: 100000, s: "+" },
       { k: "Booking requests a month", v: "700+", n: 700, s: "+" },
       { k: "Partner businesses", v: "110+", n: 110, s: "+" },
     ],

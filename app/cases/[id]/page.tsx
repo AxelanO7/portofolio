@@ -25,9 +25,9 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
       url,
       siteName: "Jeremia Axelano",
       type: "article",
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: c.title }],
+      images: [{ url: "/og-image.jpg?v=2", width: 1200, height: 630, alt: c.title }],
     },
-    twitter: { card: "summary_large_image", title: c.title, description: c.summary, images: ["/og-image.jpg"] },
+    twitter: { card: "summary_large_image", title: c.title, description: c.summary, images: ["/og-image.jpg?v=2"] },
   };
 }
 

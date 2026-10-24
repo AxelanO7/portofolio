@@ -2654,7 +2654,7 @@ A tilted tape of facts. The numbers are the content, so it never reads as decora
 
 ```html
 <div class="x-tape" data-marquee data-speed="30">
-  <span>30,000+ VISITORS</span>
+  <span>100,000+ VISITS</span>
   <span>700+ BOOKINGS A MONTH</span>
   <span>110+ PARTNERS</span>
   <span>6 AGENTS ON DUTY</span>
@@ -2779,8 +2779,8 @@ Numbers count up once when they enter the view. They show the final value if scr
 ```html
 <div class="x-st">
   <div>
-    <b data-count="30000" data-suffix="+"></b>
-    <span>visitors tracked</span>
+    <b data-count="100000" data-suffix="+"></b>
+    <span>site visits tracked</span>
   </div>
   <div>
     <b data-count="700" data-suffix="+"></b>
@@ -2827,7 +2827,7 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasIO = 'IntersectionObserver' in window;
 
-/* count up once: <b data-count="30000" data-suffix="+"> */
+/* count up once: <b data-count="100000" data-suffix="+"> */
 function fmt(v, d) {
   return v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
 }
@@ -2889,7 +2889,7 @@ Digits roll to their value. Heavier than a count-up, so use it for one number. T
 **HTML**
 
 ```html
-<div class="x-od" aria-label="30,000+"></div>
+<div class="x-od" aria-label="100,000+"></div>
 ```
 
 **CSS**
@@ -2950,7 +2950,7 @@ function onView(el, fn, threshold = 0.5) {
 
 function init(s) {
   var el = $('.x-od', s),
-    v = '30,000+',
+    v = '100,000+',
     h = '';
   v.split('').forEach(function (ch, i) {
     if (/\d/.test(ch)) {

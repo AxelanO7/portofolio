@@ -254,7 +254,7 @@ export default function TrailerSection() {
               <span className="ml"><span style={v({ "--i": 1 })}>Real bookings.</span></span>
             </div>
             <div className="nums fade" style={v({ "--d": ".6s" })}>
-              <div><b data-to="30000" data-suf="+">30,000+</b><span>visitors tracked</span></div>
+              <div><b data-to="100000" data-suf="+">100,000+</b><span>site visits tracked</span></div>
               <div><b data-to="700" data-suf="+">700+</b><span>booking requests a month</span></div>
               <div><b data-to="110" data-suf="+">110+</b><span>partner businesses</span></div>
             </div>
