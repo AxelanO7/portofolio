@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { CASES } from "@/config/cases";
 
-const SITE = "https://portfolio.axelano.space";
+const SITE = "https://axelano.space";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

@@ -1,7 +1,7 @@
 import { GL_BO, gl, phone, type Img } from "./media";
 import { EXPERIENCE } from "./work";
 
-export const SITE_URL = "https://portfolio.axelano.space";
+export const SITE_URL = "https://axelano.space";
 export const EMAIL = "jeremia123.jm@gmail.com";
 export const WHATSAPP = "https://wa.me/6282246034453";
 export const WHATSAPP_LABEL = "+62 822 4603 4453";

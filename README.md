@@ -1,6 +1,6 @@
 # Jeremia Axelano, portfolio
 
-Source of [portfolio.axelano.space](https://portfolio.axelano.space): a one-page portfolio for a CTO who builds marketplaces and AI agents. It is built to stay smooth on an iPhone, so every effect is time based or runs once, and nothing follows the scroll position.
+Source of [axelano.space](https://axelano.space): a one-page portfolio for a CTO who builds marketplaces and AI agents. It is built to stay smooth on an iPhone, so every effect is time based or runs once, and nothing follows the scroll position.
 
 ## Stack
 
