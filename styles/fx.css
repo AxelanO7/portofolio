@@ -94,7 +94,7 @@ html.ld-on .rise { animation-play-state: paused; }
 .cl.big { width: 78px; height: 78px; margin: -39px 0 0 -39px; background: var(--cy); }
 .cl span { font: 600 10px var(--mono); color: var(--ink); opacity: 0; text-transform: uppercase; transition: opacity 0.2s; }
 .cl.big span { opacity: 1; }
-[data-cur] { cursor: none; }
+html.cl-on [data-cur] { cursor: none; } /* set by cursor-label.tsx only while its own cursor shows (never with reduced motion or the pause switch) */
 @media (hover: none) { .cl { display: none !important; } [data-cur] { cursor: auto; } }
 
 /* ---- intro loader: the prompt mark draws itself, the name settles in, a cyan curtain lifts. Home page, once per session. ---- */

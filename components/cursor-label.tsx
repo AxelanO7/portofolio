@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { isStill } from "@/lib/motion";
 
 /** A dot that swells into a labelled circle over elements with data-cur="Label". Desktop pointers only. */
 export default function CursorLabel() {
@@ -9,10 +10,10 @@ export default function CursorLabel() {
 
   useEffect(() => {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cl = dot.current;
     const lab = label.current;
-    if (!fine || reduce || !cl || !lab) return;
+    if (!fine || !cl || !lab) return;
+    const root = document.documentElement;
     let x = 0, y = 0, tx = 0, ty = 0, active = false, raf = 0;
     const tick = () => {
       x += (tx - x) * 0.22;
@@ -23,9 +24,10 @@ export default function CursorLabel() {
     const stop = () => {
       active = false;
       cl.classList.remove("on", "big");
+      root.classList.remove("cl-on");
     };
     const move = (e: PointerEvent) => {
-      const z = (e.target as HTMLElement | null)?.closest?.("[data-cur]") as HTMLElement | null;
+      const z = isStill() ? null : ((e.target as HTMLElement | null)?.closest?.("[data-cur]") as HTMLElement | null);
       if (z) {
         tx = e.clientX;
         ty = e.clientY;
@@ -34,6 +36,7 @@ export default function CursorLabel() {
           y = ty;
           active = true;
           cl.classList.add("on");
+          root.classList.add("cl-on"); /* the real cursor is hidden over [data-cur] only while this one shows */
         }
         lab.textContent = z.dataset.cur || "";
         cl.classList.add("big");
@@ -47,6 +50,7 @@ export default function CursorLabel() {
       document.removeEventListener("pointermove", move);
       document.removeEventListener("pointerleave", stop);
       window.removeEventListener("scroll", stop);
+      root.classList.remove("cl-on");
       cancelAnimationFrame(raf);
     };
   }, []);

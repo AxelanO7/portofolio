@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { isStill } from "@/lib/motion";
 
 type Vec = [number, number, number];
 const D = Math.PI / 180;
@@ -42,7 +43,6 @@ export default function Globe() {
     const holder = box.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !holder || !ctx) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let alive = true;
     let running = false;
     let raf = 0;
@@ -60,8 +60,9 @@ export default function Globe() {
       };
       const SUN = sun();
       const dpr = Math.min(2, window.devicePixelRatio || 1);
-      let W = 0, H = 0, R = 0;
+      let W = 0, H = 0, R = 0, stillDrawn = false;
       const size = () => {
+        stillDrawn = false; /* resizing clears the canvas: draw again */
         const r = canvas.getBoundingClientRect();
         W = r.width || 300;
         H = r.height || 300;
@@ -87,7 +88,7 @@ export default function Globe() {
 
       const frame = (now: number) => {
         const ms = now - t0;
-        if (!manual && !reduce) l0 = target(ms);
+        if (!manual && !isStill()) l0 = target(ms);
         else if (manual && now - idle > 4500) {
           manual = false;
           t0 = now - (l0 / D > 180 ? CYCLE * 0.5 : 0);
@@ -204,17 +205,24 @@ export default function Globe() {
         });
       };
 
+      /* with reduced motion or the page switch the globe is drawn once and only moves when dragged */
       const loop = (now: number) => {
-        if (running) frame(now);
+        if (running) {
+          if (!isStill()) {
+            stillDrawn = false;
+            frame(now);
+          } else if (!stillDrawn) {
+            stillDrawn = true;
+            frame(now);
+          }
+        }
         raf = requestAnimationFrame(loop);
       };
-      if (reduce) frame(performance.now());
-      else raf = requestAnimationFrame(loop);
+      raf = requestAnimationFrame(loop);
 
       const io = "IntersectionObserver" in window
         ? new IntersectionObserver((es) => {
             running = es[0].isIntersecting && !document.hidden;
-            if (running && reduce) frame(performance.now());
           })
         : null;
       if (io) io.observe(holder); else running = true;
@@ -234,7 +242,7 @@ export default function Globe() {
         if (!drag) return;
         l0 = drag.l - (e.clientX - drag.x) * 0.0075;
         idle = performance.now();
-        if (reduce) frame(performance.now());
+        if (isStill()) frame(performance.now());
       };
       const up = () => {
         drag = null;
@@ -262,7 +270,7 @@ export default function Globe() {
 
   return (
     <div className="at-globe" ref={box} data-cur="Drag">
-      <canvas ref={cv} aria-label="Dotted globe with an arc from Bali to Las Vegas" />
+      <canvas ref={cv} role="img" aria-label="Dotted globe with an arc from Bali to Las Vegas" />
       <span className="hint">drag to turn the globe · night side from the real sun</span>
     </div>
   );

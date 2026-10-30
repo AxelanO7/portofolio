@@ -149,3 +149,7 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
+/* the page's own "Pause motion" switch (lib/motion.ts) does the same as the system setting */
+html.still { scroll-behavior: auto; }
+html.still *, html.still *::before, html.still *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+html.still .vw [aria-hidden] > span { font-variation-settings: "wght" 800; animation: none; }

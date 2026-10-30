@@ -6,6 +6,7 @@ import { Logo } from "@/components/ui";
 import { LOGO } from "@/config/logos";
 import { FEED_LINES, ORBIT_TOOLS, SURFACES } from "@/config/site";
 import { AGENTS, WEB3 } from "@/config/work";
+import { STILL_EV, isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 function Clock() {
@@ -50,7 +51,7 @@ function Odometer() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el || !("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || !("IntersectionObserver" in window) || isStill()) return;
     setGo(false);
     const io = new IntersectionObserver((es) => {
       if (es[0].isIntersecting) {
@@ -89,7 +90,7 @@ function SitemapTile() {
     const n = num.current;
     const b = bars.current;
     if (!n || !b) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (isStill()) return;
     const els = Array.from(b.children) as HTMLElement[];
     let timer = 0, on = false;
     const paint = (before: boolean) =>
@@ -107,13 +108,24 @@ function SitemapTile() {
       };
       requestAnimationFrame(f);
     };
+    /* the page switch ends the loop on the final numbers */
+    const settle = () => {
+      clearTimeout(timer);
+      on = false;
+      n.textContent = "70";
+      paint(false);
+    };
     const cycle = () => {
+      if (isStill()) return settle();
       n.textContent = "328";
       paint(true);
       timer = window.setTimeout(() => {
         morph();
         timer = window.setTimeout(cycle, 5600);
       }, 1400);
+    };
+    const onStill = () => {
+      if (isStill()) settle();
     };
     n.textContent = "328";
     paint(true);
@@ -128,9 +140,11 @@ function SitemapTile() {
       }
     }, { threshold: 0.4 });
     io.observe(b);
+    window.addEventListener(STILL_EV, onStill);
     return () => {
       clearTimeout(timer);
       io.disconnect();
+      window.removeEventListener(STILL_EV, onStill);
     };
   }, []);
   return (
@@ -181,11 +195,10 @@ function Feed() {
   const [items, setItems] = useState(() => FEED_LINES.slice(0, 4).map((f, i) => ({ id: i, f })));
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let n = 4;
     const id = window.setInterval(() => {
       const sec = ref.current?.closest(".sec");
-      if (document.hidden || sec?.getAttribute("data-vis") === "0") return;
+      if (document.hidden || isStill() || sec?.getAttribute("data-vis") === "0") return;
       n += 1;
       setItems((prev) => [{ id: n, f: FEED_LINES[n % FEED_LINES.length] }, ...prev].slice(0, 4));
     }, 2400);
@@ -216,7 +229,7 @@ const RINGS = [
 
 export default function LiveSection() {
   return (
-    <section className="sec" id="live" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec" id="live" data-pausable style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>

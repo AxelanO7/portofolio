@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { isStill } from "@/lib/motion";
 
 /** Adds a class once, the first time the element is at least half visible (rings, charts). */
 export default function OnView({ className = "", add = "go", threshold = 0.5, children }: { className?: string; add?: string; threshold?: number; children: ReactNode }) {
@@ -8,7 +9,7 @@ export default function OnView({ className = "", add = "go", threshold = 0.5, ch
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!("IntersectionObserver" in window) || isStill()) {
       el.classList.add(add);
       return;
     }
