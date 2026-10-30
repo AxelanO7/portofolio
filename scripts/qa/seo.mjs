@@ -1,9 +1,13 @@
 /* Search and sharing checks against a running build: titles, descriptions, canonicals, Open Graph and Twitter tags,
    JSON-LD (valid JSON, required and recommended properties by schema type, @id links, no phone or e-mail), sitemap,
-   robots, llms.txt, manifest and the 404 status. Exit code 1 when something fails.
+   robots, llms.txt, manifest, the 404 status, and the public numbers (visits, bookings, partners, agents, Web3 sites, tools,
+   builds) against config. Exit code 1 when something fails.
    usage: node scripts/qa/seo.mjs [baseUrl]      default http://localhost:3000   (start it with: npm run build && npm start)
    The pages carry the production address in their tags, so "expected" values come from the sitemap, not from baseUrl. */
+import fs from 'node:fs';
+import path from 'node:path';
 import { argv, exit } from 'node:process';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const BASE = (argv[2] || 'http://localhost:3000').replace(/\/$/, '');
 let fails = 0, warns = 0;
@@ -13,7 +17,8 @@ const warn = (m) => { warns++; console.log('  warn  ' + m); };
 const check = (cond, pass, bad, soft) => (cond ? ok(pass) : soft ? warn(bad) : fail(bad));
 
 const get = (path, init) => fetch(path.startsWith('http') ? path : BASE + path, { redirect: 'manual', ...init });
-const text = async (path) => { const r = await get(path); return { r, body: await r.text() }; };
+const text_ = async (path) => { const r = await get(path); return { r, body: await r.text() }; };
+const text = text_;
 const dec = (s) => s.replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const attrs = (s) => Object.fromEntries([...s.matchAll(/([\w:-]+)="([^"]*)"/g)].map((m) => [m[1], dec(m[2])]));
 
@@ -109,6 +114,57 @@ function checkLd(label, blocks, page) {
   return all;
 }
 
+
+/** The public numbers, as written on the page, against the config they come from. Words ("six") count as numbers. */
+async function checkClaims(entries) {
+  console.log('\nnumbers (page text and meta, against config)');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+  const cfg = (f) => import(pathToFileURL(path.join(root, f)).href);
+  const { WEB3, CLIENTS, MOBILE, SYSTEMS, AGENTS_DAILY } = await cfg('config/work.ts');
+  const { ARSENAL, TOOL_COUNT } = await cfg('config/arsenal.ts');
+  const { PROOF } = await cfg('config/cases.ts');
+  const guestlist = (fs.readFileSync(path.join(root, 'config/builds.ts'), 'utf8').match(/\{ id: "g-/g) || []).length;
+  const WORD = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12 };
+  const num = (v) => (WORD[v.toLowerCase()] ?? v).toString();
+
+  let text = '', atlas = '';
+  for (const e of entries) {
+    const html = (await text_(new URL(e.loc).pathname)).body;
+    const p = parse(html);
+    atlas += ' ' + [...html.matchAll(/<article class="at-c[^"]*"[\s\S]*?<\/article>/g)].map((m) => m[0].replace(/<[^>]+>/g, ' ')).join(' ');
+    const metas = ['description', 'og:description', 'twitter:description', 'og:image:alt'].flatMap((k) => p.meta(k));
+    // the filter bar prints a count after each label ("Guestlist 6 Mobile apps 9"), which reads like "6 Mobile apps"; it is computed from the data anyway
+    text += ' ' + html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<div class="bd-fl">[\s\S]*?<\/div>|<article class="at-c[^"]*"[\s\S]*?<\/article>/g, ' ').replace(/<[^>]+>/g, ' ') + ' ' + metas.join(' ') + ' ' + [...html.matchAll(/aria-label="([^"]*)"/g)].map((m) => dec(m[1])).join(' ');
+  }
+  text = dec(text).replace(/\s+/g, ' ');
+  atlas = dec(atlas).replace(/\s+/g, ' ');
+
+  // not after "/" or a digit: the status rings read "6/12 agents in daily use"
+  const N = '(?<![\\/]\\s*)(?<![.,\\d])([\\d][\\d,]*\\+?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)';
+  const rows = [
+    ['site visits', PROOF.visitors, [`${N} (?:site )?visits`], `Site visits tracked ${N}`],
+    ['booking requests a month', PROOF.bookings, [`${N} booking (?:requests|records) a month`], `Booking requests a month ${N}`],
+    ['partner businesses', PROOF.partners, [`${N} partner(?:s| businesses)`], `Partner businesses ${N}`],
+    ['agents in daily use', String(AGENTS_DAILY), [`${N} (?:AI )?agents(?: on duty| in daily use| are in daily use)?\\b(?! more)`]],
+    ['Web3 sites or pages', String(WEB3.length), [`${N} Web3 (?:sites|launch pages|pages)`]],
+    ['tools', String(TOOL_COUNT), [`${N} tools`]],
+    ['stacks', String(ARSENAL.length), [`${N} stacks`]],
+    ['builds', String(guestlist + MOBILE.length + CLIENTS.length + SYSTEMS.length + WEB3.length), [`${N} builds`]],
+    ['client builds', String(CLIENTS.length), [`${N} client builds`]],
+    ['mobile apps', String(MOBILE.length), [`${N} mobile apps`]],
+  ];
+  for (const [label, expected, pats, inAtlas] of rows) {
+    const found = pats.flatMap((p) => [...text.matchAll(new RegExp(p, 'gi'))].map((m) => num(m[1])))
+      .concat(inAtlas ? [...atlas.matchAll(new RegExp(inAtlas, 'gi'))].map((m) => num(m[1])) : []);
+    const wrong = [...new Set(found.filter((v) => v !== expected))];
+    check(found.length > 0, `${label}: ${found.length} mention(s), all ${expected}`, `${label}: never mentioned (expected ${expected})`, true);
+    if (wrong.length) fail(`${label}: page says ${wrong.join(', ')}, config says ${expected}`);
+  }
+  // the label matters as much as the number: booking figures are requests, most of them hand-offs to the partner's checkout
+  const loose = text.match(/\d[\d,]*\+? bookings? (?:a month|\/ mo)/gi);
+  check(!loose, 'bookings are always called "booking requests"', `"${loose && loose[0]}": say "booking requests" (see PROOF in config/cases.ts)`, true);
+}
+
 const siteWide = { defined: new Set(), refs: new Set() };
 const seen = { titles: new Map(), descriptions: new Map() };
 
@@ -180,6 +236,7 @@ async function checkPage(loc) {
   }
 
   for (const e of entries) await checkPage(e.loc);
+  await checkClaims(entries);
 
   console.log('\nrobots.txt');
   const rb = await text('/robots.txt');
