@@ -53,11 +53,18 @@ npm i --no-save playwright && npx playwright install chromium
 node scripts/capture-sites.mjs scripts/sites.example.json public/work/t
 ```
 
+Each case page has its own share image, `public/og/<id>.jpg` (1200x630), drawn from the site's colours and fonts and the case text in `config/cases.ts`. After a change to a case, run `node scripts/og/cases.mjs` and raise the `?v=` in `caseImage()` (`lib/seo.ts`) so social networks fetch the new picture. Search and sharing tags live in `lib/seo.ts`, structured data in `lib/jsonld.ts`.
+
 The brand mark is a terminal prompt (chevron + cursor) on a cyan rounded tile, drawn from the numbers in `scripts/brand/mark.mjs`. `components/ui.tsx` (`<Mark />`) and `components/intro.tsx` carry the same numbers. After changing the artwork, run `node scripts/brand/build-icons.mjs` to rewrite `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png` and the PNG icons in `public/`.
 
 ## QA
 
 The scripts use Playwright. They check console errors and sideways overflow (`site.mjs`), blurry images (`blur-audit.mjs`), real touch scrolling over every interactive area (`swipe.mjs`), loading time on a throttled iPhone profile (`throttle.mjs`) and anchor offsets (`anchors.mjs`).
+
+Two more need no browser, only a running build (`seo.mjs`) or the network (`links.mjs`):
+
+- `seo.mjs`: titles, descriptions, canonicals, Open Graph and Twitter tags, JSON-LD (valid JSON, required properties by type, `@id` links, no phone or e-mail), sitemap, robots, `llms.txt`, manifest, the 404 status, and the public numbers on the page against `config/`.
+- `links.mjs`: every external URL in `config/`, `app/`, `components/` and `lib/`, fetched like a browser. Reports dead, parked and redirecting links and where each is used.
 
 ```bash
 npm i --no-save playwright && npx playwright install chromium webkit
@@ -65,6 +72,8 @@ npm run build && npm start &
 node scripts/qa/site.mjs http://localhost:3000/
 node scripts/qa/swipe.mjs http://localhost:3000/
 node scripts/qa/throttle.mjs "http://localhost:3000/?nointro" 5
+node scripts/qa/seo.mjs http://localhost:3000
+node scripts/qa/links.mjs --out /tmp/links
 ```
 
 ## Using this as a reference
