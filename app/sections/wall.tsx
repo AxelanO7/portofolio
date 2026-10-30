@@ -17,7 +17,7 @@ const COLS: { speed: number; rev?: boolean; items: JSX.Element[] }[] = [
 /** Proof by volume: a tilted wall of real screens, five columns moving in alternate directions (CSS only). */
 export default function WallSection() {
   return (
-    <section className="sec wl" id="wall" data-pausable>
+    <section lang="en" className="sec wl" id="wall" data-pausable>
       <div className="wl-box" aria-hidden="true">
         <LazyMount className="wl-wall">
           {COLS.map((c, i) => (

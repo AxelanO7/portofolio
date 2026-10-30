@@ -17,7 +17,7 @@ export default function ArsenalSection() {
   const b = BAND_TOOLS.slice(10);
   return (
     <>
-      <div className="stk-band" data-pausable>
+      <div lang="en" className="stk-band" data-pausable>
         <div className="wrap">
           <span className="eyebrow">{TOOL_COUNT} tools across {ARSENAL.length} stacks</span>
         </div>
@@ -26,7 +26,7 @@ export default function ArsenalSection() {
           <Marquee speed={40} gap={10} reverse items={b.map(chip)} />
         </LazyMount>
       </div>
-      <section className="sec" id="arsenal">
+      <section lang="en" className="sec" id="arsenal">
         <div className="wrap">
           <div className="head">
             <div>

@@ -43,7 +43,7 @@ function Viz({ id }: { id: string }) {
 /** Three jobs, each with the number that moved. The files stack with CSS sticky (no scroll-linked script). */
 export default function CasesSection() {
   return (
-    <section className="sec" id="cases" style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec" id="cases" style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>

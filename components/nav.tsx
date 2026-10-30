@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Mark } from "@/components/ui";
+import { MotionSwitch } from "@/components/motion";
 import { useI18n, type DictKey } from "@/lib/i18n";
 import { EV, emit } from "@/lib/events";
+import { inertExcept, lockScroll } from "@/lib/modal";
 
 const LINKS: { id: string; key: DictKey }[] = [
   { id: "platform", key: "nav_platform" },
@@ -29,6 +31,9 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const np = useRef<HTMLElement>(null);
+  const hd = useRef<HTMLElement>(null);
+  const ov = useRef<HTMLElement>(null);
+  const hb = useRef<HTMLButtonElement>(null);
 
   /* which section is being read */
   useEffect(() => {
@@ -71,27 +76,40 @@ export function Navbar() {
     };
   }, [active, locale]);
 
-  /* menu overlay: lock the page behind it, close with Escape */
+  /* menu overlay: lock the page behind it (scroll, focus, screen readers), close with Escape and give focus back to the button, close when the bar turns into the desktop one */
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    if (!open) return;
+    const unlock = lockScroll();
+    const unInert = inertExcept([hd.current, ov.current]);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      hb.current?.focus({ preventScroll: true });
+    };
+    const wide = window.matchMedia("(min-width: 1021px)");
+    const onWide = () => wide.matches && setOpen(false);
     window.addEventListener("keydown", onKey);
+    wide.addEventListener("change", onWide);
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      wide.removeEventListener("change", onWide);
+      unInert();
+      unlock();
     };
   }, [open]);
 
   const href = (id: string) => `/#${id}`;
   const lang = (cls: string) => (
-    <button type="button" className={`lang ${cls}`} aria-label="Toggle language" onClick={() => setLocale(locale === "en" ? "id" : "en")}>
-      <span className={locale === "en" ? "on" : ""}>EN</span>/<span className={locale === "id" ? "on" : ""}>ID</span>
+    <button type="button" className={`lang ${cls}`} onClick={() => setLocale(locale === "en" ? "id" : "en")}>
+      <span className="sr">{locale === "en" ? "Language: English. Switch to Indonesian. " : "Bahasa: Indonesia. Ganti ke Inggris. "}</span>
+      <span lang="en" className={locale === "en" ? "on" : ""}>EN</span>/<span lang="id" className={locale === "id" ? "on" : ""}>ID</span>
     </button>
   );
 
   return (
     <>
-      <header className="nv">
+      <MotionSwitch className="skip" label="Pause motion" />
+      <header className="nv" ref={hd}>
         <div className="wrap">
           <a className="brand" href="/#top">
             <Mark />
@@ -100,25 +118,25 @@ export function Navbar() {
           <nav className="np" ref={np} aria-label="Primary">
             <span className="ind" />
             {LINKS.map((l) => (
-              <a key={l.id} href={href(l.id)} data-id={l.id} className={active === l.id ? "on" : undefined}>
+              <a key={l.id} href={href(l.id)} data-id={l.id} className={active === l.id ? "on" : undefined} aria-current={active === l.id ? "true" : undefined}>
                 {t(l.key)}
               </a>
             ))}
           </nav>
-          <button type="button" className="kb" onClick={() => emit(EV.palette)} aria-label={t("nav_search")}>
+          <button type="button" className="kb" onClick={() => emit(EV.palette)} aria-haspopup="dialog" aria-keyshortcuts="Meta+K Control+K">
             {t("nav_search")} <kbd>⌘K</kbd>
           </button>
           {lang("d")}
           <a className="btn sm nv-cta" href={href("contact")}>
             {t("nav_contact")}
           </a>
-          <button type="button" className="hb" aria-label={t("nav_menu")} aria-expanded={open} aria-controls="ov" onClick={() => setOpen((v) => !v)}>
+          <button type="button" className="hb" ref={hb} aria-label={t("nav_menu")} aria-expanded={open} aria-controls="ov" onClick={() => setOpen((v) => !v)}>
             <i />
             <i />
           </button>
         </div>
       </header>
-      <div className={`ov${open ? " open" : ""}`} id="ov">
+      <nav className={`ov${open ? " open" : ""}`} id="ov" ref={ov} aria-label={t("nav_menu")}>
         {LINKS.map((l, i) => (
           <a key={l.id} href={href(l.id)} style={{ ["--i" as string]: i }} onClick={() => setOpen(false)}>
             {t(l.key)}
@@ -132,7 +150,7 @@ export function Navbar() {
         </button>
         <div style={{ marginTop: 18 }}>{lang("")}</div>
         <small>Bali · UTC+8</small>
-      </div>
+      </nav>
     </>
   );
 }

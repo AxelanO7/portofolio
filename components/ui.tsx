@@ -36,7 +36,7 @@ export function PhoneFrame({ img, width, sd, priority, low, alt = "", className 
   return (
     <div className={`phone ${className}`} style={style}>
       <div className="scr">
-        <div className="sb">
+        <div className="sb" aria-hidden="true">
           <span>9:41</span>
           <i />
         </div>

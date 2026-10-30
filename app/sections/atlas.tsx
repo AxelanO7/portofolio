@@ -5,7 +5,7 @@ import { v } from "@/lib/css";
 /** Expansion as the story: one platform, a city at a time. */
 export default function AtlasSection() {
   return (
-    <section className="sec at" id="atlas" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec at" id="atlas" data-pausable style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>

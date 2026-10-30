@@ -6,6 +6,7 @@ import { EMAIL, WHATSAPP, WHATSAPP_LABEL } from "@/config/site";
 import { ENGAGEMENTS } from "@/config/cases";
 import { useI18n } from "@/lib/i18n";
 import { EV } from "@/lib/events";
+import { isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 const LINKS = [
@@ -29,7 +30,6 @@ export default function ContactSection() {
     const root = sec.current, canvas = cv.current, d = disc.current, head = hw.current, btn = copy.current, tst = toast.current;
     const ctx = canvas?.getContext("2d");
     if (!root || !canvas || !ctx || !d || !head || !btn || !tst) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     let W = 0, H = 0, run = false, raf = 0;
@@ -56,7 +56,7 @@ export default function ContactSection() {
     if (fine) root.addEventListener("pointermove", dm);
 
     const frame = (now: number) => {
-      if (run && !reduce) {
+      if (run && !isStill()) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, W, H);
         rip = rip.filter((r) => now - r.t < 4200);
@@ -100,7 +100,12 @@ export default function ContactSection() {
     if (hio) hio.observe(head); else head.classList.add("go");
 
     const doCopy = () => {
-      const done = () => { tst.classList.add("on"); window.setTimeout(() => tst.classList.remove("on"), 1600); };
+      const done = () => {
+        tst.textContent = "Copied";
+        tst.classList.add("on");
+        window.setTimeout(() => { tst.classList.remove("on"); }, 1600);
+        window.setTimeout(() => { if (!tst.classList.contains("on")) tst.textContent = ""; }, 2000);
+      };
       try { navigator.clipboard.writeText(EMAIL).then(done, done); } catch { done(); }
     };
     btn.addEventListener("click", doCopy);
@@ -135,8 +140,8 @@ export default function ContactSection() {
             <p className="lead">{t("contact_desc")}</p>
             <div className="ct-act">
               <a className="btn pri beam" href={`mailto:${EMAIL}?subject=Intro%20call`} style={v({ "--r": "99px" })}>{t("contact_call")} →</a>
-              <button type="button" className="cpb" ref={copy}>{EMAIL} <i>⧉</i></button>
-              <span className="toast" ref={toast} role="status">Copied</span>
+              <button type="button" className="cpb" ref={copy} aria-label={`Copy ${EMAIL}`}>{EMAIL} <i aria-hidden="true">⧉</i></button>
+              <span className="toast" ref={toast} role="status" />
             </div>
             <div className="ct-act" style={{ marginTop: 14 }}>
               <a className="btn sm" href={WHATSAPP} target="_blank" rel="noopener noreferrer">{t("contact_whatsapp")}</a>

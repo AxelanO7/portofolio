@@ -123,15 +123,16 @@
 .rl .segs i.done::after { transform: none; }
 .rl .segs i.on::after { animation: seg var(--ms, 5s) linear forwards; }
 .rl.hold .segs i.on::after, .rl.hold .ch * { animation-play-state: paused !important; }
+.rl.hold .ch.jump * { animation-play-state: running !important; } /* a chapter picked by hand while paused still plays its entrance */
 @keyframes seg { to { transform: scaleX(1); } }
 .rl .ctl { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 14px; font: 400 12px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: #fff; }
 .rl .ctl .sp { margin-left: auto; }
 .rl .ctl button { border: 1px solid rgba(255, 255, 255, 0.5); background: rgba(0, 0, 0, 0.22); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 12px; }
-.rl .tap { position: absolute; top: 0; bottom: 0; z-index: 10; border: 0; background: transparent; cursor: pointer; }
 .rl.lt .ctl { color: var(--ink-warm); }
 .rl.lt .ctl button { border-color: rgba(28, 20, 7, 0.65); background: rgba(255, 255, 255, 0.4); color: var(--ink-warm); }
 .rl.lt .segs i { background: rgba(28, 20, 7, 0.22); }
 .rl.lt .segs i::after { background: var(--ink-warm); }
+.rl .tap { position: absolute; top: 0; bottom: 0; z-index: 10; border: 0; background: transparent; cursor: pointer; }
 .rl .tap.l { left: 0; width: 32%; }
 .rl .tap.r { right: 0; width: 68%; }
 .rl .ch { position: absolute; inset: 0; padding: clamp(60px, 8vw, 96px) clamp(24px, 5vw, 72px) clamp(54px, 6vw, 76px); display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.4s; color: #fff; }

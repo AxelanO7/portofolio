@@ -74,6 +74,14 @@ h1, h2, h3, h4, p, dl, dd, figure, blockquote, ul, ol { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: balance; }
 :focus-visible { outline: 2px solid var(--cy); outline-offset: 3px; }
+main:focus { outline: 0; } /* the skip link target takes focus but is not a control */
+/* surfaces where cyan would vanish: the menu (cyan), the gold and teal case files, the story player's gold and coral chapters */
+.ov :focus-visible { outline-color: var(--ink); }
+.cs.s2 :focus-visible { outline-color: #fff; }
+.cs.s3 :focus-visible { outline-color: var(--ink-warm); }
+.rl :focus-visible { outline: 2px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px rgba(3, 16, 24, 0.7); }
+.rl.lt :focus-visible { outline-color: var(--ink-warm); box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.7); }
+.rl .tap:focus-visible { outline-offset: -6px; box-shadow: none; }
 ::selection { background: rgba(45, 212, 232, 0.28); color: #fff; }
 
 .skip { position: fixed; left: 12px; top: -60px; z-index: 100001; padding: 15px 18px; border-radius: 10px; background: var(--cy); color: var(--ink); font: 600 14px/1 var(--body); text-decoration: none; transition: top 0.2s; }

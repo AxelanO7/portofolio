@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { PhoneFrame } from "@/components/ui";
 import { phone } from "@/config/media";
 import { EV } from "@/lib/events";
+import { STILL_EV, isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 const NAMES = ["Hello", "Marketplaces", "Proof", "Agents", "Cities", "Say hello"];
@@ -18,7 +19,6 @@ export default function TrailerSection() {
   useEffect(() => {
     const root = reel.current;
     if (!root) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const chs = Array.from(root.querySelectorAll<HTMLElement>(".ch"));
     const segs = Array.from(root.querySelectorAll<HTMLElement>(".segs i"));
     const nm = root.querySelector<HTMLElement>("[data-nm]")!;
@@ -27,12 +27,19 @@ export default function TrailerSection() {
     const tl = root.querySelector<HTMLButtonElement>("[data-tl]")!;
     const tr = root.querySelector<HTMLButtonElement>("[data-tr]")!;
     const replay = root.querySelector<HTMLButtonElement>("[data-replay]")!;
-    let cur = -1, timer = 0, playing = true, started = false, autoPaused = false, startedAt = 0, remaining = 0, visible = false;
+    const live = root.querySelector<HTMLElement>("[data-live]")!;
+    /* with reduced motion (or the page switch) nothing advances by itself until the visitor presses play */
+    let cur = -1, timer = 0, playing = !isStill(), started = false, autoPaused = false, startedAt = 0, remaining = 0, visible = false, optIn = false, announce = false;
+    const auto = () => !isStill() || optIn;
 
     const counters = (ch: HTMLElement) => {
       ch.querySelectorAll<HTMLElement>("[data-to]").forEach((el) => {
         const to = +(el.dataset.to || 0);
         const suf = el.dataset.suf || "";
+        if (isStill()) {
+          el.textContent = to.toLocaleString("en-US") + suf;
+          return;
+        }
         const t0 = performance.now() + 500;
         const f = (t: number) => {
           const p = Math.max(0, Math.min(1, (t - t0) / 1700));
@@ -74,46 +81,60 @@ export default function TrailerSection() {
         }
       });
       cur = i;
+      root.classList.toggle("lt", chs[i].dataset.tone === "light");
+      if (!playing && root.classList.contains("hold")) {
+        chs[i].classList.add("jump");
+        window.setTimeout(() => chs[i].classList.remove("jump"), 2500);
+      }
       nm.textContent = chs[i].dataset.name || "";
       cn.textContent = `${String(i + 1).padStart(2, "0")} / ${String(chs.length).padStart(2, "0")}`;
+      if (announce) live.textContent = `Chapter ${i + 1} of ${chs.length}: ${chs[i].dataset.name || ""}`;
+      announce = false;
       if (chs[i].querySelector("[data-to]")) counters(chs[i]);
       const ms2 = +(chs[i].dataset.ms || 0);
-      if (ms2 > 0 && playing && started && !reduce) schedule(ms2);
+      if (ms2 > 0 && playing && started && auto()) schedule(ms2);
     };
 
-    const pause = () => {
+    /* `freeze` also freezes the running chapter animation (press and hold, pause button, off screen); the page-wide switch does not, its CSS already ends every animation at once */
+    const pause = (freeze = true) => {
       if (!playing) return;
       playing = false;
-      root.classList.add("hold");
+      if (freeze) root.classList.add("hold");
       pp.textContent = "▶";
       pp.setAttribute("aria-label", "Play");
       clearTimeout(timer);
       remaining = Math.max(0, remaining - (performance.now() - startedAt));
     };
-    const play = () => {
+    const play = (explicit?: boolean) => {
       if (playing) return;
+      if (explicit) optIn = true;
       playing = true;
       root.classList.remove("hold");
       pp.textContent = "❚❚";
       pp.setAttribute("aria-label", "Pause");
-      if (+(chs[cur].dataset.ms || 0) > 0 && !reduce) {
+      if (+(chs[cur].dataset.ms || 0) > 0 && auto()) {
         startedAt = performance.now();
-        timer = window.setTimeout(() => go(cur + 1), remaining || 1);
+        timer = window.setTimeout(() => go(cur + 1), remaining > 0 ? remaining : +(chs[cur].dataset.ms || 1));
       }
     };
 
-    const onNext = () => go(cur + 1);
-    const onPrev = () => go(cur - 1);
+    const onNext = () => { announce = true; go(cur + 1); };
+    const onPrev = () => { announce = true; go(cur - 1); };
     const onPP = (e: Event) => {
       e.stopPropagation();
-      playing ? pause() : play();
+      if (playing) pause();
+      else play(true);
+      live.textContent = playing ? "Playing" : "Paused";
     };
     const onReplay = (e?: Event) => {
       e?.stopPropagation();
       started = true;
       playing = true;
+      optIn = true;
+      announce = true;
       root.classList.remove("hold");
       pp.textContent = "❚❚";
+      pp.setAttribute("aria-label", "Pause");
       go(0, true);
     };
     tr.addEventListener("click", onNext);
@@ -153,15 +174,29 @@ export default function TrailerSection() {
       });
     });
 
+    /* arrow keys only when the visitor is not typing or using another widget (terminal, search, palette, tabs) */
     const onKey = (e: KeyboardEvent) => {
-      if (!visible) return;
-      if (e.key === "ArrowRight") go(cur + 1);
-      else if (e.key === "ArrowLeft") go(cur - 1);
+      if (!visible || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t?.closest?.("input, textarea, select, [contenteditable], [role=tablist], [role=listbox], [role=combobox], [role=dialog]")) return;
+      if (e.key === "ArrowRight") { announce = true; go(cur + 1); }
+      else if (e.key === "ArrowLeft") { announce = true; go(cur - 1); }
     };
     window.addEventListener("keydown", onKey);
     const onReel = () => onReplay();
     window.addEventListener(EV.reel, onReel);
+    const onStill = () => {
+      if (isStill()) {
+        optIn = false;
+        pause(false);
+      }
+    };
+    window.addEventListener(STILL_EV, onStill);
 
+    if (!playing) {
+      pp.textContent = "▶";
+      pp.setAttribute("aria-label", "Play");
+    }
     go(0);
     const io = "IntersectionObserver" in window
       ? new IntersectionObserver(
@@ -194,6 +229,7 @@ export default function TrailerSection() {
       replay.removeEventListener("click", onReplay);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener(EV.reel, onReel);
+      window.removeEventListener(STILL_EV, onStill);
       cleanups.forEach((f) => f());
     };
   }, []);
@@ -205,7 +241,7 @@ export default function TrailerSection() {
   ];
 
   return (
-    <section className="sec" id="trailer" data-pausable>
+    <section lang="en" className="sec" id="trailer" data-pausable>
       <div className="wrap">
         <div className="head">
           <div>
@@ -221,7 +257,7 @@ export default function TrailerSection() {
             ))}
           </div>
 
-          <div className="ch c1 on" data-ms="4200" data-name="Hello">
+          <div className="ch c1 on" data-ms="4200" data-name="Hello" role="group" aria-roledescription="slide" aria-label="1 of 6: Hello">
             <div className="ring" />
             <div className="ring b" />
             <div className="h">
@@ -232,7 +268,7 @@ export default function TrailerSection() {
             <p className="sub fade" style={v({ "--d": "1.1s" })}>CTO · Bali · UTC+8</p>
           </div>
 
-          <div className="ch c2" data-ms="5200" data-name="Marketplaces">
+          <div className="ch c2" data-ms="5200" data-name="Marketplaces" role="group" aria-roledescription="slide" aria-label="2 of 6: Marketplaces">
             <div className="h">
               <span className="ml"><span style={v({ "--i": 0 })}>I build</span></span>
               <span className="ml"><span style={v({ "--i": 1 })}>marketplaces.</span></span>
@@ -247,7 +283,7 @@ export default function TrailerSection() {
             </div>
           </div>
 
-          <div className="ch c3" data-ms="5200" data-name="Proof">
+          <div className="ch c3" data-ms="5200" data-name="Proof" data-tone="light" role="group" aria-roledescription="slide" aria-label="3 of 6: Proof">
             <div className="sticker">live in<br />Bali · 2026<br />★</div>
             <div className="h">
               <span className="ml"><span style={v({ "--i": 0 })}>Real traffic.</span></span>
@@ -260,7 +296,7 @@ export default function TrailerSection() {
             </div>
           </div>
 
-          <div className="ch c4" data-ms="6000" data-name="Agents">
+          <div className="ch c4" data-ms="6000" data-name="Agents" role="group" aria-roledescription="slide" aria-label="4 of 6: Agents">
             <div className="grid">
               <div className="h">
                 <span className="ml"><span style={v({ "--i": 0 })}>…and the</span></span>
@@ -278,7 +314,7 @@ export default function TrailerSection() {
             </div>
           </div>
 
-          <div className="ch c5" data-ms="5400" data-name="Cities">
+          <div className="ch c5" data-ms="5400" data-name="Cities" role="group" aria-roledescription="slide" aria-label="5 of 6: Cities">
             <div className="h">
               <span className="ml"><span style={v({ "--i": 0 })}>One platform.</span></span>
               <span className="ml"><span style={v({ "--i": 1 })}>A city at a time.</span></span>
@@ -299,7 +335,7 @@ export default function TrailerSection() {
             </svg>
           </div>
 
-          <div className="ch c6" data-ms="0" data-name="Say hello">
+          <div className="ch c6" data-ms="0" data-name="Say hello" data-tone="light" role="group" aria-roledescription="slide" aria-label="6 of 6: Say hello">
             <div className="h">
               <span className="ml"><span style={v({ "--i": 0 })}>Let’s build</span></span>
               <span className="ml"><span style={v({ "--i": 1 })}>the next one.</span></span>
@@ -314,8 +350,9 @@ export default function TrailerSection() {
           <button className="tap l" type="button" data-tl aria-label="Previous chapter" />
           <button className="tap r" type="button" data-tr aria-label="Next chapter" />
           <div className="ctl">
-            <span data-nm>Hello</span>
-            <span className="sp" data-cn>01 / 06</span>
+            <span className="sr" role="status" aria-live="polite" data-live />
+            <span data-nm aria-hidden="true">Hello</span>
+            <span className="sp" data-cn aria-hidden="true">01 / 06</span>
             <button type="button" data-pp aria-label="Pause">❚❚</button>
           </div>
         </div>

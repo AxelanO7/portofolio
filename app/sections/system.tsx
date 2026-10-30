@@ -34,7 +34,7 @@ export default function SystemSection() {
   AGENTS.forEach((_, k) => wire(`a${k}`, curve(1000, yS(k), 942, 160 + k * 30), k * 0.6, true, true));
 
   return (
-    <section className="sec" id="system" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec" id="system" data-pausable style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>
