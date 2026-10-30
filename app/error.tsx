@@ -17,7 +17,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
         <p style={{ marginTop: 14, maxWidth: "46ch", color: "var(--mut)", fontSize: 18 }}>Try again, or go back to the start.</p>
         <div style={{ marginTop: 32, display: "flex", flexWrap: "wrap", gap: 12 }}>
           <button className="btn pri" type="button" onClick={() => reset()}>Try again</button>
-          <Link className="btn" href="/">Back to the home page</Link>
+          <Link className="btn" href="/">Back to the homepage</Link>
         </div>
       </div>
     </section>

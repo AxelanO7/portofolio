@@ -29,7 +29,7 @@ export default function NotFound() {
           <div className="er">open: this-page: no such page</div>
         </div>
         <div className="acts">
-          <Link className="btn pri" href="/">Back to the home page</Link>
+          <Link className="btn pri" href="/">Back to the homepage</Link>
           <Link className="btn" href="/#cases">See the case studies</Link>
         </div>
         <div className="nf-more">

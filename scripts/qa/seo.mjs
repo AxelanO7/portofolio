@@ -273,7 +273,7 @@ async function checkPage(loc) {
     check(/noindex/.test(pp.meta('robots').join(' ')), '  noindex', '  no noindex');
     check(pp.h1.length === 1, `  h1 "${pp.h1[0]}"`, `  ${pp.h1.length} h1`);
     check(!pp.ld.length, '  no JSON-LD', '  JSON-LD on a 404');
-    if (p === '/definitely-not-a-page') check(/Back to the home page/.test(body), '  link back home', '  no link back home');
+    if (p === '/definitely-not-a-page') check(/Back to the homepage/.test(body), '  link back home', '  no link back home');
   }
 
   console.log('\n@id graph');
