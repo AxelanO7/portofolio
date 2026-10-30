@@ -110,7 +110,7 @@ export default function FxRoot() {
       });
     }
 
-    /* decode effect on small labels, once, when they come into view */
+    /* decode effect on small labels, once, when they come into view. Not in the hero: its text is painted final from the first frame (LCP), never scrambled. */
     if (hasIO && !reduce) {
       const sio = new IntersectionObserver(
         (es) => es.forEach((e) => {
@@ -131,7 +131,7 @@ export default function FxRoot() {
         }),
         { threshold: 0.8 }
       );
-      all(".eyebrow, .dec").forEach((el) => sio.observe(el));
+      all(".eyebrow, .dec").filter((el) => !el.closest("#top")).forEach((el) => sio.observe(el));
       off.push(() => sio.disconnect());
     }
 

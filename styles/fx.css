@@ -4,10 +4,11 @@
 .js .rv { opacity: 0; transform: translateY(18px); }
 .js .rv.in { animation: rv-in 0.75s var(--ease) both; animation-delay: var(--d, 0s); }
 @keyframes rv-in { to { opacity: 1; transform: none; } }
-/* above-the-fold entrance: pure CSS, runs on first paint, no script needed (keeps LCP independent of hydration) */
-.rise { opacity: 0; transform: translateY(18px); animation: rv-in 0.75s var(--ease) both; animation-delay: var(--d, 0s); }
-html.ld-on .rise { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .js .rv, .js .rv.in, .rise { opacity: 1; transform: none; animation: none; } }
+/* above-the-fold entrance: pure CSS and transform only. The text is opaque and painted from the first frame (LCP waits for neither script nor the
+   entrance); with the intro on, the curtain covers it while it settles. */
+.rise { animation: rise-in 0.7s var(--ease) both; animation-delay: var(--d, 0s); }
+@keyframes rise-in { from { transform: translateY(18px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .js .rv, .js .rv.in { opacity: 1; transform: none; animation: none; } .rise { animation: none; } }
 
 /* ---- marquee: the track holds the set twice, so -50% loops with no seam ---- */
 .mq { overflow: hidden; display: flex; }
@@ -97,20 +98,18 @@ html.ld-on .rise { animation-play-state: paused; }
 [data-cur] { cursor: none; }
 @media (hover: none) { .cl { display: none !important; } [data-cur] { cursor: auto; } }
 
-/* ---- intro loader: the prompt mark draws itself, the name settles in, a cyan curtain lifts. Home page, once per session. ---- */
-.ld { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; place-items: center; overflow: hidden; animation: ldfail 0s 4.6s forwards; }
-html.ld-on .ld { display: grid; }
-@keyframes ldfail { to { opacity: 0; visibility: hidden; } }
-.ld.gone { display: none !important; }
-.ld.out { opacity: 0; pointer-events: none; transition: opacity 0.25s; animation: none; }
-.ld-c { position: absolute; inset: 0; background: var(--cy); transform: translateY(101%); }
-.ld.go { animation: ldbg 0.75s forwards; }
-.ld.go .ld-c { animation: ldc 0.75s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
-.ld.go .ld-in { animation: ldf 0.2s 0.2s forwards; }
+/* ---- intro loader: the prompt mark draws itself, the name settles in, a cyan curtain lifts. Home page, once per session.
+   The timeline is plain CSS from the first paint (the head script only switches it on, marks the session and handles the skip), so it never waits for
+   hydration: 0 to 0.9 s the mark draws, 0.9 to 1.65 s the curtain lifts, then the layer is hidden. The hero is already painted underneath. ---- */
+.ld { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; place-items: center; overflow: hidden; }
+html.ld-on .ld { display: grid; animation: ldbg 0.75s 0.9s forwards, ldend 0s 1.65s forwards; }
+html.ld-skip .ld { opacity: 0; pointer-events: none; transition: opacity 0.25s; }
 @keyframes ldbg { 0%, 54% { background: var(--bg); } 55%, 100% { background: transparent; } }
+@keyframes ldend { to { opacity: 0; visibility: hidden; } }
+.ld-c { position: absolute; inset: 0; background: var(--cy); transform: translateY(101%); animation: ldc 0.75s 0.9s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
 @keyframes ldc { 0% { transform: translateY(101%); } 55% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+.ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 6px; animation: ldf 0.2s 1.1s forwards; }
 @keyframes ldf { to { opacity: 0; } }
-.ld-in { position: relative; z-index: 2; display: grid; justify-items: center; gap: 6px; }
 .ld-in svg { width: 84px; height: 84px; overflow: visible; margin-bottom: 14px; }
 .ld-in .tile { fill: var(--cy); transform-box: fill-box; transform-origin: center; transform: scale(0.82); opacity: 0; animation: tilein 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .ld-in path { fill: none; stroke: var(--ink); stroke-width: 7.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash 0.32s 0.3s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
@@ -121,4 +120,5 @@ html.ld-on .ld { display: grid; }
 .ld-t { font: 700 20px/1.1 var(--disp); letter-spacing: -0.02em; opacity: 0; transform: translateY(6px); animation: ldup 0.4s 0.5s ease-out forwards; }
 .ld-s { font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); opacity: 0; transform: translateY(6px); animation: ldup 0.4s 0.62s ease-out forwards; }
 @keyframes ldup { to { opacity: 1; transform: none; } }
+/* reveals that come into view while the curtain is up wait for it to lift */
 html.ld-on .rv.in { animation-play-state: paused; }
