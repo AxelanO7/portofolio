@@ -1,4 +1,4 @@
-/* 404 page. Loaded only by app/not-found.tsx. Same ground, type and buttons as the case pages; no animation. */
+/* 404 page (app/not-found.tsx). Same ground, type and buttons as the case pages; no animation. */
 .nf { padding: clamp(48px, 9vw, 112px) 0 clamp(64px, 10vw, 128px); }
 .nf .wrap { max-width: 860px; }
 .nf-code {

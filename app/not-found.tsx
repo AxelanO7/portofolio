@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CASES } from "@/config/cases";
-import "@/styles/notfound.css";
 
 /**
  * Next sends the 404 status and adds noindex itself. The rest of the site's head (description, canonical,
