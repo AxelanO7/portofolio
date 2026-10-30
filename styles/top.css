@@ -24,13 +24,13 @@
 .ov {
   position: fixed; left: 0; right: 0; top: 64px; bottom: 0; z-index: 55; background: var(--cy); color: var(--ink);
   padding: 26px max(20px, env(safe-area-inset-left, 0px)) calc(26px + env(safe-area-inset-bottom, 0px));
-  display: flex; flex-direction: column; gap: 4px; clip-path: circle(0 at calc(100% - 38px) -20px); visibility: hidden;
+  display: flex; flex-direction: column; gap: 0; clip-path: circle(0 at calc(100% - 38px) -20px); visibility: hidden;
   transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s 0.7s; overflow: auto;
 }
 .ov.open { clip-path: circle(170% at calc(100% - 38px) -20px); visibility: visible; transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.2, 1); }
 .ov a, .ov button.ovk {
   font: 800 clamp(30px, 9vw, 44px) / 1.15 var(--disp); letter-spacing: -0.04em; text-decoration: none; color: inherit;
-  opacity: 0; transform: translateY(18px); transition: all 0.5s; text-align: left;
+  opacity: 0; transform: translateY(18px); transition: all 0.5s; text-align: left; display: flex; align-items: center; min-height: 44px;
 }
 .ov.open a, .ov.open button.ovk { opacity: 1; transform: none; transition-delay: calc(var(--i) * 0.06s + 0.25s); }
 .ov small { font: 500 12px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-top: auto; padding-top: 20px; }
@@ -40,6 +40,8 @@
   .nv .nv-cta { margin-left: 0; }
 }
 @media (min-width: 1021px) { .ov { display: none; } }
+@media (max-width: 380px) { .nv .wrap { gap: 12px; } .brand { font-size: 16px; gap: 9px; } .nv .btn.sm { padding: 0 12px; } }
+@media (max-width: 339px) { .nv .nv-cta { display: none; } }
 
 /* ============ hero ============ */
 .hr { overflow: hidden; isolation: isolate; padding: 0 !important; }

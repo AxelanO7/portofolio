@@ -76,7 +76,7 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
 :focus-visible { outline: 2px solid var(--cy); outline-offset: 3px; }
 ::selection { background: rgba(45, 212, 232, 0.28); color: #fff; }
 
-.skip { position: fixed; left: 12px; top: -60px; z-index: 100001; padding: 11px 16px; border-radius: 10px; background: var(--cy); color: var(--ink); font: 600 14px/1 var(--body); text-decoration: none; transition: top 0.2s; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 100001; padding: 15px 18px; border-radius: 10px; background: var(--cy); color: var(--ink); font: 600 14px/1 var(--body); text-decoration: none; transition: top 0.2s; }
 .skip:focus { top: 12px; }
 /* visually hidden, still read by screen readers */
 .sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
@@ -135,6 +135,15 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
 @keyframes shine { to { background-position: -250% 0; } }
 
 .logo-i { width: 1em; height: 1em; fill: currentColor; flex: none; }
+
+/* ---- touch screens: small controls get a hit area of at least 44 x 44 px (invisible, centred on the control), the look does not change ---- */
+@media (pointer: coarse) {
+  .brand, .nv .btn.sm, .hb, .lang, .rl .ctl button, .cs .more, .bd-fl button, .tm-sugg button, .ct-act .btn.sm, .ft button, .cp a.back { position: relative; }
+  .brand::after, .nv .btn.sm::after, .hb::after, .lang::after, .rl .ctl button::after, .cs .more::after, .bd-fl button::after, .tm-sugg button::after, .ct-act .btn.sm::after, .ft button::after, .cp a.back::after {
+    content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%);
+  }
+  .cp a.back { display: inline-block; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

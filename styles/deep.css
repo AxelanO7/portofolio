@@ -59,7 +59,7 @@
 .bd-rows .mq { --g: 12px; }
 .bd-th { width: 176px; height: auto; aspect-ratio: 16 / 10; border-radius: 11px; border: 1px solid var(--line); display: block; background: var(--bg-1); }
 .bd-bar { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line); background: var(--bg-1); border-radius: 14px; padding: 0 16px; height: 54px; max-width: 680px; }
-.bd-bar input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--fg); font: 400 15px var(--mono); }
+.bd-bar input { flex: 1; align-self: stretch; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--fg); font: 400 15px var(--mono); }
 .bd-bar span { font: 400 12px var(--mono); color: var(--mut); white-space: nowrap; }
 .bd-fl { display: flex; gap: 8px; margin: 14px 0 22px; flex-wrap: wrap; }
 .bd-fl button { font: 500 12.5px/1 var(--mono); padding: 9px 13px; border-radius: 99px; border: 1px solid var(--line); background: var(--bg-1); color: var(--fg); }
@@ -100,7 +100,9 @@ a.bd-card:hover .bd-media img.cover { transform: scale(1.06); }
 .tm-body .dm { color: #7f8da0; }
 .tin { display: flex; gap: 10px; align-items: center; }
 .tin input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: inherit; font: inherit; caret-color: var(--cy); }
+@media (pointer: coarse) { .tin input { min-height: 44px; margin: -9px 0; } .bd-fl { row-gap: 14px; } } /* touch: hit areas of wrapped chip rows do not overlap */
 .tm-sugg { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+@media (pointer: coarse) { .tm-sugg { row-gap: 14px; } }
 .tm-sugg button { font: 400 12px/1 var(--mono); padding: 8px 11px; border-radius: 7px; border: 1px solid var(--line); background: var(--bg-1); color: var(--fg); }
 .dfs { display: grid; gap: 16px; }
 .df { border: 1px solid var(--line); border-radius: 16px; background: var(--bg-1); overflow: hidden; }
