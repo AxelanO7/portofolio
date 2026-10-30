@@ -13,7 +13,7 @@
 .ag-term header span { margin-left: auto; }
 .ag-log { height: 358px; overflow: hidden; padding: 14px 16px; font: 400 12.5px/1.85 var(--mono); display: flex; flex-direction: column; justify-content: flex-end; }
 .ag-log p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: slide 0.5s both; }
-.ag-log .ts { color: #5f7d96; }
+.ag-log .ts { color: #7391aa; }
 .ag-log .a { color: #ffb199; }
 .ag-log .ok { color: #59d6a3; }
 .ag-log .w { color: #ffd166; }
@@ -64,7 +64,7 @@
 .bd-fl { display: flex; gap: 8px; margin: 14px 0 22px; flex-wrap: wrap; }
 .bd-fl button { font: 500 12.5px/1 var(--mono); padding: 9px 13px; border-radius: 99px; border: 1px solid var(--line); background: var(--bg-1); color: var(--fg); }
 .bd-fl button[aria-pressed="true"] { background: var(--cy); border-color: var(--cy); color: var(--ink); }
-.bd-fl button small { opacity: 0.8; margin-left: 4px; }
+.bd-fl button small { font-size: 11px; opacity: 0.8; margin-left: 4px; }
 .bd-fl button[aria-pressed="true"] small { opacity: 1; }
 .bd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 46%), 1fr)); gap: 14px; }
 .bd-card { position: relative; display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-1); overflow: hidden; text-decoration: none; color: inherit; animation: slide 0.45s both; transition: border-color 0.25s, transform 0.25s; }
@@ -76,7 +76,7 @@ a.bd-card:hover .bd-media img.cover { transform: scale(1.06); }
 .bd-media.posters img { height: 100%; width: auto; border-radius: 8px; box-shadow: 0 10px 24px -10px #000; border: 1px solid rgba(255, 255, 255, 0.14); }
 .bd-media.tile { background: radial-gradient(120% 120% at 0% 0%, var(--t1, #12303f), var(--t2, #07121a)); }
 .bd-media.tile b { font: 800 clamp(44px, 7vw, 66px) / 1 var(--disp-o); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5); }
-.bd-media.tile i { position: absolute; left: 12px; bottom: 10px; font: 500 10.5px/1 var(--mono); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
+.bd-media.tile i { position: absolute; left: 12px; bottom: 10px; font: 500 11px/1 var(--mono); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
 .bd-body { padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start; flex: 1; }
 .bd-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .bd-top h3 { font: 600 16px/1.2 var(--disp); letter-spacing: -0.02em; }
@@ -112,7 +112,7 @@ a.bd-card:hover .bd-media img.cover { transform: scale(1.06); }
 .js .df .ln { opacity: 0; }
 .js .df.in .ln { animation: fi 0.45s both; animation-delay: calc(var(--i) * 0.28s + 0.2s); }
 @keyframes fi { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; } }
-.df .ln i { font-style: normal; color: var(--mut); text-align: right; padding-right: 10px; opacity: 0.7; }
+.df .ln i { font-style: normal; color: #7d93a1; text-align: right; padding-right: 10px; } /* line numbers: dimmer than the code, still >= 4.5:1 */
 .df .ln em { font-style: normal; text-align: center; color: var(--mut); }
 .df .ln span { padding: 0 14px 0 4px; white-space: pre-wrap; word-break: break-word; }
 .df .ln.a { background: rgba(79, 224, 189, 0.1); }
