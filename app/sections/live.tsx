@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import OnView from "@/components/on-view";
 import { Logo } from "@/components/ui";
+import { ARSENAL, TOOL_COUNT } from "@/config/arsenal";
 import { LOGO } from "@/config/logos";
 import { FEED_LINES, ORBIT_TOOLS, SURFACES } from "@/config/site";
 import { AGENTS, WEB3 } from "@/config/work";
@@ -169,7 +170,7 @@ function Orbit() {
     <div className="bn-t bn-orb" data-spot>
       <div className="tx"><span className="bn-e">Tools of the trade</span></div>
       <div className="bn-orbit">
-        <div className="ctr">82<small>tools, 10 stacks</small></div>
+        <div className="ctr">{TOOL_COUNT}<small>tools, {ARSENAL.length} stacks</small></div>
         {ring(ORBIT_TOOLS.slice(0, 4), 70, 34)}
         {ring(ORBIT_TOOLS.slice(4, 12), 118, 56, true)}
       </div>
