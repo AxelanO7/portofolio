@@ -70,7 +70,7 @@
 .ct-dots { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
 .ct-disc { position: absolute; left: 0; top: 0; width: min(520px, 80vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(233, 194, 125, 0.28), rgba(233, 194, 125, 0) 66%); z-index: -1; pointer-events: none; will-change: transform; }
 .ct-hw { position: relative; margin-bottom: clamp(26px, 4vw, 44px); }
-.ct-h { font: 800 clamp(46px, 9vw, 150px) / 0.92 var(--disp); letter-spacing: -0.055em; }
+.ct-h { font: 800 clamp(46px, 9vw, 150px) / 0.92 var(--disp-o); letter-spacing: -0.055em; } /* both layers share the static font so they overlay exactly */
 .ct-h.o { color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5); }
 .ct-h.f { position: absolute; left: 0; top: 0; background: linear-gradient(100deg, var(--gold), var(--coral)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 0; clip-path: inset(0 100% 0 0); }
 .ct-hw.go .ct-h.f { animation: curtain 1.3s cubic-bezier(0.7, 0, 0.2, 1) forwards; }

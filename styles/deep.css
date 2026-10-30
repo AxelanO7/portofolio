@@ -75,7 +75,7 @@ a.bd-card:hover .bd-media img.cover { transform: scale(1.06); }
 .bd-media.posters { gap: 6%; grid-auto-flow: column; padding: 8% 10%; background: radial-gradient(90% 90% at 50% 0%, #12303f, #07121a); }
 .bd-media.posters img { height: 100%; width: auto; border-radius: 8px; box-shadow: 0 10px 24px -10px #000; border: 1px solid rgba(255, 255, 255, 0.14); }
 .bd-media.tile { background: radial-gradient(120% 120% at 0% 0%, var(--t1, #12303f), var(--t2, #07121a)); }
-.bd-media.tile b { font: 800 clamp(44px, 7vw, 66px) / 1 var(--disp); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5); }
+.bd-media.tile b { font: 800 clamp(44px, 7vw, 66px) / 1 var(--disp-o); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5); }
 .bd-media.tile i { position: absolute; left: 12px; bottom: 10px; font: 500 10.5px/1 var(--mono); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); }
 .bd-body { padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start; flex: 1; }
 .bd-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }

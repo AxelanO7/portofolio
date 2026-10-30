@@ -140,7 +140,7 @@
 .rl .c1 .ring.b { right: 2%; top: -8%; width: 40%; animation-duration: 9s; animation-direction: reverse; opacity: 0.5; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .rl .c1 .h { font-size: clamp(40px, 10vw, 150px); }
-.rl .c1 .o { color: transparent; -webkit-text-stroke: 2px #fff; }
+.rl .c1 .o { font-family: var(--disp-o); color: transparent; -webkit-text-stroke: 2px #fff; }
 .rl .c2 { background: linear-gradient(135deg, #0d7a8f, #0a4659); }
 .rl .c2 .h { font-size: clamp(28px, 5.2vw, 76px); max-width: 50%; }
 .rl .c2 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; max-width: 26em; }

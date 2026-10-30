@@ -1,3 +1,14 @@
+/* Outlined text (-webkit-text-stroke) uses this static Outfit 800 (OFL, from @fontsource/outfit): the variable
+   font keeps overlapping contours, and the stroke draws them as extra lines inside the letters. Static builds have them merged.
+   Bundled by the CSS pipeline (hashed, long cache). Falls back to the variable font until it arrives. */
+@font-face {
+  font-family: "Outfit Outline";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("./fonts/outfit-latin-800-normal.woff2") format("woff2");
+}
+
 /* ------------------------------------------------------------------
    Design tokens. One family: deep teal-navy ground, a single cyan as the
    interface colour (same family as Guestlist Ticket), champagne gold for
@@ -25,6 +36,7 @@
   --ink: #031018;
   --ink-warm: #1c1407;
   --disp: "Outfit Variable", Outfit, system-ui, sans-serif;
+  --disp-o: "Outfit Outline", "Outfit Variable", Outfit, system-ui, sans-serif; /* outlined text only, see @font-face above */
   --body: Inter, system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -66,6 +78,8 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
 
 .skip { position: fixed; left: 12px; top: -60px; z-index: 100001; padding: 11px 16px; border-radius: 10px; background: var(--cy); color: var(--ink); font: 600 14px/1 var(--body); text-decoration: none; transition: top 0.2s; }
 .skip:focus { top: 12px; }
+/* visually hidden, still read by screen readers */
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 
 .wrap {
   width: 100%;
@@ -78,8 +92,6 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
 
 .sec { position: relative; padding: clamp(64px, 8vw, 108px) 0; }
 .sec[data-vis="0"] *,
-/* visually hidden, still read by screen readers */
-.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .sec[data-vis="0"] *::before,
 .sec[data-vis="0"] *::after { animation-play-state: paused !important; }
 
