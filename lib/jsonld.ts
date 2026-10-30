@@ -30,8 +30,8 @@ const person = (): Json => ({
   name: SITE_NAME,
   alternateName: "Axel",
   url: HOME,
-  // the About photo (public/about.webp is 400x500)
-  image: { "@type": "ImageObject", url: abs("/about.webp"), contentUrl: abs("/about.webp"), width: 400, height: 500 },
+  // the About photo (public/about.webp, 400x500: above the 50,000 pixels Google asks for)
+  image: abs("/about.webp"),
   description: "CTO at Guestlist Ticket. Builds marketplaces and the AI agents that run them.",
   jobTitle: "Chief Technology Officer",
   worksFor: { "@type": "Organization", name: "Guestlist Ticket", alternateName: "Guestlist", url: "https://guestlistticket.com" },
@@ -84,7 +84,7 @@ export function caseGraph(c: Case): Json {
         mainEntityOfPage: { "@type": "WebPage", "@id": url },
         headline: c.title,
         description: c.summary,
-        image: { "@type": "ImageObject", url: abs(img.url), width: img.width, height: img.height },
+        image: abs(img.url),
         datePublished: c.published,
         dateModified: c.updated,
         inLanguage: "en",

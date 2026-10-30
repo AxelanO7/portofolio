@@ -61,9 +61,10 @@ The brand mark is a terminal prompt (chevron + cursor) on a cyan rounded tile, d
 
 The scripts use Playwright. They check console errors and sideways overflow (`site.mjs`), blurry images (`blur-audit.mjs`), real touch scrolling over every interactive area (`swipe.mjs`), loading time on a throttled iPhone profile (`throttle.mjs`) and anchor offsets (`anchors.mjs`).
 
-Two more need no browser, only a running build (`seo.mjs`) or the network (`links.mjs`):
+Three more need no browser, only a running build (`seo.mjs`, `schema.mjs`) or the network (`links.mjs`):
 
 - `seo.mjs`: titles, descriptions, canonicals, Open Graph and Twitter tags, JSON-LD (valid JSON, required properties by type, `@id` links, no phone or e-mail), sitemap, robots, `llms.txt`, manifest, the 404 status, and the public numbers on the page against `config/`.
+- `schema.mjs`: the JSON-LD of the pages against the schema.org vocabulary (unknown types, properties on the wrong type).
 - `links.mjs`: every external URL in `config/`, `app/`, `components/` and `lib/`, fetched like a browser. Reports dead, parked and redirecting links and where each is used.
 
 ```bash
@@ -73,6 +74,7 @@ node scripts/qa/site.mjs http://localhost:3000/
 node scripts/qa/swipe.mjs http://localhost:3000/
 node scripts/qa/throttle.mjs "http://localhost:3000/?nointro" 5
 node scripts/qa/seo.mjs http://localhost:3000
+node scripts/qa/schema.mjs http://localhost:3000/ http://localhost:3000/cases/seo
 node scripts/qa/links.mjs --out /tmp/links
 ```
 
