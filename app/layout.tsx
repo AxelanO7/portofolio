@@ -7,45 +7,16 @@ import FxRoot from "@/components/fx-root";
 import Intro from "@/components/intro";
 import Palette from "@/components/palette";
 import CursorLabel from "@/components/cursor-label";
-import { TOOL_COUNT } from "@/config/arsenal";
-import { SITE_URL } from "@/config/site";
+import { rootMetadata } from "@/lib/seo";
 import { Providers } from "./providers";
 
-const TITLE = "Jeremia Axelano · CTO, marketplaces and AI agents";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: { default: TITLE, template: "%s · Jeremia Axelano" },
-  description: `Jeremia Axelano is a CTO and full-stack engineer in Bali. Guestlist Ticket on web and mobile, AI agents in daily use, 44 Web3 sites and a ${TOOL_COUNT}-tool arsenal, built end to end.`,
-  openGraph: {
-    title: TITLE,
-    description: "A nightlife marketplace on web and mobile, a fleet of AI agents and 44 Web3 sites. One builder across the whole stack.",
-    url: SITE_URL,
-    siteName: "Jeremia Axelano",
-    type: "website",
-    images: [{ url: "/og-image.jpg?v=2", width: 1200, height: 630, alt: "Jeremia Axelano, CTO, marketplaces and AI agents" }],
-  },
-  twitter: { card: "summary_large_image", title: TITLE, images: ["/og-image.jpg?v=2"] },
-  alternates: { canonical: SITE_URL },
-};
+/** Title, descriptions, canonical, share card and robots: lib/seo.ts. Structured data: lib/jsonld.ts, rendered per page. */
+export const metadata: Metadata = rootMetadata;
 
 export const viewport: Viewport = {
   themeColor: "#050f16",
   width: "device-width",
   initialScale: 1,
-};
-
-const PERSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jeremia Axelano",
-  alternateName: "Axel",
-  jobTitle: "Chief Technology Officer",
-  url: SITE_URL,
-  worksFor: { "@type": "Organization", name: "Guestlist", url: "https://guestlistticket.com" },
-  address: { "@type": "PostalAddress", addressLocality: "Denpasar", addressRegion: "Bali", addressCountry: "ID" },
-  knowsAbout: ["Marketplace platforms", "AI agents", "Mobile apps", "Cloud infrastructure", "Web3"],
-  sameAs: ["https://www.linkedin.com/in/jeremia-axelano/", "https://github.com/AxelanO7", "https://link.axelano.space"],
 };
 
 /**
@@ -62,7 +33,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
       </head>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_LD) }} />
         <a className="skip" href="#main">Skip to content</a>
         <Providers>
           <Intro />

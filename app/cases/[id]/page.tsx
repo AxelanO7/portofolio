@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CASES, ENGAGEMENTS } from "@/config/cases";
-import { EMAIL, SITE_URL } from "@/config/site";
+import { EMAIL } from "@/config/site";
 import { StatusPill } from "@/components/ui";
+import JsonLd from "@/components/json-ld";
+import { caseGraph } from "@/lib/jsonld";
+import { caseMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -13,22 +16,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
   const c = CASES.find((x) => x.id === params.id);
-  if (!c) return {};
-  const url = `${SITE_URL}/cases/${c.id}`;
-  return {
-    title: c.title,
-    description: c.summary,
-    alternates: { canonical: url },
-    openGraph: {
-      title: `${c.title} · Jeremia Axelano`,
-      description: c.summary,
-      url,
-      siteName: "Jeremia Axelano",
-      type: "article",
-      images: [{ url: "/og-image.jpg?v=2", width: 1200, height: 630, alt: c.title }],
-    },
-    twitter: { card: "summary_large_image", title: c.title, description: c.summary, images: ["/og-image.jpg?v=2"] },
-  };
+  return c ? caseMetadata(c) : {};
 }
 
 export default function CasePage({ params }: { params: { id: string } }) {
@@ -45,6 +33,7 @@ export default function CasePage({ params }: { params: { id: string } }) {
 
   return (
     <article className="cp">
+      <JsonLd data={caseGraph(c)} />
       <div className="wrap">
         <Link href="/#cases" className="back">← All case studies</Link>
         <div style={{ marginTop: 26 }}>

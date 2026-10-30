@@ -15,6 +15,10 @@ export interface Case {
   /** honest note on what is not done or not measured yet */
   next: string;
   status: Status;
+  /** ISO 8601 with offset: when the case page first went online (git 201d647). Feeds Article.datePublished and og:article. */
+  published: string;
+  /** ISO 8601 with offset: last change to the case text (git 201d647). Bump it whenever the text changes. Feeds dateModified and the sitemap. */
+  updated: string;
 }
 
 /**
@@ -46,6 +50,8 @@ export const CASES: Case[] = [
     ],
     next: "Performance numbers will be added once they are re-measured on the current release.",
     status: "live",
+    published: "2026-10-11T17:39:12+08:00",
+    updated: "2026-10-11T17:39:12+08:00",
   },
   {
     id: "agents",
@@ -62,6 +68,8 @@ export const CASES: Case[] = [
     ],
     next: "Turning on the support agent in a small, supervised pilot, then widening it once the answers hold up.",
     status: "live",
+    published: "2026-10-11T17:39:12+08:00",
+    updated: "2026-10-11T17:39:12+08:00",
   },
   {
     id: "city",
@@ -78,6 +86,8 @@ export const CASES: Case[] = [
     ],
     next: "Production launch in October 2026. Numbers for the new market will follow once it is live.",
     status: "build",
+    published: "2026-10-11T17:39:12+08:00",
+    updated: "2026-10-11T17:39:12+08:00",
   },
 ];
 

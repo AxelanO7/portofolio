@@ -59,6 +59,9 @@ export const AGENTS: Item[] = [
   I("ag12", "Admin Copilot and Event Data v2", "Next on the roadmap, each with a named owner and a cost case.", "planned"),
 ];
 
+/** Agents counted as "in daily use": live, or used inside the team every day. Meta text and the share cards read this, so they follow the list above. */
+export const AGENTS_DAILY = AGENTS.filter((a) => a.status === "live" || a.status === "internal").length;
+
 /* ------------------------------------------------------------------ */
 /* Mobile apps                                                         */
 /* ------------------------------------------------------------------ */
