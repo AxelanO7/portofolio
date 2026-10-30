@@ -78,6 +78,8 @@ h1, h2, h3, h4 { font-family: var(--disp); letter-spacing: -0.03em; text-wrap: b
 
 .sec { position: relative; padding: clamp(64px, 8vw, 108px) 0; }
 .sec[data-vis="0"] *,
+/* visually hidden, still read by screen readers */
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .sec[data-vis="0"] *::before,
 .sec[data-vis="0"] *::after { animation-play-state: paused !important; }
 
