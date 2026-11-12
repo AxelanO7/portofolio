@@ -53,7 +53,7 @@ export const CASES: Case[] = [
     next: "Performance numbers will be added once they are re-measured on the current release.",
     status: "live",
     published: "2026-10-11T17:39:12+08:00",
-    updated: "2026-11-13T09:00:00+08:00",
+    updated: "2026-11-13T05:00:00+08:00",
   },
   {
     id: "agents",
@@ -76,7 +76,7 @@ export const CASES: Case[] = [
   {
     id: "city",
     title: "New cities, from a spreadsheet",
-    summary: "Taking a nightlife marketplace from Bali to four US cities: a daily import pipeline with human approval, USD pricing and a platform that is multi-city by design.",
+    summary: "Taking a nightlife marketplace from Bali to four US cities: a daily import pipeline with human approval, USD pricing and a multi-city platform.",
     problem: "Opening a new market meant weeks of manual venue research.",
     constraints: "Event data comes from third parties in different formats and currencies, nothing may go live without approval, and a venue that has not confirmed a partnership gets a plain listing page, not promises about entry or guest lists.",
     approach: "A daily import pipeline that finds, checks and cites venue and event data, then asks a person to approve before anything goes live. USD pricing and multi-currency checkout, a city and country picker, region filters in the back office and SEO groundwork for each new market. In November 2026 the first US venues went live as listing pages with a link to the official site.",
@@ -90,7 +90,7 @@ export const CASES: Case[] = [
     next: "The US pages are listings for now: no packages, events or booking yet. Traffic numbers for the new market will follow once there is enough to measure.",
     status: "live",
     published: "2026-10-11T17:39:12+08:00",
-    updated: "2026-11-13T09:00:00+08:00",
+    updated: "2026-11-13T05:00:00+08:00",
   },
 ];
 

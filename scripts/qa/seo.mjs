@@ -134,7 +134,7 @@ async function checkClaims(entries) {
     atlas += ' ' + [...html.matchAll(/<article class="at-c[^"]*"[\s\S]*?<\/article>/g)].map((m) => m[0].replace(/<[^>]+>/g, ' ')).join(' ');
     const metas = ['description', 'og:description', 'twitter:description', 'og:image:alt'].flatMap((k) => p.meta(k));
     // the filter bar prints a count after each label ("Guestlist 6 Mobile apps 9"), which reads like "6 Mobile apps"; it is computed from the data anyway
-    text += ' ' + html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<div class="bd-fl">[\s\S]*?<\/div>|<article class="at-c[^"]*"[\s\S]*?<\/article>/g, ' ').replace(/<[^>]+>/g, ' ') + ' ' + metas.join(' ') + ' ' + [...html.matchAll(/aria-label="([^"]*)"/g)].map((m) => dec(m[1])).join(' ');
+    text += ' ' + html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<div class="bd-fl"[^>]*>[\s\S]*?<\/div>|<article class="at-c[^"]*"[\s\S]*?<\/article>/g, ' ').replace(/<[^>]+>/g, ' ') + ' ' + metas.join(' ') + ' ' + [...html.matchAll(/aria-label="([^"]*)"/g)].map((m) => dec(m[1])).join(' ');
   }
   text = dec(text).replace(/\s+/g, ' ');
   atlas = dec(atlas).replace(/\s+/g, ' ');
