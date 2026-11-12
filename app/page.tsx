@@ -1,3 +1,5 @@
+import JsonLd from "@/components/json-ld";
+import { homeGraph } from "@/lib/jsonld";
 import HeroSection from "./sections/hero";
 import Ribbon from "./sections/ribbon";
 import TrailerSection from "./sections/trailer";
@@ -17,6 +19,7 @@ import ContactSection from "./sections/contact";
 export default function Home() {
   return (
     <>
+      <JsonLd data={homeGraph()} />
       <HeroSection />
       <Ribbon />
       <TrailerSection />

@@ -13,3 +13,4 @@
 @import "./mid.css";
 @import "./deep.css";
 @import "./end.css";
+@import "./notfound.css"; /* 404 page: app/not-found.tsx. Imported here, not there, so it ships inside the one stylesheet instead of a second request on every page. */

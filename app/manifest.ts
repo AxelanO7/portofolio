@@ -2,10 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/",
     name: "Jeremia Axelano",
     short_name: "Axelano",
     description: "CTO, marketplaces and AI agents. Bali, UTC+8.",
+    lang: "en",
     start_url: "/",
+    scope: "/",
     display: "standalone",
     background_color: "#050f16",
     theme_color: "#050f16",

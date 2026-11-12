@@ -50,7 +50,7 @@ export const AGENTS: Item[] = [
   I("ag3", "Error Alert Agents", "Every failed request becomes a plain-language alert with a help code and a paste-ready AI prompt.", "live", { label: "production" }),
   I("ag4", "Agent Board and Event Import", "AI reads venue pages and proposes each field with its source, and a person approves before anything goes live. Also pulls events from partner sites and a ticketing catalog into staging.", "internal"),
   I("ag5", "Testing Agent", "End-to-end tests, hourly smoke checks and an alert when the database stops matching the code. Being rebuilt for staging.", "build"),
-  I("ag6", "Social Analytics Agent", "A headless Claude Code job reads Instagram, Facebook and TikTok metrics through MCP and summarises them.", "internal"),
+  I("ag6", "Social Analytics Agent", "A headless Claude Code job reads Instagram, Facebook and TikTok metrics through MCP and summarizes them.", "internal"),
   I("ag7", "Pending-Conversion Analyst", "Explains why bookings stay unpaid and suggests fixes, with a weekly summary for the founder.", "build"),
   I("ag8", "Lerka", "A multi-model assistant: ask once, several AI models answer, and a judge merges them into one reply. Includes a podcast companion with voice.", "beta"),
   I("ag9", "Claude Code Team Setup", "Persistent remote coding sessions, cost-aware model routing and a shared status dashboard.", "internal"),
@@ -58,6 +58,9 @@ export const AGENTS: Item[] = [
   I("ag11", "Customer-Support Agent", "Answers guest questions on WhatsApp from trained replies, with an AI fallback. Staff always win: it steps in only when nobody replies in time, and refunds and complaints go to a person.", "build"),
   I("ag12", "Admin Copilot and Event Data v2", "Next on the roadmap, each with a named owner and a cost case.", "planned"),
 ];
+
+/** Agents counted as "in daily use": live, or used inside the team every day. Meta text and the share cards read this, so they follow the list above. */
+export const AGENTS_DAILY = AGENTS.filter((a) => a.status === "live" || a.status === "internal").length;
 
 /* ------------------------------------------------------------------ */
 /* Mobile apps                                                         */
@@ -71,7 +74,7 @@ export const MOBILE: Item[] = [
   I("pay", "Teacher Payroll", "School attendance, leave and digital payroll app.", "delivered", { img: "payroll", imgM: "payroll" }),
   I("pdam", "PDAM Bangli", "Customer app for the regional water utility.", "delivered"),
   I("att", "Mobile Attendance", "Staff attendance app with a payroll calculator companion.", "delivered"),
-  I("wimo", "Wimo", "Mobile app built for the jeep-project organisation.", "internal"),
+  I("wimo", "Wimo", "Mobile app built for the jeep-project organization.", "internal"),
   I("java", "Android Java Apps", "Seven native Android apps: BMI, hotel booking, ordering, campus, color learning, learning-style detector and a coffee shop.", "delivered"),
 ];
 
@@ -110,7 +113,8 @@ export const SYSTEMS: Item[] = [
   I("baling", "Balingkang", "Web system with a separate backend and frontend.", "delivered"),
   I("perpus", "Cortis Library", "Library management web app.", "delivered"),
   I("ums", "UMS", "Management system with a single-page frontend and a REST backend.", "delivered"),
-  I("moni", "Monitrack", "Tracking web app, deployed on Vercel.", "delivered", { label: "monitrack-mu.vercel.app", url: "https://monitrack-mu.vercel.app" }),
+  // monitrack-mu.vercel.app answers 404 DEPLOYMENT_NOT_FOUND (checked 2026-10-30), so the link is off. Put label and url back if it is deployed again.
+  I("moni", "Monitrack", "Tracking web app, deployed on Vercel.", "delivered"),
 ];
 
 /* ------------------------------------------------------------------ */
@@ -166,7 +170,7 @@ export const WEB3: Item[] = [
   W("academy-coin", "Academy Coin", "TBA", "academy.axelano.space", "vite", "concept", "Gold-black royal cat academy with a report card."),
   W("aurum-coin", "Aurum", "$AURUM", "aurum-coin.vercel.app", "vite", "concept", "Gold-and-white quality mark."),
   W("bob-coin", "Built On Brew", "$BOB", "bob-coin.vercel.app", "vite", "concept", "Charcoal and gold editorial with a brewing timeline."),
-  W("caliber-coin", "Caliber", "$CAL", "caliber-coin.vercel.app", "vite", "concept", "Watch-catalogue look with a provenance ledger."),
+  W("caliber-coin", "Caliber", "$CAL", "caliber-coin.vercel.app", "vite", "concept", "Watch-catalog look with a provenance ledger."),
   W("caturn", "Caturn", "$CATURN", "caturn-red.vercel.app", "vite", "concept", "Saturn-ring galaxy in navy and gold."),
   W("chip-coin", "Chip", "$CHIP", "chip-coin.vercel.app", "vite", "concept", "Ranger field journal in pine and rust."),
   W("ember-coin", "Ember", "$EMBER", "ember-coin.vercel.app", "vite", "concept", "Whitepaper style with an on-chain burn tracker."),

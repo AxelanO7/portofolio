@@ -1,0 +1,22 @@
+/* 404 page (app/not-found.tsx). Same ground, type and buttons as the case pages; no animation. */
+.nf { padding: clamp(48px, 9vw, 112px) 0 clamp(64px, 10vw, 128px); }
+.nf .wrap { max-width: 860px; }
+.nf-code {
+  margin-top: 18px;
+  font: 800 clamp(96px, 24vw, 208px) / 0.86 var(--disp);
+  letter-spacing: -0.055em;
+  background: linear-gradient(100deg, var(--gold) 20%, var(--gold-hi) 45%, #d9a85c 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nf h1 { margin-top: 14px; }
+.nf .lead { margin-top: 14px; max-width: 46ch; color: var(--mut); font-size: 18px; }
+.nf-term { margin-top: 30px; max-width: 460px; padding: 14px 16px; border: 1px solid #17324a; border-radius: 14px; background: #040d14; font: 400 13.5px/1.75 var(--mono); color: #d7e1ee; overflow-wrap: anywhere; }
+.nf-term .pr { color: #7fe0b4; }
+.nf-term .er { color: #ff8a80; }
+.nf .acts { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+.nf-more { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); }
+.nf-more ul { margin-top: 12px; display: grid; gap: 2px; }
+.nf-more a { display: inline-block; padding: 9px 0; color: var(--fg); text-decoration: none; border-bottom: 1px solid transparent; }
+.nf-more a:hover { color: var(--cy-hi); border-bottom-color: var(--cy-hi); }

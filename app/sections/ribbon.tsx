@@ -1,6 +1,9 @@
 import { Marquee } from "@/components/ui";
+import { PROOF } from "@/config/cases";
+import { AGENTS_DAILY, WEB3 } from "@/config/work";
 
-const FACTS = ["100,000+ visits", "700+ bookings a month", "110+ partners", "6 agents on duty", "Bali live", "Las Vegas Oct 2026", "44 Web3 launch pages"];
+/** Numbers come from config (PROOF, the agent and Web3 lists), so the ribbon follows them. "Booking requests", as everywhere else: most are hand-offs to the partner's checkout. */
+const FACTS = [`${PROOF.visitors} visits`, `${PROOF.bookings} booking requests a month`, `${PROOF.partners} partners`, `${AGENTS_DAILY} agents on duty`, "Bali live", "Las Vegas Oct 2026", `${WEB3.length} Web3 launch pages`];
 
 /** Diagonal ribbon between hero and trailer. Replaces a plain divider. */
 export default function Ribbon() {
