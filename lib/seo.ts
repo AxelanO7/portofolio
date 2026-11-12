@@ -26,7 +26,7 @@ export const BUILT_AT = new Date();
 
 /** Home share image (public/og-image.jpg, 1200x630). ?v= makes social networks fetch a fresh copy after a change. */
 export const OG_IMAGE = {
-  url: "/og-image.jpg?v=2",
+  url: "/og-image.jpg?v=3",
   width: 1200,
   height: 630,
   type: "image/jpeg",
