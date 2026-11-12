@@ -5,6 +5,7 @@ import LazyMount from "@/components/lazy-mount";
 import { Marquee, StatusPill } from "@/components/ui";
 import { BUILDS, KIND_COUNT, KIND_LABEL, SHOTS, type Build, type BuildKind } from "@/config/builds";
 import { EV } from "@/lib/events";
+import { isStill } from "@/lib/motion";
 
 const LIM = 12;
 const FILTERS: ("all" | BuildKind)[] = ["all", "guestlist", "mobile", "client", "system", "web3"];
@@ -82,7 +83,7 @@ export default function BuildsSection() {
       setQ(String((e as CustomEvent<{ q?: string }>).detail?.q || "").toLowerCase());
       setKind("all");
       setAll(false);
-      document.getElementById("work")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      document.getElementById("work")?.scrollIntoView({ behavior: isStill() ? "auto" : "smooth" });
     };
     window.addEventListener(EV.builds, on);
     return () => window.removeEventListener(EV.builds, on);
@@ -98,7 +99,7 @@ export default function BuildsSection() {
   const needle = q.trim().toLowerCase();
 
   return (
-    <section className="sec" id="work" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec" id="work" data-pausable style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>
@@ -114,14 +115,15 @@ export default function BuildsSection() {
       </LazyMount>
       <div className="wrap">
         <div className="bd-bar">
-          <span>⌕</span>
+          <span aria-hidden="true">⌕</span>
           <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setAll(false); }} placeholder={`Search ${BUILDS.length} builds`} autoComplete="off" aria-label="Search builds" />
-          <span>{found.length} result{found.length === 1 ? "" : "s"}</span>
+          <span role="status" aria-live="polite">{found.length} result{found.length === 1 ? "" : "s"}</span>
         </div>
-        <div className="bd-fl">
+        <div className="bd-fl" role="group" aria-label="Filter builds by type">
           {FILTERS.map((f) => (
             <button key={f} type="button" aria-pressed={kind === f} onClick={() => { setKind(f); setAll(false); }}>
               {f === "all" ? "All" : KIND_LABEL[f]}
+              <span className="sr"> </span>
               <small>{f === "all" ? BUILDS.length : KIND_COUNT[f]}</small>
             </button>
           ))}

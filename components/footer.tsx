@@ -1,6 +1,7 @@
 "use client";
 
 import { Mark } from "@/components/ui";
+import { MotionSwitch } from "@/components/motion";
 import { useI18n } from "@/lib/i18n";
 
 export default function Footer() {
@@ -20,7 +21,7 @@ export default function Footer() {
           <Mark size={22} /> © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Jeremia Axelano · CTO, Bali (UTC+8)
         </span>
         <span>
-          {t("footer_note")} · <button type="button" onClick={again}>replay intro</button>
+          {t("footer_note")} · <button type="button" onClick={again}>replay intro</button> · <MotionSwitch />
         </span>
       </div>
     </footer>

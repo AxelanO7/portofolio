@@ -95,6 +95,11 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  /* the page language follows the toggle (screen readers pick the voice from it) */
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const value = useMemo<Ctx>(
     () => ({
       locale,

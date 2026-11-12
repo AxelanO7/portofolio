@@ -70,7 +70,7 @@
 .ct-dots { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
 .ct-disc { position: absolute; left: 0; top: 0; width: min(520px, 80vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(233, 194, 125, 0.28), rgba(233, 194, 125, 0) 66%); z-index: -1; pointer-events: none; will-change: transform; }
 .ct-hw { position: relative; margin-bottom: clamp(26px, 4vw, 44px); }
-.ct-h { font: 800 clamp(46px, 9vw, 150px) / 0.92 var(--disp); letter-spacing: -0.055em; }
+.ct-h { font: 800 clamp(46px, 9vw, 150px) / 0.92 var(--disp-o); letter-spacing: -0.055em; } /* both layers share the static font so they overlay exactly */
 .ct-h.o { color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5); }
 .ct-h.f { position: absolute; left: 0; top: 0; background: linear-gradient(100deg, var(--gold), var(--coral)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 0; clip-path: inset(0 100% 0 0); }
 .ct-hw.go .ct-h.f { animation: curtain 1.3s cubic-bezier(0.7, 0, 0.2, 1) forwards; }
@@ -101,12 +101,14 @@
 .ft button { background: none; border: 0; color: var(--cy); font: inherit; padding: 0; text-decoration: underline; cursor: pointer; }
 
 /* ============ command palette ============ */
-.pal { position: fixed; inset: 0; z-index: 99998; background: rgba(2, 8, 12, 0.7); display: none; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; }
+.pal { position: fixed; inset: 0; z-index: 99998; background: rgba(2, 8, 12, 0.7); display: none; align-items: flex-start; justify-content: center; padding: 12vh 16px 16px; cursor: pointer; overscroll-behavior: contain; }
 .pal.on { display: flex; }
-.pbox { width: min(560px, 100%); background: var(--bg-1); border: 1px solid var(--line-2); border-radius: 16px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); overflow: hidden; }
+.pbox { cursor: auto; width: min(560px, 100%); background: var(--bg-1); border: 1px solid var(--line-2); border-radius: 16px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); overflow: hidden; }
 .pbox input { width: 100%; border: 0; border-bottom: 1px solid var(--line); outline: 0; background: transparent; color: var(--fg); font: 400 16px var(--mono); padding: 16px 18px; }
-.pbox ul { margin: 0; padding: 6px; max-height: 50vh; overflow: auto; }
-.pbox li { padding: 11px 12px; border-radius: 8px; font: 400 14px/1.2 var(--body); display: flex; justify-content: space-between; gap: 10px; cursor: pointer; }
+.pbox input:focus-visible { box-shadow: inset 0 -2px 0 var(--cy); }
+.pbox ul { position: relative; margin: 0; padding: 6px; max-height: 50vh; max-height: 50dvh; overflow: auto; overscroll-behavior: contain; }
+.pbox li { padding: 11px 12px; border-radius: 8px; font: 400 14px/1.2 var(--body); display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; }
+@media (pointer: coarse) { .pbox li { min-height: 44px; } }
 .pbox li small { font: 400 11.5px var(--mono); color: var(--mut); }
 .pbox li.on { background: rgba(45, 212, 232, 0.12); }
 

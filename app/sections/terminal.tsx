@@ -6,6 +6,7 @@ import { CASES } from "@/config/cases";
 import { DIFFS } from "@/config/site";
 import { AGENTS } from "@/config/work";
 import { EV, emit } from "@/lib/events";
+import { isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 const SUGGEST = ["help", "whoami", "agents", "cat cases/search", "stack", "reel"];
@@ -19,7 +20,9 @@ export default function TerminalSection() {
     const tb = body.current;
     if (!tb) return;
     tb.innerHTML = "";
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    /* answers are read out politely, but not the two demo commands that run by themselves */
+    tb.setAttribute("aria-live", "off");
+    const reduce = isStill();
     const hist: string[] = [];
     let hi = 0;
     const tin = document.createElement("div");
@@ -43,7 +46,7 @@ export default function TerminalSection() {
       stack: () => ARSENAL.map((s) => `${pad(s.name, 22)}${s.tools.length}`).join("\n"),
       web3: () => 'every launch page has its own look.\ntry: <span class="hi">open golden</span>',
     };
-    const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: isStill() ? "auto" : "smooth" });
     const run = (raw: string) => {
       const line = raw.trim();
       if (!line) return;
@@ -83,6 +86,7 @@ export default function TerminalSection() {
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
+        tb.setAttribute("aria-live", "polite");
         hist.push(ti.value);
         hi = hist.length;
         run(ti.value);
@@ -97,7 +101,10 @@ export default function TerminalSection() {
       }
     };
     ti.addEventListener("keydown", onKey);
-    const onCmd = (e: Event) => run(String((e as CustomEvent<string>).detail || ""));
+    const onCmd = (e: Event) => {
+      tb.setAttribute("aria-live", "polite");
+      run(String((e as CustomEvent<string>).detail || ""));
+    };
     window.addEventListener(EV.term, onCmd);
 
     /* a short demo the first time the terminal is on screen */
@@ -106,7 +113,10 @@ export default function TerminalSection() {
       const cmds = ["whoami", "ls"];
       let i = 0;
       const next = () => {
-        if (i >= cmds.length) return;
+        if (i >= cmds.length) {
+          tb.setAttribute("aria-live", "polite");
+          return;
+        }
         const c = cmds[i++];
         let k = 0;
         const type = () => {
@@ -122,6 +132,7 @@ export default function TerminalSection() {
     if (reduce || !("IntersectionObserver" in window)) {
       run("whoami");
       run("ls");
+      tb.setAttribute("aria-live", "polite");
     } else {
       io = new IntersectionObserver((es) => {
         if (es[0].isIntersecting) {
@@ -141,7 +152,7 @@ export default function TerminalSection() {
   }, []);
 
   return (
-    <section className="sec" id="terminal" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec" id="terminal" data-pausable style={{ paddingTop: 20 }}>
       <div className="wrap">
         <div className="head">
           <div>
@@ -154,7 +165,7 @@ export default function TerminalSection() {
           <div>
             <div className="tm">
               <header><span className="on">TERMINAL</span><span>PROBLEMS 0</span><span>OUTPUT</span></header>
-              <div className="tm-body" ref={body} />
+              <div className="tm-body" ref={body} role="log" aria-label="Terminal output" />
             </div>
             <div className="tm-sugg">
               {SUGGEST.map((c) => <button key={c} type="button" onClick={() => emit(EV.term, c)}>{c}</button>)}

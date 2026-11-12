@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { TESTIMONIALS } from "@/config/cases";
 import { TIMELINE } from "@/config/site";
 import { useI18n } from "@/lib/i18n";
+import { isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 const cv = (x1: number, y1: number, x2: number, y2: number) => {
@@ -22,7 +23,7 @@ export default function AboutSection() {
     if (!el) return;
     const items = Array.from(el.children) as HTMLElement[];
     const light = () => items.forEach((it, k) => window.setTimeout(() => it.classList.add("on"), 300 + k * 520));
-    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!("IntersectionObserver" in window) || isStill()) {
       items.forEach((i) => i.classList.add("on"));
       return;
     }
@@ -88,7 +89,7 @@ export default function AboutSection() {
                 </div>
               ))}
             </div>
-            <div className="tls">
+            <div className="tls" tabIndex={0} role="region" aria-label="Timeline, scroll sideways">
               {TIMELINE.map((e) => (
                 <div key={e.t}>
                   <b>{e.d.split(" ").pop()}</b>

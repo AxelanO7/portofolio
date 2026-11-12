@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { isStill, restoreStill } from "@/lib/motion";
 
 const GLYPHS = "!<>-_\\/[]{}=+*^?#";
 const fmt = (v: number) => Math.round(v).toLocaleString("en-US");
@@ -16,7 +17,8 @@ export default function FxRoot() {
 
   useEffect(() => {
     (window as Window & { __axReady?: boolean }).__axReady = true;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    restoreStill(); /* the visitor's "pause motion" choice, before anything below reads it */
+    const reduce = isStill();
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const hasIO = "IntersectionObserver" in window;
     const off: Array<() => void> = [];
@@ -82,7 +84,7 @@ export default function FxRoot() {
         el.addEventListener("pointermove", mv);
         off.push(() => el.removeEventListener("pointermove", mv));
       });
-      all("[data-tilt]").forEach((el) => {
+      if (!reduce) all("[data-tilt]").forEach((el) => {
         let raf = 0;
         const mv = (e: PointerEvent) => {
           if (raf) return;

@@ -44,7 +44,7 @@ export default function CasePage({ params }: { params: { id: string } }) {
   ] as const;
 
   return (
-    <article className="cp">
+    <article className="cp" lang="en">
       <div className="wrap">
         <Link href="/#cases" className="back">← All case studies</Link>
         <div style={{ marginTop: 26 }}>

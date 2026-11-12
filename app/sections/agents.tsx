@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StatusPill } from "@/components/ui";
 import { LOG_LINES } from "@/config/site";
 import { AGENTS, type Item } from "@/config/work";
+import { isStill } from "@/lib/motion";
 import { v } from "@/lib/css";
 
 /** A simulated clock, so the server and the browser render the same first lines. */
@@ -31,11 +32,10 @@ export default function AgentsSection() {
   const log = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let n = 13;
     const id = window.setInterval(() => {
       const sec = log.current?.closest(".sec");
-      if (document.hidden || sec?.getAttribute("data-vis") === "0") return;
+      if (document.hidden || isStill() || sec?.getAttribute("data-vis") === "0") return;
       n += 1;
       setLines((prev) => [...prev, line(n)].slice(-14));
     }, 1500);
@@ -47,7 +47,7 @@ export default function AgentsSection() {
   const done = AGENTS.filter((a) => a.status === "delivered");
 
   return (
-    <section className="sec ags" id="agents" data-pausable style={{ paddingTop: 20 }}>
+    <section lang="en" className="sec ags" id="agents" data-pausable style={{ paddingTop: 20 }}>
       <div className="ag-met" aria-hidden="true">
         <div className="w">
           {METEORS.map((m, i) => <i key={i} style={v({ "--x": `${m.x}%`, "--d": `${m.d}s`, "--l": `${m.l}s` })} />)}

@@ -36,7 +36,7 @@ export function PhoneFrame({ img, width, sd, priority, low, alt = "", className 
   return (
     <div className={`phone ${className}`} style={style}>
       <div className="scr">
-        <div className="sb">
+        <div className="sb" aria-hidden="true">
           <span>9:41</span>
           <i />
         </div>
@@ -82,15 +82,19 @@ export function Marquee({ items, speed = 40, reverse, gap = 24, vertical, classN
 /**
  * Letters whose weight rises and falls in a wave (Outfit Variable has a real weight axis).
  * It re-lays the text every frame, so keep it to one short word. Off on phones and with reduced motion.
+ * The word itself stays as plain text for screen readers (aria-label is not allowed on a bare span); the per-letter copy is hidden from them.
  */
 export function WeightWave({ text }: { text: string }) {
   return (
-    <span className="vw" aria-label={text}>
-      {text.split("").map((c, i) => (
-        <span key={i} aria-hidden="true" style={{ ["--i" as string]: i }}>
-          {c}
-        </span>
-      ))}
+    <span className="vw">
+      <span className="sr">{text}</span>
+      <span aria-hidden="true">
+        {text.split("").map((c, i) => (
+          <span key={i} style={{ ["--i" as string]: i }}>
+            {c}
+          </span>
+        ))}
+      </span>
     </span>
   );
 }
