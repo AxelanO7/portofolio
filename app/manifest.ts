@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     name: "Jeremia Axelano",
     short_name: "Axelano",
-    description: "CTO, marketplaces and AI agents. Bali, UTC+8.",
+    description: "Co-Founder & CTO, marketplaces and AI agents. Bali, UTC+8.",
     lang: "en",
     start_url: "/",
     scope: "/",

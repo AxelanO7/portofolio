@@ -9,7 +9,7 @@ export default function AtlasSection() {
       <div className="wrap">
         <div className="head">
           <div>
-            <span className="eyebrow">Built in Bali · opening cities</span>
+            <span className="eyebrow">Built in Bali · four US cities live</span>
             <h2 className="t">
               One platform. <span className="grad">A city at a time.</span>
             </h2>
@@ -30,10 +30,10 @@ export default function AtlasSection() {
                   {"note" in c && c.note && <p>{c.note}</p>}
                   {c.rows.length > 0 && (
                     <ul>
-                      {c.rows.map((r) => (
+                      {c.rows.map((r: { k: string; v: string; n?: number; s?: string }) => (
                         <li key={r.k}>
                           {r.k}
-                          {"n" in r ? <b data-count={r.n} data-suffix={r.s}>{r.v}</b> : <b>{r.v}</b>}
+                          {r.n !== undefined ? <b data-count={r.n} data-suffix={r.s}>{r.v}</b> : <b>{r.v}</b>}
                         </li>
                       ))}
                     </ul>

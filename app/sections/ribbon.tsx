@@ -3,7 +3,7 @@ import { PROOF } from "@/config/cases";
 import { AGENTS_DAILY, WEB3 } from "@/config/work";
 
 /** Numbers come from config (PROOF, the agent and Web3 lists), so the ribbon follows them. "Booking requests", as everywhere else: most are hand-offs to the partner's checkout. */
-const FACTS = [`${PROOF.visitors} visits`, `${PROOF.bookings} booking requests a month`, `${PROOF.partners} partners`, `${AGENTS_DAILY} agents on duty`, "Bali live", "Las Vegas Oct 2026", `${WEB3.length} Web3 launch pages`];
+const FACTS = [`${PROOF.visitors} visits`, `${PROOF.bookings} booking requests in a month`, `${PROOF.partners} partners`, `${AGENTS_DAILY} agents on duty`, "Bali live", "4 US cities live", `${WEB3.length} Web3 launch pages`];
 
 /** Diagonal ribbon between hero and trailer. Replaces a plain divider. */
 export default function Ribbon() {

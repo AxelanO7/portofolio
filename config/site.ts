@@ -34,21 +34,23 @@ export const CITIES = [
   {
     id: "bali", name: "Bali", co: "8.65°S 115.22°E", state: "Live in production", tone: "b", glow: "rgba(79,224,189,.5)",
     rows: [
-      { k: "Site visits tracked", v: "100,000+", n: 100000, s: "+" },
-      { k: "Booking requests a month", v: "700+", n: 700, s: "+" },
+      { k: "Site visits tracked", v: "110,000+", n: 110000, s: "+" },
+      { k: "Booking requests in a month", v: "1,000+", n: 1000, s: "+" },
       { k: "Partner businesses", v: "110+", n: 110, s: "+" },
     ],
   },
   {
-    id: "vegas", name: "Las Vegas", co: "36.17°N 115.14°W", state: "In build · opening Oct 2026", tone: "v", glow: "rgba(255,123,92,.5)",
+    id: "us", name: "United States", co: "4 cities", state: "Live · venue pages", tone: "v", glow: "rgba(255,123,92,.5)",
+    note: "Venue pages for now: no packages or booking yet.",
     rows: [
-      { k: "Events staged in dev", v: "1,700+", n: 1700, s: "+" },
-      { k: "Venues staged", v: "45+", n: 45, s: "+" },
-      { k: "Checkout currency", v: "USD" },
+      { k: "Las Vegas", v: "7", n: 7, s: "" },
+      { k: "Miami", v: "4", n: 4, s: "" },
+      { k: "Los Angeles", v: "3", n: 3, s: "" },
+      { k: "New York", v: "2", n: 2, s: "" },
     ],
   },
   {
-    id: "next", name: "Next city", co: "to be announced", state: "City and country pickers already built", tone: "n", glow: "rgba(90,120,210,.45)",
+    id: "any", name: "Any city", co: "multi-city by design", state: "City and country pickers built", tone: "n", glow: "rgba(90,120,210,.45)",
     note: "Region filters in the back office, multi-currency checkout and SEO groundwork for a new market are in place.",
     rows: [],
   },
@@ -59,7 +61,7 @@ export const PIPELINE = [
   { t: "Check", x: "Duplicates, hours and formats are checked against the source." },
   { t: "A person approves", x: "Nothing goes live until someone says yes to each field." },
   { t: "Price locally", x: "USD pricing and multi-currency checkout, with the city picker." },
-  { t: "Go live", x: "Las Vegas, October 2026. The same release adds the next city." },
+  { t: "Go live", x: "Las Vegas, Miami, Los Angeles and New York went live in November 2026 as venue pages." },
 ];
 
 export type DiffKind = "a" | "r" | "m";
@@ -73,16 +75,16 @@ export interface Diff {
 export const DIFFS: Diff[] = [
   {
     file: "seo/sitemap.xml",
-    meta: "−258 URLs",
+    meta: "328 → 70 → 159",
     lines: [
       ["m", "// before: client-rendered homepage"],
-      ["r", "urls: 328   // 186 are redirects"],
+      ["r", "urls: 328   // mostly redirects"],
       ["a", "urls: 70    // real pages only"],
+      ["a", "urls: 159   // + four US cities"],
       ["a", "homepage: server-rendered"],
-      ["a", "ads: attribution tracking"],
       ["a", "domain: moved, zero downtime"],
     ],
-    foot: "<b>Result</b> · search engines only see real pages. The brand moved domains with zero downtime.",
+    foot: "<b>Result</b> · search engines only see real pages, and the list grows as venues and cities go live.",
   },
   {
     file: "agents/registry.ts",
@@ -95,21 +97,22 @@ export const DIFFS: Diff[] = [
       ["a", "agent-board        internal   // a person approves every field"],
       ["a", "social-analytics   internal"],
       ["a", "claude-code-setup  internal"],
+      ["m", "cs-agent           testing    // not answering guests yet"],
     ],
-    foot: "<b>Result</b> · 6 agents in daily use, 5 more in build, beta or planning.",
+    foot: "<b>Result</b> · 6 agents in daily use, 5 more in build, beta or planning. The support agent is in testing.",
   },
   {
-    file: "cities/las-vegas.ts",
-    meta: "+ 1,700 events · 45 venues",
+    file: "cities/us.ts",
+    meta: "+ 16 venue pages · 4 cities",
     lines: [
       ["m", "// one platform, a city at a time"],
       ["r", "research: weeks of manual venue lookup"],
       ["a", "import: daily pipeline, sources cited"],
       ["a", "review: a person approves every field"],
-      ["a", "pricing: USD, multi-currency checkout"],
-      ["a", "status: staged in dev, opening Oct 2026"],
+      ["a", "live: Las Vegas 7 · Miami 4"],
+      ["a", "live: Los Angeles 3 · New York 2"],
     ],
-    foot: "<b>Result</b> · 1,700+ events and 45+ venues staged. The same release adds the next city.",
+    foot: "<b>Result</b> · 16 venue pages live in four US cities since November 2026.",
   },
 ];
 

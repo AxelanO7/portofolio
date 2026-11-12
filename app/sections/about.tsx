@@ -76,7 +76,7 @@ export default function AboutSection() {
               <img src="/about.webp" width={400} height={500} alt="Jeremia Axelano" loading="lazy" decoding="async" />
               <figcaption>
                 <b>Jeremia Axelano</b>
-                <span>CTO · Guestlist Ticket</span>
+                <span>Co-Founder & CTO · Guestlist Ticket</span>
                 <small>Bali, Indonesia (UTC+8)</small>
               </figcaption>
             </figure>

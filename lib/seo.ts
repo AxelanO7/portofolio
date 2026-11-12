@@ -15,9 +15,9 @@ const WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "e
 /** Small counts are written as words, like the rest of the site ("six AI agents"). */
 export const inWords = (n: number) => WORDS[n] ?? String(n);
 
-export const HOME_TITLE = `${SITE_NAME} · CTO, marketplaces and AI agents`;
+export const HOME_TITLE = `${SITE_NAME} · Co-Founder & CTO, marketplaces, AI agents`;
 /** 120-160 characters: longer ones are cut in search results. Counts come from config, so they stay true. */
-export const HOME_DESCRIPTION = `${SITE_NAME} is a CTO and full-stack engineer in Bali. Guestlist Ticket on web and mobile, ${inWords(AGENTS_DAILY)} AI agents in daily use and ${WEB3.length} Web3 sites, built end to end.`;
+export const HOME_DESCRIPTION = `${SITE_NAME}, co-founder and CTO of Guestlist Ticket in Bali. A nightlife marketplace on web and mobile, ${inWords(AGENTS_DAILY)} AI agents in daily use, ${WEB3.length} Web3 sites.`;
 /** Shorter and plainer, for link previews. */
 const SHARE_DESCRIPTION = `A nightlife marketplace on web and mobile, a fleet of AI agents and ${WEB3.length} Web3 sites. One builder across the whole stack.`;
 
@@ -30,12 +30,12 @@ export const OG_IMAGE = {
   width: 1200,
   height: 630,
   type: "image/jpeg",
-  alt: "Jeremia Axelano, CTO at Guestlist Ticket. I build marketplaces, and the agents that run them. Bali, UTC+8.",
+  alt: "Jeremia Axelano, Co-Founder and CTO at Guestlist Ticket. I build marketplaces, and the agents that run them. Bali, UTC+8.",
 };
 
 /** Case share images (public/og/<id>.jpg, 1200x630), drawn by scripts/og/cases.mjs. */
 export const caseImage = (c: Case) => ({
-  url: `/og/${c.id}.jpg?v=1`,
+  url: `/og/${c.id}.jpg?v=2`,
   width: 1200,
   height: 630,
   type: "image/jpeg",

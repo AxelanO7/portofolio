@@ -39,12 +39,8 @@ export default function HeroSection() {
               Bali <small>{t("state_live")}</small>
             </span>
             <span className="chip">
-              <span className="dot off" />
-              Las Vegas <small>Oct 2026</small>
-            </span>
-            <span className="chip">
-              <span className="dot off" />
-              Next city <small>TBA</small>
+              <span className="dot" />
+              4 US cities <small>{t("state_live")}</small>
             </span>
           </div>
         </div>
@@ -61,9 +57,9 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="hr-float f2">
-            <i>100k</i>
+            <i>110k</i>
             <div>
-              <b>100,000+ visits</b>
+              <b>110,000+ visits</b>
               <span>tracked in production</span>
             </div>
           </div>

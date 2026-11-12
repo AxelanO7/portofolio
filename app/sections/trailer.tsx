@@ -265,7 +265,7 @@ export default function TrailerSection() {
               <span className="ml"><span style={v({ "--i": 1 })}>Jeremia</span></span>
               <span className="ml"><span className="o" style={v({ "--i": 2 })}>Axelano.</span></span>
             </div>
-            <p className="sub fade" style={v({ "--d": "1.1s" })}>CTO · Bali · UTC+8</p>
+            <p className="sub fade" style={v({ "--d": "1.1s" })}>Co-Founder & CTO · Bali · UTC+8</p>
           </div>
 
           <div className="ch c2" data-ms="5200" data-name="Marketplaces" role="group" aria-roledescription="slide" aria-label="2 of 6: Marketplaces">
@@ -290,8 +290,8 @@ export default function TrailerSection() {
               <span className="ml"><span style={v({ "--i": 1 })}>Real bookings.</span></span>
             </div>
             <div className="nums fade" style={v({ "--d": ".6s" })}>
-              <div><b data-to="100000" data-suf="+">100,000+</b><span>site visits tracked</span></div>
-              <div><b data-to="700" data-suf="+">700+</b><span>booking requests a month</span></div>
+              <div><b data-to="110000" data-suf="+">110,000+</b><span>site visits tracked</span></div>
+              <div><b data-to="1000" data-suf="+">1,000+</b><span>booking requests in a month</span></div>
               <div><b data-to="110" data-suf="+">110+</b><span>partner businesses</span></div>
             </div>
           </div>
@@ -319,19 +319,17 @@ export default function TrailerSection() {
               <span className="ml"><span style={v({ "--i": 0 })}>One platform.</span></span>
               <span className="ml"><span style={v({ "--i": 1 })}>A city at a time.</span></span>
             </div>
-            <svg viewBox="0 0 760 250" role="img" aria-label="Arc from Bali to Las Vegas, then a dashed line to the next city">
+            <svg viewBox="0 0 760 250" role="img" aria-label="Arc from Bali to Las Vegas, with Miami, Los Angeles and New York live too">
               <path className="arc" pathLength={1} d="M600 190 C 480 20, 250 20, 130 150" />
-              <path d="M130 150 C 100 180, 70 200, 30 205" fill="none" stroke="#e9c27d" strokeWidth="2" strokeDasharray="4 6" opacity=".7" />
               <circle className="pin" cx="600" cy="190" r="7" />
               <circle className="ring2" cx="600" cy="190" r="12" />
               <circle className="pin" cx="130" cy="150" r="7" />
               <circle className="ring2" cx="130" cy="150" r="12" style={{ animationDelay: ".8s" }} />
-              <circle cx="30" cy="205" r="6" fill="none" stroke="#e9c27d" strokeWidth="2" />
               <text x="600" y="222" textAnchor="middle">Bali</text>
               <text className="s" x="600" y="242" textAnchor="middle">live</text>
               <text x="130" y="122" textAnchor="middle">Las Vegas</text>
-              <text className="s" x="130" y="104" textAnchor="middle">Oct 2026</text>
-              <text className="s" x="30" y="232">next</text>
+              <text className="s" x="130" y="104" textAnchor="middle">live</text>
+              <text className="s" x="130" y="178" textAnchor="middle">+ Miami · LA · New York</text>
             </svg>
           </div>
 
@@ -344,7 +342,7 @@ export default function TrailerSection() {
               <a className="b2" href="#contact">Start a conversation →</a>
               <button className="b2 o" type="button" data-replay>↺ Replay</button>
             </div>
-            <p className="sub fade" style={v({ "--d": "1.1s" })}>Product · Advisory · Part-time CTO</p>
+            <p className="sub fade" style={v({ "--d": "1.1s" })}>Product · Advisory · Technical partner</p>
           </div>
 
           <button className="tap l" type="button" data-tl aria-label="Previous chapter" />

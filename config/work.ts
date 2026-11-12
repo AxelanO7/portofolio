@@ -55,7 +55,7 @@ export const AGENTS: Item[] = [
   I("ag8", "Lerka", "A multi-model assistant: ask once, several AI models answer, and a judge merges them into one reply. Includes a podcast companion with voice.", "beta"),
   I("ag9", "Claude Code Team Setup", "Persistent remote coding sessions, cost-aware model routing and a shared status dashboard.", "internal"),
   I("ag10", "AutoSDR and Bali AI Suite", "Outreach agent plus demand forecasting and trend scanners for Bali tourism.", "delivered", { label: "github.com/AxelanO7", url: "https://github.com/AxelanO7" }),
-  I("ag11", "Customer-Support Agent", "Answers guest questions on WhatsApp from trained replies, with an AI fallback. Staff always win: it steps in only when nobody replies in time, and refunds and complaints go to a person.", "build"),
+  I("ag11", "Customer-Support Agent", "Answers guest questions on WhatsApp from trained replies, with an AI fallback. Built and deployed, in testing: not answering real guests yet. Staff always win: it steps in only when nobody replies in time, and refunds and complaints go to a person.", "build"),
   I("ag12", "Admin Copilot and Event Data v2", "Next on the roadmap, each with a named owner and a cost case.", "planned"),
 ];
 
@@ -198,7 +198,7 @@ export const INFRA = [
   { value: "650→150s", label: "build time", name: "Faster Deploys", text: "Back-office build cut by two thirds, backend builds only what changed." },
   { value: "2", label: "backup sites", name: "Self-hosted Data", text: "Moved off a hosted database, with off-site backups and a prod-mirror staging environment." },
   { value: "0", label: "downtime", name: "Domain and Email Move", text: "Brand moved to a new domain with Google Change of Address accepted." },
-  { value: "328→70", label: "sitemap URLs", name: "Clean Sitemap", text: "Redirect entries removed, so search engines only see real pages." },
+  { value: "70→159", label: "sitemap URLs", name: "Clean Sitemap", text: "Cleaned up from 328, then grown to 159 real pages as venues and cities went live." },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -206,9 +206,9 @@ export const INFRA = [
 /* ------------------------------------------------------------------ */
 
 export const EXPERIENCE = [
-  { date: "Mar 2025", title: "Chief Technology Officer, New Directions Success", text: "Own technology for Guestlist Ticket: web, mobile, partner app, back office and AI agents on a Go microservices backend. Leading the Las Vegas launch." },
+  { date: "Mar 2025", title: "Co-Founder and Chief Technology Officer, New Directions Success", text: "Co-founded Guestlist Ticket and own its technology: web, mobile, partner app, back office and AI agents on a Go microservices backend. Opened venue pages in four US cities." },
   { date: "Sep 2024", title: "Senior Mobile Engineer, Jobseeker", text: "Matching platforms for job seekers and employers." },
-  { date: "Aug 2022", title: "Mobile Engineering Lead, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
+  { date: "Aug 2022", title: "Tech Lead Mobile Engineer, BTW Edutech", text: "iOS, Android, web and desktop. Led and mentored the team." },
   { date: "Aug 2021", title: "President, student executive board", text: "Led 114 members and more than 40 programs." },
   { date: "Dec 2019", title: "Freelance Full-Stack", text: "Client work across the whole stack, and the start of the Web3 launch sites." },
 ];

@@ -32,9 +32,9 @@ const person = (): Json => ({
   url: HOME,
   // the About photo (public/about.webp, 400x500: above the 50,000 pixels Google asks for)
   image: abs("/about.webp"),
-  description: "CTO at Guestlist Ticket. Builds marketplaces and the AI agents that run them.",
-  jobTitle: "Chief Technology Officer",
-  worksFor: { "@type": "Organization", name: "Guestlist Ticket", alternateName: "Guestlist", url: "https://guestlistticket.com" },
+  description: "Co-founder and CTO at Guestlist Ticket. Builds marketplaces and the AI agents that run them.",
+  jobTitle: "Co-Founder and Chief Technology Officer",
+  worksFor: { "@type": "Organization", name: "Guestlist Ticket", alternateName: "Guestlist", legalName: "PT New Directions Success", url: "https://guestlistticket.com" },
   address: { "@type": "PostalAddress", addressLocality: "Denpasar", addressRegion: "Bali", addressCountry: "ID" },
   knowsAbout: ["Marketplace platforms", "AI agents", "Mobile apps", "Cloud infrastructure", "Web3"],
   sameAs: ["https://www.linkedin.com/in/jeremia-axelano/", "https://github.com/AxelanO7", "https://link.axelano.space"],

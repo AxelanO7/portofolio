@@ -23,7 +23,7 @@ const host = /SITE_URL = "https?:\/\/([^"]+)"/.exec(read('config/site.ts').toStr
 const CARD = {
   seo: { stat: '328<svg viewBox="0 0 64 40"><path d="M2 20h54M40 4l18 16-18 16"/></svg>70', size: 120, label: 'sitemap URLs', hl: 'rebuilt' },
   agents: { stat: String(AGENTS_DAILY), size: 200, label: 'agents in daily use', hl: 'run the company' },
-  city: { stat: '1,700+', size: 120, label: 'events staged in dev', hl: 'from a spreadsheet' },
+  city: { stat: '16', size: 200, label: 'venue pages live', hl: 'from a spreadsheet' },
 };
 
 const font = (family, file, weight) =>

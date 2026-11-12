@@ -143,7 +143,7 @@ async function checkClaims(entries) {
   const N = '(?<![\\/]\\s*)(?<![.,\\d])([\\d][\\d,]*\\+?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)';
   const rows = [
     ['site visits', PROOF.visitors, [`${N} (?:site )?visits`], `Site visits tracked ${N}`],
-    ['booking requests a month', PROOF.bookings, [`${N} booking (?:requests|records) a month`], `Booking requests a month ${N}`],
+    ['booking requests a month', PROOF.bookings, [`${N} booking (?:requests|records) (?:in )?a month`], `Booking requests (?:in )?a month ${N}`],
     ['partner businesses', PROOF.partners, [`${N} partner(?:s| businesses)`], `Partner businesses ${N}`],
     ['agents in daily use', String(AGENTS_DAILY), [`${N} (?:AI )?agents(?: on duty| in daily use| are in daily use)?\\b(?! more)`]],
     ['Web3 sites or pages', String(WEB3.length), [`${N} Web3 (?:sites|launch pages|pages)`]],

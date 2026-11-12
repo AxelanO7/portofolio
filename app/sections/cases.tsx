@@ -8,9 +8,9 @@ import { v } from "@/lib/css";
 const SHORT_AGENTS = ["Error alert", "IT automation", "Ops briefing", "Agent Board", "Social analytics", "Claude Code setup"];
 
 const CARD: Record<string, { big: string; tone: string; label: string; approach: string }> = {
-  seo: { big: "328→70", tone: "s1", label: "Search", approach: "Moved the homepage to server rendering, rebuilt the sitemap, cleaned up page titles and added attribution tracking for ads." },
+  seo: { big: "328→70", tone: "s1", label: "Search", approach: "Moved the homepage to server rendering, rebuilt the sitemap, cleaned up page titles and added attribution tracking for ads. The sitemap has since grown to 159 real pages." },
   agents: { big: String(AGENTS.filter((a) => a.status === "live" || a.status === "internal").length), tone: "s2", label: "Agents", approach: "Each agent has a named human owner. A person approves every field before it goes live." },
-  city: { big: "1,700+", tone: "s3", label: "Expansion", approach: "A daily import pipeline that finds, checks and cites data, then asks a person to approve." },
+  city: { big: "16", tone: "s3", label: "Expansion", approach: "A daily import pipeline that finds, checks and cites data, then asks a person to approve. Venue pages are live in four US cities." },
 };
 
 function Viz({ id }: { id: string }) {

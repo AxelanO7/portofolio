@@ -17,9 +17,9 @@ export function GET() {
   const upcoming = AGENTS.filter((a) => a.status === "build" || a.status === "beta" || a.status === "planned").length;
   const body = `# Jeremia Axelano
 
-> CTO and full-stack engineer in Bali (UTC+8). CTO at Guestlist Ticket, a nightlife and experiences marketplace: live in Bali, opening Las Vegas in October 2026. Jeremia builds marketplaces on web and mobile, the AI agents that run them, and Web3 launch sites.
+> Co-founder, CTO and full-stack engineer in Bali (UTC+8). Co-founder and CTO at Guestlist Ticket, a nightlife and experiences marketplace: live in Bali, with venue pages in Las Vegas, Miami, Los Angeles and New York. Jeremia builds marketplaces on web and mobile, the AI agents that run them, and Web3 launch sites.
 
-Status is shown as it is on the site: live, in build, internal or concept. Numbers are rounded down. Bali, in production: ${PROOF.visitors} site visits, ${PROOF.bookings} booking requests a month and ${PROOF.partners} partner businesses. ${up(inWords(AGENTS_DAILY))} AI agents are in daily use and ${inWords(upcoming)} more are in build, beta or planning. The portfolio lists ${BUILDS.length} builds, ${WEB3.length} of them Web3 sites, and ${TOOL_COUNT} tools across ${ARSENAL.length} stacks.
+Status is shown as it is on the site: live, in build, internal or concept. Numbers are rounded down. In production: ${PROOF.visitors} site visits, ${PROOF.bookings} booking requests in a month and ${PROOF.partners} partner businesses. ${up(inWords(AGENTS_DAILY))} AI agents are in daily use and ${inWords(upcoming)} more are in build, beta or planning. The portfolio lists ${BUILDS.length} builds, ${WEB3.length} of them Web3 sites, and ${TOOL_COUNT} tools across ${ARSENAL.length} stacks.
 
 ## Start here
 

@@ -40,7 +40,7 @@ export default function TerminalSection() {
     const pad = (s: string, n: number) => (s + " ".repeat(n)).slice(0, n);
     const CMD: Record<string, () => string> = {
       help: () => ['help  commands', 'whoami  who is this', 'ls  list folders', 'cat cases/search  also agents, city', 'agents  the agents and their status', 'stack  tool counts', 'web3  launch pages', 'open fight  find a build', 'reel  replay the trailer', 'globe  jump to the cities', 'clear'].map((l) => `<span class="hi">${l.split("  ")[0]}</span>  ${l.split("  ")[1] ?? ""}`).join("\n"),
-      whoami: () => "Jeremia Axelano · CTO at Guestlist Ticket\nBali, UTC+8. Builds marketplace platforms and AI agents.\nWeb, iOS, Android, back office. Live in Bali, Las Vegas Oct 2026.",
+      whoami: () => "Jeremia Axelano · Co-Founder & CTO at Guestlist Ticket\nBali, UTC+8. Builds marketplace platforms and AI agents.\nWeb, iOS, Android, back office. Live in Bali, venue pages in four US cities.",
       ls: () => "cases/   systems/   builds/   contact.sh",
       agents: () => AGENTS.map((a) => `${pad(a.name, 30)}<span class="dm">${a.status}</span>`).join("\n"),
       stack: () => ARSENAL.map((s) => `${pad(s.name, 22)}${s.tools.length}`).join("\n"),

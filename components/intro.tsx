@@ -14,7 +14,7 @@ export default function Intro() {
           <path pathLength={1} className="cur" d="M39 46H50" />
         </svg>
         <div className="ld-t">Jeremia Axelano</div>
-        <div className="ld-s">CTO · Bali</div>
+        <div className="ld-s">Co-Founder & CTO · Bali</div>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { isStill } from "@/lib/motion";
 type Vec = [number, number, number];
 const D = Math.PI / 180;
 const BALI = { n: "Bali", s: "live", lon: 115.2, lat: -8.65 };
-const VEGAS = { n: "Las Vegas", s: "Oct 2026", lon: -115.14, lat: 36.17 };
+const VEGAS = { n: "Las Vegas", s: "Live", lon: -115.14, lat: 36.17 };
 const CYCLE = 16000;
 
 const vec = (lon: number, lat: number): Vec => {

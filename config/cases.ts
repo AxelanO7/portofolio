@@ -22,15 +22,16 @@ export interface Case {
 }
 
 /**
- * Headline numbers, Bali production only. Rounded down to a "+" floor from the prod
- * database on 2026-10-11 (111 partner businesses, 727 booking records in Sep 2026,
- * most of them hand-offs to the partner's checkout). Visitors are site visits, re-read
- * from the admin General Visitors totals on 2026-10-24: 100,292 visits, 34,806 unique.
- * Never label them "unique visitors". Re-check against the database before raising any number.
+ * Headline numbers, rounded down to a "+" floor from the prod database on 2026-11-12:
+ * 117,706 site visits (41,833 unique), 112 partner businesses, and 1,133 booking records
+ * in Oct 2026 (895 hand-offs to the partner's checkout, 238 direct). November runs at about
+ * 700 a month so far, so the label says "in a month", never "every month".
+ * Visitors are site visits. Never label them "unique visitors".
+ * Re-check against the database before raising any number.
  */
 export const PROOF = {
-  visitors: "100,000+",
-  bookings: "700+",
+  visitors: "110,000+",
+  bookings: "1,000+",
   partners: "110+",
 };
 
@@ -39,19 +40,20 @@ export const CASES: Case[] = [
     id: "seo",
     title: "Search traffic, rebuilt",
     summary: "How a nightlife marketplace cleaned up what search engines see: server rendering, a clean sitemap and a domain move without downtime.",
-    problem: "The homepage rendered on the client, and the sitemap listed 186 redirect URLs next to the real pages.",
+    problem: "The homepage rendered on the client, and the sitemap listed 328 URLs when only 70 were real pages: 186 of the rest were redirects.",
     constraints: "A live marketplace with real bookings, so no downtime. The brand and the domain were changing at the same time, and the team was small.",
-    approach: "Moved the homepage to server rendering in early October, rebuilt the sitemap so it lists only real pages, cleaned up page titles and descriptions for venues, and added attribution tracking for ads. The domain move came with a Google Change of Address.",
-    result: "Sitemap 328 → 70 URLs, so search engines only see real pages.",
+    approach: "Moved the homepage to server rendering in early October, rebuilt the sitemap so it lists only real pages, cleaned up page titles and descriptions for venues, and added attribution tracking for ads. The domain move came with a Google Change of Address. Since then every new venue page goes into the sitemap when it goes live.",
+    result: "Sitemap 328 → 70 real pages, then 159 as venues and cities were added.",
     outcome: [
-      "Sitemap 328 → 70 URLs, redirect entries removed.",
+      "Sitemap 328 → 70 URLs with redirect entries removed, then 159 real pages by November 2026, including four US cities.",
+      "Venue pages carry structured data (venue, FAQ, breadcrumbs) from the day they go live.",
       "Brand moved to a new domain with zero downtime, and Google accepted the Change of Address.",
       "Ad attribution tracking in place, so bookings can be tied back to a campaign.",
     ],
     next: "Performance numbers will be added once they are re-measured on the current release.",
     status: "live",
     published: "2026-10-11T17:39:12+08:00",
-    updated: "2026-10-11T17:39:12+08:00",
+    updated: "2026-11-13T09:00:00+08:00",
   },
   {
     id: "agents",
@@ -73,21 +75,22 @@ export const CASES: Case[] = [
   },
   {
     id: "city",
-    title: "A new city, from a spreadsheet",
-    summary: "Opening Las Vegas as a second market: a daily import pipeline with human approval, USD pricing and a platform that is multi-city by design.",
+    title: "New cities, from a spreadsheet",
+    summary: "Taking a nightlife marketplace from Bali to four US cities: a daily import pipeline with human approval, USD pricing and a platform that is multi-city by design.",
     problem: "Opening a new market meant weeks of manual venue research.",
-    constraints: "Event data comes from third parties in different formats and currencies, nothing may go live without approval, and the launch date is fixed.",
-    approach: "A daily import pipeline that finds, checks and cites venue and event data, then asks a person to approve before anything goes live. USD pricing and multi-currency checkout, a city and country picker, region filters in the back office and SEO groundwork for the new market.",
-    result: "1,700+ events and 45+ venues staged in dev. Production launch in October 2026.",
+    constraints: "Event data comes from third parties in different formats and currencies, nothing may go live without approval, and a venue that has not confirmed a partnership gets a plain listing page, not promises about entry or guest lists.",
+    approach: "A daily import pipeline that finds, checks and cites venue and event data, then asks a person to approve before anything goes live. USD pricing and multi-currency checkout, a city and country picker, region filters in the back office and SEO groundwork for each new market. In November 2026 the first US venues went live as listing pages with a link to the official site.",
+    result: "16 venue pages live in Las Vegas, Miami, Los Angeles and New York since November 2026.",
     outcome: [
-      "1,700+ events and 45+ venues imported and staged ahead of launch.",
+      "16 venue pages live: Las Vegas 7, Miami 4, Los Angeles 3, New York 2.",
+      "Each page carries structured data (venue, FAQ, breadcrumbs) and sits in the sitemap.",
       "USD pricing and multi-currency checkout built.",
       "The same platform can add more cities and countries without a rebuild.",
     ],
-    next: "Production launch in October 2026. Numbers for the new market will follow once it is live.",
-    status: "build",
+    next: "The US pages are listings for now: no packages, events or booking yet. Traffic numbers for the new market will follow once there is enough to measure.",
+    status: "live",
     published: "2026-10-11T17:39:12+08:00",
-    updated: "2026-10-11T17:39:12+08:00",
+    updated: "2026-11-13T09:00:00+08:00",
   },
 ];
 
@@ -125,7 +128,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const ENGAGEMENTS = [
   { title: "Build a product", text: "A scoped project, web or mobile, shipped end to end." },
   { title: "Advisory", text: "Architecture and hiring review for a team that already ships." },
-  { title: "CTO as a service", text: "An ongoing technical lead, part time." },
+  { title: "Technical partner", text: "An ongoing technical lead for your team, part time." },
 ];
 
 /** Web3 sites shown first; the rest sit in the archive. */
