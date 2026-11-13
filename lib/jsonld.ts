@@ -37,6 +37,9 @@ const person = (): Json => ({
   worksFor: { "@type": "Organization", name: "Guestlist Ticket", alternateName: "Guestlist", legalName: "PT New Directions Success", url: "https://guestlistticket.com" },
   address: { "@type": "PostalAddress", addressLocality: "Denpasar", addressRegion: "Bali", addressCountry: "ID" },
   knowsAbout: ["Marketplace platforms", "AI agents", "Mobile apps", "Cloud infrastructure", "Web3"],
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Indonesian Institute of Business and Technology (INSTIKI)" },
+  knowsLanguage: ["id", "en"],
+  award: "Internal Debate Competition winner, INSTIKI, February 2023",
   sameAs: ["https://www.linkedin.com/in/jeremia-axelano/", "https://github.com/AxelanO7", "https://link.axelano.space"],
 });
 

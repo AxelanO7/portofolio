@@ -12,6 +12,7 @@ const cv = (x1: number, y1: number, x2: number, y2: number) => {
   return `M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}`;
 };
 const YS = [30, 85, 140];
+const BG = ["edu", "lead", "speak", "lang"] as const;
 
 /** About: bio, a timeline that lights up in turn, a small request beam and two recommendations quoted word for word. */
 export default function AboutSection() {
@@ -97,6 +98,19 @@ export default function AboutSection() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+        <div className="bgd rv">
+          <span className="eyebrow">{t("bg_eyebrow")}</span>
+          <h3 className="bgt">{t("bg_title")}</h3>
+          <div className="bgg">
+            {BG.map((k) => (
+              <div className="bgc" key={k}>
+                <span>{t(`bg_${k}_k`)}</span>
+                <b>{t(`bg_${k}_t`)}</b>
+                <p>{t(`bg_${k}_x`)}</p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="qts rv">

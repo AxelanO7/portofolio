@@ -30,6 +30,13 @@ Status is shown as it is on the site: live, in build, internal or concept. Numbe
 
 ${CASES.map((c) => `- [${c.title}](${caseUrl(c)}): ${c.summary}`).join("\n")}
 
+## Background
+
+- Education: Bachelor of Information Technology (Information Data Management), Indonesian Institute of Business and Technology (INSTIKI), Bali, August 2019 to February 2023, GPA 3.62 of 4.00
+- Honors: Internal Debate Competition winner, INSTIKI, February 2023
+- Leadership: President of the INSTIKI Student Executive Board (114 members, more than 40 programs, 2021 to 2022); Vice Chairman of the Christian Student Union (180 members)
+- Languages: Indonesian (native), English (professional working proficiency)
+
 ## Optional
 
 - [LinkedIn](https://www.linkedin.com/in/jeremia-axelano/)
